@@ -1,0 +1,102 @@
+[
+    {
+        "id":"1",
+        "img":"https://i.postimg.cc/J0WR4Hnx/tomatoes-canva-removebg-preview.png",
+        "name":"Tomato",
+        "oldPrice":"2.51",
+        "newPrice":"1.59",
+        "rating":"4.5",
+        "stock":"In Stock"
+
+    },
+    {
+        "id":"2",
+        "img":"https://i.postimg.cc/2SXmLKyV/580b57fcd9996e24bc43c216-1024x869.png",
+        "name":"Cucumber",
+        "oldPrice":"1.50",
+        "newPrice":"1.14",
+        "rating":"4.5",
+        "stock":"In Stock"
+
+    },
+    {
+        "id":"3",
+        "img":"https://ninetheme.com/themes/agricoma/wp-content/uploads/2023/12/red-apple-300x300.jpg",
+        "name":"Red Apple",
+        "oldPrice":"2.57",
+        "newPrice":"1.52",
+        "rating":"4.7",
+        "stock":"In Stock"
+
+    },
+    {
+        "id":"4",
+        "img":"https://ninetheme.com/themes/agricoma/wp-content/uploads/2023/12/green-gabbage-300x300.jpg",
+        "name":"Green Cabbage",
+        "oldPrice":"1.54",
+        "newPrice":"1.10",
+        "rating":"4.5",
+        "stock":"In Stock"
+
+    },
+    {
+        "id":"5",
+        "img":"https://ninetheme.com/themes/agricoma/wp-content/uploads/2023/12/organic-carrot-300x300.jpg",
+        "name":"Fresh Red Seedless",
+        "oldPrice":"1.54",
+        "newPrice":"1.10",
+        "rating":"4.5",
+        "stock":"In Stock"
+
+    },
+    {
+        "id":"6",
+        "img":"https://ninetheme.com/themes/agricoma/wp-content/uploads/2023/12/fresh-red-seedless-300x300.jpg",
+        "name":"Green Cabbage",
+        "oldPrice":"1.54",
+        "newPrice":"1.10",
+        "rating":"4.5",
+        "stock":"In Stock"
+
+    },
+    {
+        "id":"7",
+        "img":"https://ninetheme.com/themes/agricoma/wp-content/uploads/2023/10/fruit-product-3.jpg",
+        "name":"Watermelon",
+        "oldPrice":"1.54",
+        "newPrice":"1.10",
+        "rating":"4.5",
+        "stock":"In Stock"
+
+    },
+    {
+        "id":"8",
+        "img":"https://ninetheme.com/themes/agricoma/wp-content/uploads/2023/12/sugar-snap-peas-300x300.jpg",
+        "name":"Ladysfinger",
+        "oldPrice":"1.54",
+        "newPrice":"1.10",
+        "rating":"4.5",
+        "stock":"In Stock"
+
+    },
+    {
+        "id":"9",
+        "img":"https://i.postimg.cc/yNmmX0h7/beans-removebg-preview.png",
+        "name":"Beans",
+        "oldPrice":"1.54",
+        "newPrice":"1.10",
+        "rating":"4.5",
+        "stock":"In Stock"
+
+    },
+    {
+        "id":"10",
+        "img":"https://i.postimg.cc/ZnKxq0d4/images-removebg-preview.png",
+        "name":"Pumpkin",
+        "oldPrice":"1.54",
+        "newPrice":"1.10",
+        "rating":"4.5",
+        "stock":"In Stock"
+
+    }
+]

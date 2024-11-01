@@ -1,0 +1,30 @@
+[
+    {
+       "id":"1" ,
+       "cardColor":"#e3e5e0",
+       "name":"Prepated & deli",
+       "description":"Discover all you favorite brands in one Place",
+       "img":"https://i.postimg.cc/YSQbxJrd/pran-pasteurized-full-cream-liquid-milk-1-ltr-removebg-preview.png"
+    },
+    {
+       "id":"2" ,
+       "cardColor":"#E9FFD3",
+       "name":"Breakfast",
+       "description":"Discover all you favorite brands in one Place",
+       "img":"https://i.postimg.cc/J4J3YGSq/local-breakfast-removebg-preview.png"
+    },
+    {
+       "id":"3" ,
+       "cardColor":"#FFCDE3",
+       "name":"Vegetables",
+       "description":"Discover all you favorite brands in one Place",
+       "img":"https://i.postimg.cc/HkzyF5zQ/image-asset-removebg-preview.png"
+    },
+    {
+       "id":"4" ,
+       "cardColor":"#F5CDC9",
+       "name":"Dried Food",
+       "description":"Discover all you favorite brands in one Place",
+       "img":"https://i.postimg.cc/pdyp7SpH/EAFA-Markets-Dryfoods-fd1f5bff-removebg-preview.png"
+    }
+]
