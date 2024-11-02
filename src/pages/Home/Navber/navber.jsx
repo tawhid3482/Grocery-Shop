@@ -3,9 +3,10 @@ import logo from "../../../assets/logo/logo.png";
 import { FaArrowDown } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BsCart3 } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Navber = () => {
-  const [isOpen, setIsOpen ] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navOption = (
     <>
@@ -34,12 +35,10 @@ const Navber = () => {
           <img src={logo} alt="" className="w-14 h-10 md:w-24 md:h-14" />
         </div>
 
-        <div className="hidden md:flex items-center w-96 md:w-auto border border-[#019267] rounded-xl relative"> {/* Add relative here */}
-          <input
-            type="text"
-            placeholder="Search"
-            className="input w-60 h-9"
-          />
+        <div className="hidden md:flex items-center w-96 md:w-auto border border-[#019267] rounded-xl relative">
+          {" "}
+          {/* Add relative here */}
+          <input type="text" placeholder="Search" className="input w-60 h-9" />
           <button
             className="btn ml-2 btn-ghost"
             onClick={() => setIsOpen(!isOpen)}
@@ -47,7 +46,6 @@ const Navber = () => {
             All
             <FaArrowDown />
           </button>
-          
           <div className="">
             <button className="btn btn-ghost">
               <svg
@@ -66,7 +64,6 @@ const Navber = () => {
               </svg>
             </button>
           </div>
-
           {/* Dropdown Menu */}
           {isOpen && (
             <ul className="absolute top-full mt-2 w-full dropdown-content menu bg-base-100 rounded-box shadow p-2 z-10">
@@ -83,7 +80,9 @@ const Navber = () => {
           </div>
           <div>
             <button className="btn btn-circle">
-              <MdFavoriteBorder className="text-3xl" />
+              <Link to={"/favorite"}>
+                <MdFavoriteBorder className="text-3xl" />
+              </Link>
             </button>
           </div>
           <div className="dropdown dropdown-end">

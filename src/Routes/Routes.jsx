@@ -3,6 +3,7 @@ import {
   } from "react-router-dom";
 import Main from "../Layout/main";
 import Home from "../pages/Home/Home/Home";
+import Favoutire from "../pages/Favorite/Favoutire";
   
  export const router = createBrowserRouter([
     {
@@ -14,8 +15,8 @@ import Home from "../pages/Home/Home/Home";
           element:<Home></Home>
         },
         {
-          path:'/',
-          element:<Home></Home>
+          path:'/favorite',
+          element:<Favoutire></Favoutire>
         }
       ]
     },
