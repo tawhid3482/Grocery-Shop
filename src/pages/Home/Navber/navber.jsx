@@ -4,9 +4,19 @@ import { FaArrowDown } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BsCart3 } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import CartModal from "../../Cart/CartModal";
 
 const Navber = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleCartClick = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  }
 
   const navOption = (
     <>
@@ -74,10 +84,11 @@ const Navber = () => {
 
         <div className="flex items-center gap-2">
           <div>
-            <button className="btn btn-circle">
+            <button  onClick={handleCartClick} className="btn btn-circle">
               <BsCart3 className="text-3xl" />
             </button>
           </div>
+          <CartModal isOpen={isModalOpen} onClose={handleCloseModal} />
           <div>
             <button className="btn btn-circle">
               <Link to={"/favorite"}>
@@ -102,6 +113,11 @@ const Navber = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
+              <li >
+                <Link to={'/'} className="justify-between">
+                  Home
+                </Link>
+              </li>
               <li>
                 <a className="justify-between">
                   Profile

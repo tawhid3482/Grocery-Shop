@@ -1,0 +1,20 @@
+[
+    {
+        "id":"1",
+        "img":"https://i.postimg.cc/J0WR4Hnx/tomatoes-canva-removebg-preview.png",
+        "name":"Tomato",
+        "newPrice":"1.59",
+        "count":"1"
+
+    
+    },
+    {
+        "id":"2",
+        "img":"https://i.postimg.cc/2SXmLKyV/580b57fcd9996e24bc43c216-1024x869.png",
+        "name":"Cucumber",
+        "newPrice":"1.14",
+        "count":"1"
+
+    }
+
+]
