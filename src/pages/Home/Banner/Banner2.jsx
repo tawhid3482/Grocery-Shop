@@ -52,31 +52,31 @@ const Banner2 = () => {
             </div>
           </div>
 
-          <div className="flex  justify-between  items-center my-5">
-            <div className="md:flex md:items-center  sm:flex-col lg:gap-4 mr-5 mt-10 md:mt-8 lg:mt-0 md:flex-row">
-              <p className="font-medium text-white">
+          <div className="my-5">
+            <div className="flex flex-col md:flex-row md:items-center md:gap-2 lg:gap-4 md:mr-2 lg:mr-5 mt-10 md:mt-8 lg:mt-0">
+              <p className="md:text-sm lg:text-base font-medium text-white mb-4 md:mb-0">
                 Hurry to take advantage of the offer
               </p>
-              <div className="grid grid-cols-2 md:grid-flow-col gap-5 text-center auto-cols-max mt-3 md:mt-0">
-                <div className="flex flex-col p-2 border border-yellow-300 rounded-lg text-neutral-content">
+              <div className="grid grid-cols-2 md:flex gap-2 md:gap-4 mt-3 md:mt-0">
+                <div className="flex flex-col p-2 border border-yellow-300 rounded-lg text-neutral-content text-center">
                   <span className="countdown font-mono text-2xl">
                     <span style={{ "--value": timeLeft.days }}></span>
                   </span>
                   days
                 </div>
-                <div className="flex flex-col p-2 border border-yellow-300 rounded-lg text-neutral-content">
+                <div className="flex flex-col p-2 border border-yellow-300 rounded-lg text-neutral-content text-center">
                   <span className="countdown font-mono text-2xl">
                     <span style={{ "--value": timeLeft.hours }}></span>
                   </span>
                   hours
                 </div>
-                <div className="flex flex-col p-2 border border-yellow-300 rounded-lg text-neutral-content">
+                <div className="flex flex-col p-2 border border-yellow-300 rounded-lg text-neutral-content text-center">
                   <span className="countdown font-mono text-2xl">
                     <span style={{ "--value": timeLeft.minutes }}></span>
                   </span>
                   min
                 </div>
-                <div className="flex flex-col p-2 border border-yellow-300 rounded-lg text-neutral-content">
+                <div className="flex flex-col p-2 border border-yellow-300 rounded-lg text-neutral-content text-center">
                   <span className="countdown font-mono text-2xl">
                     <span style={{ "--value": timeLeft.seconds }}></span>
                   </span>

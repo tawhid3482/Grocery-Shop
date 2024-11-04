@@ -6,6 +6,8 @@ import CartModalShowCard from "./CartModalShowCard";
 import { BiSolidCoupon } from "react-icons/bi";
 import { PiNotePencilLight } from "react-icons/pi";
 import { RiContactsLine } from "react-icons/ri";
+import { TbTruckDelivery } from "react-icons/tb";
+import { FiShoppingCart } from "react-icons/fi";
 
 const CartModal = ({ isOpen, onClose }) => {
   const [timeLeft] = CountDown();
@@ -29,8 +31,8 @@ const CartModal = ({ isOpen, onClose }) => {
               <IoMdClose className="text-xl text-green-600" />
             </button>
           </div>
-          
-          <div className="flex items-center justify-between mx-4 border border-[#019267] p-2 bg-green-300">
+
+          <div className="flex items-center justify-between mx-4 border border-[#019267] p-2 bg-green-300 rounded-sm">
             <h1 className="text-sm font-semibold">
               These products are limited, checkout within
             </h1>
@@ -56,42 +58,76 @@ const CartModal = ({ isOpen, onClose }) => {
             <p className="text-sm font-medium uppercase">
               Buy $492.01 more to enjoy FREE Shipping
             </p>
-            <p>Lader</p>
+            <div className="relative pt-1">
+              <div className="overflow-hidden text-xs flex rounded bg-pink-200">
+                <div
+                  style={{ width: "35%" }} // Adjust height as needed
+                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500 relative p-2"
+                >
+                  <TbTruckDelivery className="text-2xl absolute right-1 top-[-5px] text-black " />{" "}
+                  {/* Adjust text size as needed */}
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Scrollable Cart Items Section */}
-          <div className="flex-1 overflow-y-auto">
-            <div className="grid grid-cols-1 gap-3 place-items-center p-4">
-              {cart?.map((carts) => (
-                <CartModalShowCard key={carts.id} carts={carts} />
-              ))}
-            </div>
-          </div>
 
-          <div className="mx-4 my-5">
-            <div className="flex justify-between items-center my-2">
-              <p className="text-xl font-medium uppercase">Subtotal:</p>
-              <span>$45</span>
-            </div>
-            <div className="flex justify-between items-center my-2">
-              <p className="text-xl font-medium uppercase">Total:</p>
-              <span>$45</span>
-            </div>
-            <div className="flex justify-between items-center my-2">
-              <button className="btn bg-[#019267] text-white w-1/2">View Cart</button>
-              <button className="btn w-1/2 bg-[#f84503] text-white">Checkout</button>
-            </div>
-            <div className="flex justify-between items-center">
-              <button className="btn w-1/3">
-                <BiSolidCoupon className="text-3xl" />
-              </button>
-              <button className="btn w-1/3">
-                <PiNotePencilLight className="text-3xl" />
-              </button>
-              <button className="btn w-1/3">
-                <RiContactsLine className="text-3xl" />
-              </button>
-            </div>
+          <div className="flex-1 overflow-y-auto ">
+            {cart && cart.length > 0 ? (
+              <div className="">
+                <div className="grid grid-cols-1 gap-3 place-items-center p-4">
+                  {cart?.map((carts) => (
+                    <CartModalShowCard key={carts.id} carts={carts} />
+                  ))}
+                </div>
+
+                <div className="mx-4 my-5">
+                  <div className="flex justify-between items-center my-2">
+                    <p className="text-xl font-medium uppercase">Subtotal:</p>
+                    <span>$45</span>
+                  </div>
+                  <div className="flex justify-between items-center my-2">
+                    <p className="text-xl font-medium uppercase">Total:</p>
+                    <span>$45</span>
+                  </div>
+                  <div className="flex justify-between items-center my-2">
+                    <button className="btn bg-[#019267] text-white w-1/2">
+                      View Cart
+                    </button>
+                    <button className="btn w-1/2 bg-[#f84503] text-white">
+                      Checkout
+                    </button>
+                  </div>
+                  <div className="flex justify-between items-center ">
+                    <button className="btn w-1/3">
+                      <BiSolidCoupon className="text-3xl" />
+                    </button>
+                    <button className="btn w-1/3">
+                      <PiNotePencilLight className="text-3xl" />
+                    </button>
+                    <button className="btn w-1/3">
+                      <RiContactsLine className="text-3xl" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center gap-5 mx-4">
+                <FiShoppingCart className="text-9xl " />
+                <p className="text-xl font-bold uppercase">
+                  No products in the cart.
+                </p>
+                <div className="grid md:grid-cols-2 gap-3">
+                  <button className="btn bg-[#019267] text-white">
+                    Start Shopping
+                  </button>
+                  <button className="btn bg-[#F0592A] text-white">
+                    Return Policy
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

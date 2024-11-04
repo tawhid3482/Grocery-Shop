@@ -12,7 +12,7 @@ const ProCard = () => {
         <div className="hidden lg:block md:w-64 md:h-[400px]">
           <Carousel></Carousel>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 ">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 ">
           {proCard?.map((proCards) => (
             <ProCards key={proCards?.id} proCards={proCards}></ProCards>
           ))}
