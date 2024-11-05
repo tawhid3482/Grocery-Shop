@@ -3,6 +3,7 @@ import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Rating from "react-rating";
+import ProductDetails from "./ProductDetails";
 
 const ProductShow = ({ cards }) => {
   const { img, oldPrice, newPrice, name, rating, stock } = cards;
@@ -10,7 +11,9 @@ const ProductShow = ({ cards }) => {
     <div>
       <div className="card border bg-base-100 w-60 h-96 shadow-lg">
         <figure>
-          <img src={img} alt="img" className="lg:h-52 " />
+          <Link to={'/productsDetails'}>
+            <img src={img} alt="img" className="lg:h-52 " />
+          </Link>
         </figure>
         <hr className="my-2" />
         <div className="card-body mt-0 pt-0">
