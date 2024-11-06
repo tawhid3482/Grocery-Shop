@@ -8,6 +8,7 @@ import { VscCalendar } from "react-icons/vsc";
 
 
 const ProductDetails = () => {
+
   const [count, setCount] = useState(1);
 
   const increaseCount = () => setCount(count + 1);
@@ -16,6 +17,7 @@ const ProductDetails = () => {
       setCount(count - 1);
     }
   };
+  
   return (
     <div>
       <div className=" flex justify-between items-center flex-col lg:flex-row my-8">
