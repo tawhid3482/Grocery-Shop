@@ -74,11 +74,11 @@ const CartModal = ({ isOpen, onClose }) => {
           {/* Scrollable Cart Items Section */}
 
           <div className="flex-1 overflow-y-auto ">
-            {cart && cart.length > 0 ? (
+            {cart && cart?.length > 0 ? (
               <div className="">
                 <div className="grid grid-cols-1 gap-3 place-items-center p-4">
                   {cart?.map((carts) => (
-                    <CartModalShowCard key={carts.id} carts={carts} />
+                    <CartModalShowCard key={carts?.id} carts={carts} />
                   ))}
                 </div>
 

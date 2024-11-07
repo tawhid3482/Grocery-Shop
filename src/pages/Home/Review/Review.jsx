@@ -2,6 +2,7 @@ import React from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import UseReview from "../../../Hooks/UseReview";
 import Reviews from "./Reviews";
+import { NavLink } from "react-router-dom";
 
 const Review = () => {
   const [review] = UseReview();
@@ -19,11 +20,13 @@ const Review = () => {
           </div>
         </div>
         <div className="">
+          <NavLink to={'/allProducts'}> 
           <button className="btn btn-ghost border-2 hover:border-[#019267] rounded-3xl">
             {" "}
             Check Products{" "}
             <IoIosArrowRoundForward className="text-xl"></IoIosArrowRoundForward>
           </button>
+          </NavLink>
         </div>
       </div>
       <div className="grid place-items-center grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 ">

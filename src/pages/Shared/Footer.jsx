@@ -5,7 +5,7 @@ import { FaInstagramSquare } from "react-icons/fa";
 const Footer = () => {
   return (
     <div>
-      <footer className=" bg-base-300  p-10 mt-2">
+      <footer className=" bg-base-300  p-10 mt-2 inline-block ">
         <div className="grid  md:grid-cols-2">
           <div className="grid grid-cols-2 lg:grid-cols-4">
             <nav className="grid">

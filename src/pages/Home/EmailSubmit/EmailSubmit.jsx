@@ -20,7 +20,7 @@ const EmailSubmit = () => {
           <div className=" flex items-center text-black bg-white p-[6px] lg:p-2 rounded-3xl ">
             <input
               type="text"
-              className="w-full md:w-96 p-1 lg:p-2 "
+              className="w-full md:w-96 p-1 lg:p-2 rounded-lg"
               placeholder="Your E-mail"
             />
             <button className="ml-2 bg-yellow-400 p-2 rounded-2xl">
