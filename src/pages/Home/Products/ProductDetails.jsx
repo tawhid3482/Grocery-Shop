@@ -1,13 +1,25 @@
 import Rating from "react-rating";
 import PageTitle from "../../../Components/PageTitle/PageTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { VscCalendar } from "react-icons/vsc";
+import { useLoaderData, useParams } from "react-router-dom";
+import { rankings } from "match-sorter";
 
 
 const ProductDetails = () => {
+const [proDetails,setProDetails]=useState(null)
+  const {id}=useParams()
+
+  const data = useLoaderData()
+
+  useEffect(()=>{
+    const findData = data?.find((product)=>product?.id === id)
+    setProDetails(findData)
+  },[id,data])
+
 
   const [count, setCount] = useState(1);
 
@@ -23,7 +35,7 @@ const ProductDetails = () => {
       <div className=" flex justify-between items-center flex-col lg:flex-row my-8">
         <div className="lg:w-1/3  lg:h-[450px] p-3">
           <img
-            src="https://i.postimg.cc/J0WR4Hnx/tomatoes-canva-removebg-preview.png"
+            src={proDetails?.img}
             className="lg:w-[680px] lg:h-[450px]"
             alt=""
           />
@@ -32,16 +44,15 @@ const ProductDetails = () => {
           <PageTitle
             tName={"Home"}
             tName2={"Products"}
-            tName3={name}
+            tName3={proDetails?.name}
           ></PageTitle>
-          <h3 className="text-3xl font-medium ">Village Tomato</h3>
+          <h3 className="text-3xl font-medium my-2">{proDetails?.name}</h3>
           <p className="text-sm">
-            The generated Lorem Ipsum is therefore always free from repetition
-            injected humour, or non-characteristic words etc. Susp endisse
-            ultricies nisi vel quam suscipit. Sabertooth peacock flounder…
+            {proDetails?.description}
+            
           </p>
           <Rating
-            initialRating={"4"}
+            initialRating={proDetails?.rating}
             emptySymbol={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,10 +88,10 @@ const ProductDetails = () => {
 
           <div className="flex items-center gap-3">
             <span className="relative font-medium text-xl ">
-              ${"15"}
+              ${proDetails?.oldPrice}
               <span className="absolute left-0 top-1/2 w-full h-[2px] bg-black rotate-12 transform -translate-y-1/2"></span>
             </span>
-            <spam className="text-[#019267] font-medium text-xl">${"19"}</spam>
+            <spam className="text-[#019267] font-medium text-xl">${proDetails?.newPrice}</spam>
           </div>
           <div className="flex gap-5 items-center my-2">
             <div className="counter flex gap-5 items-center border p-2 rounded-sm w-24">
@@ -135,7 +146,7 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-        <div className="lg:w-1/3 border lg:h-[450px] p-3 md:my-5 lg:my-0">
+        <div className="lg:w-1/3 border lg:h-[450px] p-3 md:my-5 lg:my-0 rounded-md">
           <p className="text-xl font-medium ">Similar Products </p>
           <div className="">
             <div className="flex gap-10 items-center border p-2">

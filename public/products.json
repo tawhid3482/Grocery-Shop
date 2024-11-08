@@ -6,7 +6,8 @@
         "oldPrice":"2.51",
         "newPrice":"1.59",
         "rating":"4.5",
-        "stock":"In Stock"
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     },
     {
@@ -16,7 +17,8 @@
         "oldPrice":"1.50",
         "newPrice":"1.14",
         "rating":"4.5",
-        "stock":"In Stock"
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     },
     {
@@ -26,7 +28,8 @@
         "oldPrice":"2.57",
         "newPrice":"1.52",
         "rating":"4.7",
-        "stock":"In Stock"
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     },
     {
@@ -36,7 +39,8 @@
         "oldPrice":"1.54",
         "newPrice":"1.10",
         "rating":"4.5",
-        "stock":"In Stock"
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     },
     {
@@ -46,7 +50,8 @@
         "oldPrice":"1.54",
         "newPrice":"1.10",
         "rating":"4.5",
-        "stock":"In Stock"
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     },
     {
@@ -56,7 +61,8 @@
         "oldPrice":"1.54",
         "newPrice":"1.10",
         "rating":"4.5",
-        "stock":"In Stock"
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     },
     {
@@ -65,8 +71,9 @@
         "name":"Watermelon",
         "oldPrice":"1.54",
         "newPrice":"1.10",
-        "rating":"4.5",
-        "stock":"In Stock"
+        "rating":"4.1",
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     },
     {
@@ -75,8 +82,9 @@
         "name":"Ladysfinger",
         "oldPrice":"1.54",
         "newPrice":"1.10",
-        "rating":"4.5",
-        "stock":"In Stock"
+        "rating":"4.9",
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     },
     {
@@ -85,8 +93,9 @@
         "name":"Beans",
         "oldPrice":"1.54",
         "newPrice":"1.10",
-        "rating":"4.5",
-        "stock":"In Stock"
+        "rating":"4.1",
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     },
     {
@@ -95,8 +104,9 @@
         "name":"Pumpkin",
         "oldPrice":"1.54",
         "newPrice":"1.10",
-        "rating":"4.5",
-        "stock":"In Stock"
+        "rating":"3.5",
+        "stock":"In Stock",
+        "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui."
 
     }
 ]

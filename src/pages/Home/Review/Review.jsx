@@ -20,7 +20,7 @@ const Review = () => {
           </div>
         </div>
         <div className="">
-          <NavLink to={'/allProducts'}> 
+          <NavLink to={'/shop'}> 
           <button className="btn btn-ghost border-2 hover:border-[#019267] rounded-3xl">
             {" "}
             Check Products{" "}

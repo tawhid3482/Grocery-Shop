@@ -6,12 +6,12 @@ import Rating from "react-rating";
 import ProductDetails from "./ProductDetails";
 
 const ProductShow = ({ cards }) => {
-  const { img, oldPrice, newPrice, name, rating, stock } = cards;
+  const { id,img, oldPrice, newPrice, name, rating, stock } = cards;
   return (
     <div>
       <div className="card border bg-base-100 w-60 h-96 shadow-lg">
         <figure>
-          <Link to={'/productsDetails'}>
+          <Link to={`/productsDetails/${id}`}>
             <img src={img} alt="img" className="lg:h-52 " />
           </Link>
         </figure>

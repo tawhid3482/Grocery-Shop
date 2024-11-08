@@ -2,6 +2,7 @@ import React from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import Brands from "./Brands";
 import UseBrands from "../../../Hooks/UseBrands";
+import { NavLink } from "react-router-dom";
 
 const Brand = () => {
   const [brand] = UseBrands();
@@ -14,11 +15,14 @@ const Brand = () => {
           </div>
         </div>
         <div className="">
+          <NavLink to={'/shop'}>
           <button className="btn btn-ghost border-2 hover:border-[#019267] rounded-3xl">
             {" "}
             Check Products{" "}
             <IoIosArrowRoundForward className="text-xl"></IoIosArrowRoundForward>
           </button>
+          </NavLink>
+          
         </div>
       </div>
       <div className="">

@@ -3,6 +3,7 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import { IoIosMenu } from "react-icons/io";
 import ProductShow from "./ProductShow";
 import UseProducts from "../../../Hooks/UseProducts";
+import { NavLink } from "react-router-dom";
 
 const Product = () => {
   const [product] = UseProducts();
@@ -49,10 +50,12 @@ const Product = () => {
         </div>
 
         <div className="flex justify-center md:justify-end w-full md:w-auto mt-2 md:mt-0 relative">
+          <NavLink to={'/shop'}>
           <button className="flex items-center gap-1 rounded-3xl hover:bg-[#019267] hover:text-white p-2">
             All Categories
             <IoIosArrowRoundForward className="text-2xl" />
           </button>
+          </NavLink>
         </div>
       </div>
       {/* Dropdown Menu - visible only when the menu icon is clicked */}

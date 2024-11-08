@@ -68,6 +68,9 @@ const Navbar2 = () => {
         <NavLink to={"/faq"} activeClassName="active-link">
           FAQ
         </NavLink>
+        <NavLink to={"/return"} activeClassName="active-link">
+         Returns Policy
+        </NavLink>
       </li>
     </>
   );
@@ -110,7 +113,7 @@ const Navbar2 = () => {
 
           <div className="dropdown dropdown-hover">
             <NavLink
-              to={"/allProducts"}
+              to={"/shop"}
               className={({ isActive }) =>
                 isActive
                   ? "btn m-1 flex items-center bg-[#019267] text-white"
