@@ -8,11 +8,11 @@ const ProCard = () => {
 
   return (
     <div>
-      <div className="my-2 flex justify-between items-center flex-col lg:flex-row">
-        <div className="hidden lg:block md:w-64 md:h-[400px]">
+      <div className="my-2 flex  lg:flex-row justify-around items-center flex-col p-5">
+        <div className="hidden lg:block md:w-72 md:h-[400px] w-8/12">
           <Carousel></Carousel>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center  gap-5 ">
           {proCard?.map((proCards) => (
             <ProCards key={proCards?.id} proCards={proCards}></ProCards>
           ))}

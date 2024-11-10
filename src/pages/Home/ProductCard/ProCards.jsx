@@ -8,7 +8,7 @@ const ProCards = ({ proCards }) => {
   const { img, oldPrice, newPrice, name, rating, stock } = proCards;
   return (
     <div>
-      <div className="card border bg-base-100 w-60  h-[400px] shadow-lg">
+      <div className="card border bg-base-100 w-64  h-[400px] shadow-lg">
         <figure>
           <img src={img} alt="img" className="lg:h-40 " />
         </figure>

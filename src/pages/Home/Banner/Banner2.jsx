@@ -1,10 +1,8 @@
-import React, { useState } from "react";
 import CountDown from "../../../Hooks/CountDown";
 import {
   MdKeyboardArrowRight,
-  MdKeyboardArrowDown,
-  MdKeyboardArrowUp,
 } from "react-icons/md";
+import { Link, NavLink } from "react-router-dom";
 
 const Banner2 = () => {
   const [timeLeft] = CountDown();
@@ -26,9 +24,11 @@ const Banner2 = () => {
             </span>
           </div>
           <div className="mr-2 md:mr-5">
-            <button className="btn rounded-xl border-none  bg-yellow-300 text-black">
+           <Link to={'/shop'}>
+           <button className="btn rounded-xl border-none  bg-yellow-300 text-black">
               Check Products{" "}
             </button>
+           </Link>
           </div>
         </div>
 
@@ -36,10 +36,12 @@ const Banner2 = () => {
           <div className="md:flex lg:items-center md:flex-col md:mt-5 lg:mt-0 gap-3 lg:flex-row ">
             <div className="flex items-center gap-2 lg:gap-4   ml-5 mt-3 md:mt-0 ">
               <h2 className="text-white font-medium text-xl">Campaigns</h2>
-              <button className="btn btn-sm hover:bg-black hover:text-white">
+             <NavLink to={'/shop'}>
+             <button className="btn btn-sm hover:bg-black hover:text-white">
                 Check All
                 <MdKeyboardArrowRight className="text-xl"></MdKeyboardArrowRight>
               </button>
+             </NavLink>
             </div>
             <div className="md:flex md:items-center gap-2 lg:gap-4 ml-5 mt-5 md:mt-0 ">
               <h2 className="text-white font-medium md:text-lg lg:text-xl">

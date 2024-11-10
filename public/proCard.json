@@ -28,15 +28,5 @@
         "rating":"4.7",
         "stock":"In Stock"
 
-    },
-    {
-        "id":"4",
-        "img":"https://ninetheme.com/themes/agricoma/wp-content/uploads/2023/12/green-gabbage-300x300.jpg",
-        "name":"Green Cabbage",
-        "oldPrice":"1.54",
-        "newPrice":"1.10",
-        "rating":"4.5",
-        "stock":"In Stock"
-
     }
 ]

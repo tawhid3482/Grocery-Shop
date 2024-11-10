@@ -21,9 +21,11 @@ const Product = () => {
         </div>
 
         <div className="hidden   lg:flex justify-between items-center gap-2 w-full lg:w-auto">
+          <NavLink to={'/shop'}>
           <button className="btn rounded-3xl hover:bg-[#019267] hover:text-white">
             ALL PRODUCTS
           </button>
+          </NavLink>
           <button className="btn  rounded-3xl hover:bg-[#019267] hover:text-white">
             FEATURED
           </button>
@@ -79,7 +81,7 @@ const Product = () => {
         </div>
       )}
 
-      <div className="grid place-items-center grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
+      <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {
           product?.map((cards)=>(
             <ProductShow key={cards.id} cards={cards}></ProductShow>

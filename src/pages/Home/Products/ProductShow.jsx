@@ -9,7 +9,7 @@ const ProductShow = ({ cards }) => {
   const { id,img, oldPrice, newPrice, name, rating, stock } = cards;
   return (
     <div>
-      <div className="card border bg-base-100 w-60 h-96 shadow-lg">
+      <div className="card border bg-base-100 w-72 h-96 shadow-lg">
         <figure>
           <Link to={`/productsDetails/${id}`}>
             <img src={img} alt="img" className="lg:h-52 " />
@@ -68,7 +68,7 @@ const ProductShow = ({ cards }) => {
               <Link to="">
                 <MdOutlineFavoriteBorder className="text-xl "></MdOutlineFavoriteBorder>
               </Link>
-              <Link to="">
+              <Link to={`/productsDetails/${id}`}>
                 <FaRegEye className="text-xl"></FaRegEye>
               </Link>
             </div>
