@@ -10,6 +10,8 @@ import Blog from "../pages/Blog/Blog";
 import FAQ from "../pages/FAQ/FAQ";
 import Return from "../pages/Return/Return";
 import Shop from "../pages/Shop/Shop";
+import Cart from "../pages/Cart/Cart";
+import SearchProduct from "../pages/Search/SearchProduct";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +59,14 @@ export const router = createBrowserRouter([
         element: <ProductDetails></ProductDetails>,
         loader:()=>fetch('/products.json')
       },
+      {
+        path:"/cart",
+        element:<Cart></Cart>,
+      },
+      {
+        path:"/search",
+        element:<SearchProduct></SearchProduct>
+      }
     ],
   },
 ]);

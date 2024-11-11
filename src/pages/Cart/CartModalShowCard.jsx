@@ -1,7 +1,7 @@
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const CartModalShowCard = ({ carts }) => {
-  const { img, name, newPrice, count } = carts;
+  const { img, name, newPrice,  } = carts;
   return (
     <div>
       <div className="flex justify-between gap-10 md:gap-0 border p-2 rounded-lg w-full md:w-80 ">
@@ -12,7 +12,7 @@ const CartModalShowCard = ({ carts }) => {
             <div className="flex gap-2 items-center">
               <span>{newPrice}</span>
               * 
-              <span>{count}</span>
+              <span>1</span>
             </div>
           </div>
         </div>

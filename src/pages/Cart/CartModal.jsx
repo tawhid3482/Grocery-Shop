@@ -8,6 +8,7 @@ import { PiNotePencilLight } from "react-icons/pi";
 import { RiContactsLine } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FiShoppingCart } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const CartModal = ({ isOpen, onClose }) => {
   const [timeLeft] = CountDown();
@@ -32,43 +33,55 @@ const CartModal = ({ isOpen, onClose }) => {
             </button>
           </div>
 
-          <div className="flex items-center justify-between mx-4 border border-[#019267] p-2 bg-green-300 rounded-sm">
-            <h1 className="text-sm font-semibold">
-              These products are limited, checkout within
-            </h1>
-            <div className="flex justify-between items-center">
-              <div className="grid md:grid-flow-col gap-4 text-center auto-cols-max">
-                <div className="flex flex-col">
-                  <span className="countdown font-mono text-xl">
-                    <span style={{ "--value": timeLeft.minutes }}></span>
-                  </span>
-                  min
-                </div>
-                <div className="flex flex-col">
-                  <span className="countdown font-mono text-xl">
-                    <span style={{ "--value": timeLeft.seconds }}></span>
-                  </span>
-                  sec
+          <div className="">
+            {cart && cart.length > 0 ? (
+              <div className="flex items-center justify-between mx-4 border border-[#019267] p-2 bg-green-300 rounded-sm">
+                <h1 className="text-sm font-semibold">
+                  These products are limited, checkout within
+                </h1>
+                <div className="flex justify-between items-center">
+                  <div className="grid md:grid-flow-col gap-4 text-center auto-cols-max">
+                    <div className="flex flex-col">
+                      <span className="countdown font-mono text-xl">
+                        <span style={{ "--value": timeLeft.minutes }}></span>
+                      </span>
+                      min
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="countdown font-mono text-xl">
+                        <span style={{ "--value": timeLeft.seconds }}></span>
+                      </span>
+                      sec
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <p></p>
+            )}
           </div>
 
-          <div className="my-5 mx-4">
-            <p className="text-sm font-medium uppercase">
-              Buy $492.01 more to enjoy FREE Shipping
-            </p>
-            <div className="relative pt-1">
-              <div className="overflow-hidden text-xs flex rounded bg-pink-200">
-                <div
-                  style={{ width: "35%" }} // Adjust height as needed
-                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500 relative p-2"
-                >
-                  <TbTruckDelivery className="text-2xl absolute right-1 top-[-5px] text-black " />{" "}
-                  {/* Adjust text size as needed */}
+          <div className="my-8">
+            {cart && cart.length > 0 ? (
+              <div className="my-5 mx-4">
+                <p className="text-sm font-medium uppercase">
+                  Buy $492.01 more to enjoy FREE Shipping
+                </p>
+                <div className="relative pt-1">
+                  <div className="overflow-hidden text-xs flex rounded bg-pink-200">
+                    <div
+                      style={{ width: "35%" }} // Adjust height as needed
+                      className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500 relative p-2"
+                    >
+                      <TbTruckDelivery className="text-2xl absolute right-1 top-[-5px] text-black " />{" "}
+                      {/* Adjust text size as needed */}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <p></p>
+            )}
           </div>
 
           {/* Scrollable Cart Items Section */}
@@ -92,9 +105,14 @@ const CartModal = ({ isOpen, onClose }) => {
                     <span>$45</span>
                   </div>
                   <div className="flex justify-between items-center my-2">
-                    <button className="btn bg-[#019267] text-white w-1/2">
+                    <Link
+                      to={"/cart"}
+                      onClick={onClose}
+                      className="btn bg-[#019267] text-white w-1/2"
+                    >
                       View Cart
-                    </button>
+                    </Link>
+
                     <button className="btn w-1/2 bg-[#f84503] text-white">
                       Checkout
                     </button>
