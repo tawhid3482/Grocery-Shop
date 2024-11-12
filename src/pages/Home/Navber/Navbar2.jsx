@@ -5,50 +5,51 @@ import { PiPhoneCallLight } from "react-icons/pi";
 import { GrHome } from "react-icons/gr";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { SiPagerduty } from "react-icons/si";
-import { GrAnnounce } from "react-icons/gr";
-import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import ButtonColor from "../../../Components/Button/ButtonColor";
+import UseProducts from "../../../Hooks/UseProducts";
 
 const Navbar2 = () => {
-  const colors = [ "#F0592A","#019267", "#e86b50", "#d8ab49", "#0aaec8", "#b759f1"]; 
-  const [currentColor, setCurrentColor] = useState(colors[0]);
+  const [currentColor] = ButtonColor();
 
-  useEffect(() => {
-    const colorInterval = setInterval(() => {
-      setCurrentColor((prevColor) => {
-        const nextIndex = (colors.indexOf(prevColor) + 1) % colors.length;
-        return colors[nextIndex];
-      });
-    }, 2000); // Change color every 2 seconds
+  const [product]=UseProducts()
 
-    return () => clearInterval(colorInterval); // Cleanup on component unmount
-  }, [colors]);
+  // filtering
+  const navigate = useNavigate();
+
+  const handleNavOptionClick = (category) => {
+    navigate(`/shop?category=${category}`);
+  };
 
   const navOption = (
     <>
       <li>
-        <a>All Products</a>
+        <a onClick={() => handleNavOptionClick("All Products")}>All Products</a>
       </li>
       <li>
-        <a>Prepared & Deli</a>
+        <a onClick={() => handleNavOptionClick("Prepared & Deli")}>
+          Prepared & Deli
+        </a>
       </li>
       <li>
-        <a>Fruits</a>
+        <a onClick={() => handleNavOptionClick("Fruits")}>Fruits</a>
       </li>
       <li>
-        <a>Vegetable</a>
+        <a onClick={() => handleNavOptionClick("Vegetable")}>Vegetable</a>
       </li>
       <li>
-        <a>Seafoods & Meat</a>
+        <a onClick={() => handleNavOptionClick("Seafoods & Meat")}>
+          Seafoods & Meat
+        </a>
       </li>
       <li>
-        <a>Grocery</a>
+        <a onClick={() => handleNavOptionClick("Grocery")}>Grocery</a>
       </li>
       <li>
-        <a>Dairy</a>
+        <a onClick={() => handleNavOptionClick("Dairy")}>Dairy</a>
       </li>
       <li>
-        <a>Bakery</a>
+        <a onClick={() => handleNavOptionClick("Bakery")}>Bakery</a>
       </li>
     </>
   );
@@ -56,7 +57,7 @@ const Navbar2 = () => {
   const pageOption = (
     <>
       <li>
-        <NavLink to={"/about"}  activeClassName="active-link">
+        <NavLink to={"/about"} activeClassName="active-link">
           About us
         </NavLink>
         <NavLink to={"/blog"} activeClassName="active-link">
@@ -69,7 +70,7 @@ const Navbar2 = () => {
           FAQ
         </NavLink>
         <NavLink to={"/return"} activeClassName="active-link">
-         Returns Policy
+          Returns Policy
         </NavLink>
       </li>
     </>

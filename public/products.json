@@ -9,7 +9,8 @@
         "stock":"In Stock",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
-        "category":"vegetables"
+        "category":"vegetables",
+        "offer":"10%"
 
     },
     {
@@ -22,7 +23,8 @@
         "stock":"In Stock",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
-        "category":"vegetables"
+        "category":"vegetables",
+        "offer":"10%"
 
     },
     {
@@ -35,7 +37,8 @@
         "stock":"In Stock",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
-        "category":"fruits"
+        "category":"fruits",
+        "offer":"10%"
 
     },
     {
@@ -48,7 +51,8 @@
         "stock":"In Stock",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
-        "category":"vegetables"
+        "category":"vegetables",
+        "offer":"10%"
 
     },
     {
@@ -61,7 +65,8 @@
         "stock":"to rated",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
-        "category":"vegetables"
+        "category":"vegetables",
+        "offer":"10%"
 
     },
     {
@@ -74,7 +79,8 @@
         "stock":"In Stock",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
-        "category":"vegetables"
+        "category":"vegetables",
+        "offer":"10%"
 
     },
     {
@@ -87,7 +93,8 @@
         "stock":"In Stock",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
-        "category":"fruits"
+        "category":"fruits",
+        "offer":"10%"
 
     },
     {
@@ -100,7 +107,8 @@
         "stock":"In Stock",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"top rated",
-        "category":"vegetables"
+        "category":"vegetables",
+        "offer":"10%"
 
     },
     {
@@ -113,7 +121,8 @@
         "stock":"In Stock",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"on sale",
-        "category":"vegetables"
+        "category":"vegetables",
+        "offer":"10%"
 
     },
     {
@@ -126,7 +135,8 @@
         "stock":"In Stock",
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"in stock",
-        "category":"vegetables"
+        "category":"vegetables",
+        "offer":"10%"
 
     }
 ]

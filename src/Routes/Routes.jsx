@@ -12,6 +12,7 @@ import Return from "../pages/Return/Return";
 import Shop from "../pages/Shop/Shop";
 import Cart from "../pages/Cart/Cart";
 import SearchProduct from "../pages/Search/SearchProduct";
+import SearchProductDetails from "../pages/Search/SearchProductDetails";
 
 export const router = createBrowserRouter([
   {

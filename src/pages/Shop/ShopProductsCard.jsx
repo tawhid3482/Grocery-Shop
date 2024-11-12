@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const ShopProductsCard = ({data}) => {
     const {id, img, oldPrice, newPrice, name, rating, stock } = data;
-  console.log(id)
     return (
         <div>
         <div className="card border bg-base-100 w-60 lg:w-72 2xl:w-60  h-96 shadow-lg my-5">

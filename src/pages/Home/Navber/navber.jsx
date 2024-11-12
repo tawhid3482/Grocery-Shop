@@ -1,30 +1,33 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useAsyncError, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo/logo.png";
-import { FaArrowDown } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BsCart3 } from "react-icons/bs";
 import CartModal from "../../Cart/CartModal";
 import UseProducts from "../../../Hooks/UseProducts";
+import SearchProduct from "../../Search/SearchProduct";
 
 const Navber = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(""); // Track search term
   const navigate = useNavigate();
 
-  const handleCartClick = () => {
-    setModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
+  const handleCartClick = () => setModalOpen(true);
+  const handleCloseModal = () => setModalOpen(false);
+
+
+  // search
+  const [product] = UseProducts();
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterProducts, setFilterProduct] = useState(product);
 
   const handleSearch = () => {
-    if (searchTerm.trim()) {
-      navigate(`/search?query=${searchTerm}`);
-    }
+    const filterPro = product?.filter((item) =>
+      item?.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilterProduct(filterPro);
+    navigate("/search", { state: { filterProduct: filterPro, query: searchTerm } });
   };
-  
 
   return (
     <div>
@@ -42,8 +45,19 @@ const Navber = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button onClick={handleSearch} className="btn btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
             </svg>
           </button>
         </div>
@@ -69,16 +83,21 @@ const Navber = () => {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <a>
+                <Link to="/profile">
                   Profile <span className="badge">New</span>
-                </a>
+                </Link>
               </li>
-              <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
+              <li>
+                <Link to="/settings">Settings</Link>
+              </li>
+              <li>
+                <Link to="/logout">Logout</Link>
+              </li>
             </ul>
           </div>
         </div>
       </div>
+     
     </div>
   );
 };

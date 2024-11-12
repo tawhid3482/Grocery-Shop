@@ -1,46 +1,35 @@
 import Rating from "react-rating";
-import {  useState } from "react";
+import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { VscCalendar } from "react-icons/vsc";
 import PageTitle from "../../Components/PageTitle/PageTitle";
+import { useLocation } from "react-router-dom";
 
-
-const searchProductDetails = () => {
-
+const SearchProductDetails = ({ pro }) => {
   const [count, setCount] = useState(1);
-
   const increaseCount = () => setCount(count + 1);
   const decreaseCount = () => {
-    if (count > 1) {
-      setCount(count - 1);
-    }
+    if (count > 1) setCount(count - 1);
   };
-  
+
   return (
     <div>
       <div className=" flex justify-between items-center flex-col lg:flex-row my-8">
         <div className="lg:w-1/3  lg:h-[450px] p-3">
-          <img
-            src={proDetails?.img}
-            className="lg:w-[680px] lg:h-[450px]"
-            alt=""
-          />
+          <img src={pro?.img} className="lg:w-[680px] lg:h-[450px]" alt="" />
         </div>
         <div className="lg:w-1/3  lg:h-[450px] p-3">
           <PageTitle
             tName={"Home"}
             tName2={"Products"}
-            tName3={proDetails?.name}
+            tName3={pro?.name}
           ></PageTitle>
-          <h3 className="text-3xl font-medium my-2">{proDetails?.name}</h3>
-          <p className="text-sm">
-            {proDetails?.description}
-            
-          </p>
+          <h3 className="text-3xl font-medium my-2">{pro?.name}</h3>
+          <p className="text-sm">{pro?.description}</p>
           <Rating
-            initialRating={proDetails?.rating}
+            initialRating={pro?.rating}
             emptySymbol={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,10 +65,12 @@ const searchProductDetails = () => {
 
           <div className="flex items-center gap-3">
             <span className="relative font-medium text-xl ">
-              ${proDetails?.oldPrice}
+              ${pro?.oldPrice}
               <span className="absolute left-0 top-1/2 w-full h-[2px] bg-black rotate-12 transform -translate-y-1/2"></span>
             </span>
-            <spam className="text-[#019267] font-medium text-xl">${proDetails?.newPrice}</spam>
+            <spam className="text-[#019267] font-medium text-xl">
+              ${pro?.newPrice}
+            </spam>
           </div>
           <div className="flex gap-5 items-center my-2">
             <div className="counter flex gap-5 items-center border p-2 rounded-sm w-24">
@@ -199,4 +190,4 @@ const searchProductDetails = () => {
   );
 };
 
-export default searchProductDetails;
+export default SearchProductDetails;

@@ -4,103 +4,51 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 import UseProducts from "../../Hooks/UseProducts";
 import ShopProductsCard from "./ShopProductsCard";
 
-const ShopProducts = ({ items, discountItems }) => {
+const ShopProducts = () => {
+  const [product] = UseProducts();
+
+  const items = [
+    "All Products",
+    "Bakery",
+    "Fruits",
+    "Grocery",
+    "Prepared & Deli",
+    "Seafood & Meat",
+    "Vegetables",
+  ];
+  const discountItems = [
+    "10% Off Or More",
+    "20% Off Or More",
+    "30% Off Or More",
+    "40% Off Or More",
+    "50% Off Or More",
+  ];
+
   const [isOpen, setIsOpen] = useState(false);
   const [isStart, setIsStart] = useState(false);
 
-  const [isColor, setIsColor] = useState(false);
-  const [isBrand, setIsBrand] = useState(false);
-  const [isKg, setIsKg] = useState(false);
-
-  const [product] = UseProducts();
-
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All Products");
+  const [selectedDiscount, setSelectedDiscount] = useState("");
 
   const handleCategoryChange = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      setSelectedCategories([...selectedCategories, value]);
-    } else {
-      setSelectedCategories(
-        selectedCategories.filter((category) => category !== value)
-      );
-    }
+    const { value } = event.target;
+    // Toggle the selection for the category
+    setSelectedCategory((prev) => (prev === value ? "" : value));
   };
 
-  // Toggle dropdown visibility
+  const handleDiscountChange = (event) => {
+    const { value } = event.target;
+    // Toggle the selection for the discount
+    setSelectedDiscount((prev) => (prev === value ? "" : value));
+  };
+
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
+
   const toggleDropdown2 = () => {
     setIsStart((prev) => !prev);
   };
-
-  const filteredItems =
-    selectedCategories.length > 0
-      ? items.filter((item) => selectedCategories.includes(item.category)) // Assuming 'category' property in items
-      : items;
-
-  const discountedItems = filteredItems.filter(
-    (item) => discountItems.find((discount) => discount.id === item.id) // Assuming 'id' property for matching discount
-  );
-
-  const navOption = (
-    <>
-      <li>
-        <a>Blue</a>
-      </li>
-      <li>
-        <a>Black</a>
-      </li>
-      <li>
-        <a>Red</a>
-      </li>
-      <li>
-        <a>Green</a>
-      </li>
-      <li>
-        <a>Orange</a>
-      </li>
-    </>
-  );
-  const navOption2 = (
-    <>
-      <li>
-        <a>Freshy</a>
-      </li>
-      <li>
-        <a>Mango</a>
-      </li>
-      <li>
-        <a>Pennyw</a>
-      </li>
-      <li>
-        <a>Savor</a>
-      </li>
-      <li>
-        <a>TIS</a>
-      </li>
-    </>
-  );
-  const navOption3 = (
-    <>
-      <li>
-        <a>0.25KG</a>
-      </li>
-      <li>
-        <a>0.50KG</a>
-      </li>
-      <li>
-        <a>1.00KG</a>
-      </li>
-      <li>
-        <a>2.00KG</a>
-      </li>
-      <li>
-        <a>5.00KG</a>
-      </li>
-    </>
-  );
 
   return (
     <div>
@@ -113,17 +61,22 @@ const ShopProducts = ({ items, discountItems }) => {
             >
               Product Categories {isOpen ? <FiMinus /> : <FiPlus />}
             </h2>
-            {isOpen && ( // Conditionally render category list
+            {isOpen && (
               <ul className="space-y-2">
                 {items.map((category) => (
                   <li key={category} className="flex items-center">
                     <input
                       type="checkbox"
+                      id={`category-${category}`}
+                      name="category"
                       value={category}
-                      checked={selectedCategories.includes(category)}
+                      checked={selectedCategory === category}
                       onChange={handleCategoryChange}
+                      className="mr-2"
                     />
-                    <label className="ml-2">{category}</label>
+                    <label htmlFor={`category-${category}`} className="cursor-pointer">
+                      {category}
+                    </label>
                   </li>
                 ))}
               </ul>
@@ -137,17 +90,22 @@ const ShopProducts = ({ items, discountItems }) => {
               Discount Filter
               {isStart ? <FiMinus /> : <FiPlus />}
             </h2>
-            {isStart && ( // Conditionally render category list
+            {isStart && (
               <ul className="space-y-2">
-                {discountItems.map((category) => (
-                  <li key={category} className="flex items-center">
+                {discountItems.map((discount) => (
+                  <li key={discount} className="flex items-center">
                     <input
                       type="checkbox"
-                      value={category}
-                      checked={selectedCategories.includes(category)}
-                      onChange={handleCategoryChange}
+                      id={`discount-${discount}`}
+                      name="discount"
+                      value={discount}
+                      checked={selectedDiscount === discount}
+                      onChange={handleDiscountChange}
+                      className="mr-2"
                     />
-                    <label className="ml-2">{category}</label>
+                    <label htmlFor={`discount-${discount}`} className="cursor-pointer">
+                      {discount}
+                    </label>
                   </li>
                 ))}
               </ul>
@@ -155,68 +113,21 @@ const ShopProducts = ({ items, discountItems }) => {
           </div>
         </div>
         <div className="md:w-9/12">
-          <div className="flex justify-between items-center  border p-2 rounded-xl  h-16">
-            <div className=" relative">
-              {" "}
-              {/* Add relative here */}
-              <button
-                className="btn ml-2 btn-ghost border"
-                onClick={() => setIsColor(!isColor)}
-              >
-                Select Color
-                <FaArrowDown />
-              </button>
-              {/* Dropdown Menu */}
-              {isColor && (
-                <ul className="absolute top-full mt-2 w-full dropdown-content menu bg-base-100 rounded-box shadow p-2 z-10">
-                  {navOption}
-                </ul>
-              )}
-            </div>
-            <div className=" relative">
-              {" "}
-              {/* Add relative here */}
-              <button
-                className="btn ml-2 btn-ghost"
-                onClick={() => setIsBrand(!isBrand)}
-              >
-                Select Brands
-                <FaArrowDown />
-              </button>
-              {/* Dropdown Menu */}
-              {isBrand && (
-                <ul className="absolute top-full mt-2 w-full dropdown-content menu bg-base-100 rounded-box shadow p-2 z-10">
-                  {navOption2}
-                </ul>
-              )}
-            </div>
-            <div className=" relative">
-              {" "}
-              {/* Add relative here */}
-              <button
-                className="btn ml-2 btn-ghost"
-                onClick={() => setIsKg(!isKg)}
-              >
-                Select KG
-                <FaArrowDown />
-              </button>
-              {/* Dropdown Menu */}
-              {isKg && (
-                <ul className="absolute top-full mt-2 w-full dropdown-content menu bg-base-100 rounded-box shadow p-2 z-10">
-                  {navOption3}
-                </ul>
-              )}
-            </div>
-            <div className="">
-              <button className="btn bg-[#019267] text-white uppercase">
-                Filter
-              </button>
-            </div>
-          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center 2xl:grid-cols-4 lg:gap-4">
-            {product?.map((data) => (
-              <ShopProductsCard key={data.id} data={data}></ShopProductsCard>
-            ))}
+            {product
+              .filter((data) =>
+                selectedCategory === "All Products" || !selectedCategory
+                  ? true
+                  : data.category === selectedCategory
+              )
+              .filter((data) =>
+                selectedDiscount
+                  ? data.discount >= parseInt(selectedDiscount)
+                  : true
+              )
+              .map((data) => (
+                <ShopProductsCard key={data.id} data={data}></ShopProductsCard>
+              ))}
           </div>
         </div>
       </div>
