@@ -66,7 +66,7 @@
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
         "category":"vegetables",
-        "offer":"10%"
+        "offer":"30%"
 
     },
     {
@@ -80,7 +80,7 @@
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
         "category":"vegetables",
-        "offer":"10%"
+        "offer":"%"
 
     },
     {
@@ -94,7 +94,7 @@
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"best sellers",
         "category":"fruits",
-        "offer":"10%"
+        "offer":"25%"
 
     },
     {
@@ -136,7 +136,7 @@
         "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
         "featured":"in stock",
         "category":"vegetables",
-        "offer":"10%"
+        "offer":"20%"
 
     }
 ]

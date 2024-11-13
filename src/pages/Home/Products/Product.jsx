@@ -23,6 +23,8 @@ const Product = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const filterProduct = filteredProducts?.slice(0,8)
+
   return (
     <div>
       <div className="flex justify-between items-center my-3 gap-9 md:gap-0 mx-2 border p-2 rounded-md">
@@ -112,7 +114,7 @@ const Product = () => {
 
       <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Render filtered products */}
-        {filteredProducts?.map((cards) => (
+        {filterProduct?.map((cards) => (
           <ProductShow key={cards.id} cards={cards} />
         ))}
       </div>

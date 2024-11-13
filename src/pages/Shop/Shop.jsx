@@ -22,6 +22,7 @@ const Shop = () => {
         <div className="">
           <ShopCaro brand={brand}></ShopCaro>
         </div>
+        <hr className="my-10" />
         <div className="my-10">
           <ShopProducts></ShopProducts>
         </div>
