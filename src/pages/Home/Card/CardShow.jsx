@@ -1,14 +1,17 @@
 import { TbBackground } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import UseProducts from "../../../Hooks/UseProducts";
 
-const CardShow = ({ card }) => {
-  const { img, cardColor, name, description } = card || {};
-  const cardBgColor = {
-    backgroundColor: cardColor,
-  };
+const CardShow = () => {
+ 
+
+
+  
+
+
   return (
     <div>
-      <Link to={'/'}>
+      <button onClick={handleCardClick} className="">
         <div
           style={cardBgColor}
           className="card w-72 h-96 shadow-xl my-5 hover:"
@@ -27,7 +30,7 @@ const CardShow = ({ card }) => {
             />
           </figure>
         </div>
-      </Link>
+      </button>
     </div>
   );
 };

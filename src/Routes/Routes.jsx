@@ -12,7 +12,7 @@ import Return from "../pages/Return/Return";
 import Shop from "../pages/Shop/Shop";
 import Cart from "../pages/Cart/Cart";
 import SearchProduct from "../pages/Search/SearchProduct";
-import SearchProductDetails from "../pages/Search/SearchProductDetails";
+import ShopProducts from "../pages/Shop/ShopProducts";
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +49,7 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop></Shop>,
-        loader:()=>fetch('/caro.json')
+        loader: () => fetch("/caro.json"),
       },
       {
         path: "/favorite",
@@ -58,16 +58,16 @@ export const router = createBrowserRouter([
       {
         path: "/productsDetails/:id",
         element: <ProductDetails></ProductDetails>,
-        loader:()=>fetch('/products.json')
+        loader: () => fetch("/products.json"),
       },
       {
-        path:"/cart",
-        element:<Cart></Cart>,
+        path: "/cart",
+        element: <Cart></Cart>,
       },
       {
-        path:"/search",
-        element:<SearchProduct></SearchProduct>
-      }
+        path: "/search",
+        element: <SearchProduct></SearchProduct>,
+      },
     ],
   },
 ]);
