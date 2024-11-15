@@ -12,7 +12,7 @@ const Shop = () => {
     <div>
       <Helmet>
         {" "}
-        <title>Grocery-Shop | Blog</title>{" "}
+        <title>Grocery-Shop | Shop</title>{" "}
       </Helmet>
       <div className="">
         <div className="h-48  w-full flex flex-col justify-center items-center text-center">

@@ -6,13 +6,18 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 
 const ShopProducts = () => {
   const [product] = UseProducts();
+
+  const [isOpen, setIsOpen] = useState(true);
+  const [isStart, setIsStart] = useState(true);
+
+  // Get category from URL query params
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const initialCategory = queryParams.get("category") || "All Products";
+  const initialCategory = decodeURIComponent(queryParams.get("category") || "All Products");
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+
+  // Discount filter state
   const [selectedDiscount, setSelectedDiscount] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isStart, setIsStart] = useState(false);
 
   useEffect(() => {
     setSelectedCategory(initialCategory);
@@ -23,9 +28,11 @@ const ShopProducts = () => {
     "Bakery",
     "Fruits",
     "Grocery",
-    "Prepared & Deli",
-    "Seafood & Meat",
+    "Prepared and Deli",
+    "Seafood and Meat",
     "Vegetables",
+    "Dried Food",
+    "Breakfast",
   ];
 
   const discountItems = [
@@ -42,13 +49,10 @@ const ShopProducts = () => {
 
   const handleDiscountChange = (event) => {
     const value = event.target.value;
-
     setSelectedDiscount((prevSelected) => {
       if (prevSelected.includes(value)) {
-        // If the discount is already selected, unselect it (remove from the array)
         return prevSelected.filter((discount) => discount !== value);
       } else {
-        // If the discount is not selected, select it (add to the array)
         return [...prevSelected, value];
       }
     });
@@ -67,16 +71,14 @@ const ShopProducts = () => {
     .filter((data) =>
       selectedCategory === "All Products" || !selectedCategory
         ? true
-        : data.category.toLowerCase() === selectedCategory.toLowerCase()
+        : data.category.trim().toLowerCase() === selectedCategory.trim().toLowerCase()
     )
     .filter((data) => {
-      // If no discounts are selected, do not apply the discount filter
       if (selectedDiscount.length === 0) {
         return true;
       }
-      // If discounts are selected, check if the product meets the discount criteria
       return selectedDiscount.some((discount) => {
-        const discountPercentage = parseInt(discount.split(" ")[0]); // Extract the percentage (e.g., "10%" => 10)
+        const discountPercentage = parseInt(discount.split(" ")[0]);
         return parseInt(data.offer) >= discountPercentage;
       });
     });
@@ -104,7 +106,10 @@ const ShopProducts = () => {
                     onChange={handleFilteredProducts}
                     className="mr-2"
                   />
-                  <label htmlFor={`category-${item}`} className="cursor-pointer">
+                  <label
+                    htmlFor={`category-${item}`}
+                    className="cursor-pointer"
+                  >
                     {item}
                   </label>
                 </li>
@@ -127,11 +132,14 @@ const ShopProducts = () => {
                     type="checkbox"
                     id={`discount-${discount}`}
                     value={discount}
-                    checked={selectedDiscount.includes(discount)} // Check if it's selected
-                    onChange={handleDiscountChange} // Toggle discount filter
+                    checked={selectedDiscount.includes(discount)}
+                    onChange={handleDiscountChange}
                     className="mr-2"
                   />
-                  <label htmlFor={`discount-${discount}`} className="cursor-pointer">
+                  <label
+                    htmlFor={`discount-${discount}`}
+                    className="cursor-pointer"
+                  >
                     {discount}
                   </label>
                 </li>

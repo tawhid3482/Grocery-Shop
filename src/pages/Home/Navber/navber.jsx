@@ -14,7 +14,6 @@ const Navber = () => {
   const handleCartClick = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
 
-
   // search
   const [product] = UseProducts();
 
@@ -26,7 +25,9 @@ const Navber = () => {
       item?.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilterProduct(filterPro);
-    navigate("/search", { state: { filterProduct: filterPro, query: searchTerm } });
+    navigate("/search", {
+      state: { filterProduct: filterPro, query: searchTerm },
+    });
   };
 
   return (
@@ -82,13 +83,9 @@ const Navber = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
+
               <li>
-                <Link to="/profile">
-                  Profile <span className="badge">New</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/settings">Settings</Link>
+                <Link to="/dashboard">Dashboard</Link>
               </li>
               <li>
                 <Link to="/logout">Logout</Link>
@@ -97,7 +94,6 @@ const Navber = () => {
           </div>
         </div>
       </div>
-     
     </div>
   );
 };

@@ -22,7 +22,7 @@ const Navbar2 = () => {
         <a onClick={() => handleNavOptionClick("All Products")}>All Products</a>
       </li>
       <li>
-        <a onClick={() => handleNavOptionClick("Prepared & Deli")}>
+        <a onClick={() => handleNavOptionClick("Prepared and Deli")}>
           Prepared & Deli
         </a>
       </li>
@@ -33,15 +33,12 @@ const Navbar2 = () => {
         <a onClick={() => handleNavOptionClick("Vegetables")}>Vegetables</a>
       </li>
       <li>
-        <a onClick={() => handleNavOptionClick("Seafoods & Meat")}>
-          Seafoods & Meat
+        <a onClick={() => handleNavOptionClick("Seafood and Meat")}>
+        Seafood & Meat
         </a>
       </li>
       <li>
         <a onClick={() => handleNavOptionClick("Grocery")}>Grocery</a>
-      </li>
-      <li>
-        <a onClick={() => handleNavOptionClick("Dairy")}>Dairy</a>
       </li>
       <li>
         <a onClick={() => handleNavOptionClick("Bakery")}>Bakery</a>

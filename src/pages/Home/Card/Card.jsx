@@ -1,14 +1,19 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UseCard from "../../../Hooks/UseCard";
 
 const Card = () => {
   const [cards] = UseCard();
+  const navigate = useNavigate();
+
+  const handleNavOptionClick = (category) => {
+    navigate(`/shop?category=${category}`);
+  };
 
   return (
     <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 items-center ">
       {cards?.map((card) => (
         <div key={card.id}>
-          <NavLink to={`/shop/${card.name}`} className="block">
+          <button onClick={() => handleNavOptionClick(card?.name)}>
             <div
               style={{ backgroundColor: card.cardColor }}
               className="card w-72 h-96 shadow-xl my-5 hover:"
@@ -27,7 +32,7 @@ const Card = () => {
                 />
               </figure>
             </div>
-          </NavLink>
+          </button>
         </div>
       ))}
     </div>
