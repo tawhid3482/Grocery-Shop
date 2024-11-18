@@ -112,8 +112,9 @@ const ProductDetails = () => {
               >
                 +
               </span>
+              <span className="text-2xl font-medium uppercase ">{proDetails?.unit_of_measure}</span>
             </div>
-            <div className="">
+            <div className=" ml-8">
               <button className="btn w-28 bg-[#019267] text-white hover:bg-[#F0592A]">
                 Add To cart
               </button>
@@ -125,7 +126,7 @@ const ProductDetails = () => {
                 <MdOutlineFavoriteBorder className="text-2xl "></MdOutlineFavoriteBorder>
               </button>{" "}
             </div>
-            <div className="">
+            <div className="ml-8">
               <button className="btn w-28 bg-[#019267] text-white hover:bg-[#F0592A]">
                 buy now
               </button>
@@ -149,7 +150,7 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        <div className="lg:w-1/3 border lg:h-[450px] p-3 md:my-5 lg:my-0 rounded-md">
+        <div className="md:w-[680px] lg:w-1/3 border lg:h-[450px] p-3 md:my-5 lg:my-0 rounded-md">
           <p className="text-xl font-medium ">Similar Products </p>
           <div
             className={`${
@@ -160,7 +161,7 @@ const ProductDetails = () => {
           >
             {similarProductFilter.map((similarProduct) => (
               <Link to={`/productsDetails/${similarProduct?.id}`}>
-                <div className="flex gap-10 items-center border p-2">
+                <div className="flex gap-10 items-center border rounded-xl p-2">
                   <div className=" ">
                     <img src={similarProduct?.img} alt="" className="w-12" />
                   </div>

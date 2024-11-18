@@ -44,14 +44,14 @@ const Product = () => {
             ALL PRODUCTS
           </button>
 
-          {/* Best Sellers Button */}
+          {/* best sellers Button */}
           <button
             onClick={() => filterProducts("best sellers")}
             className={`btn uppercase rounded-3xl hover:bg-[#019267] hover:text-white ${
               filterFeatured === "best sellers" ? "bg-[#019267] text-white" : ""
             }`}
           >
-            Best sellers
+            best sellers
           </button>
 
           {/* Top Rated Button */}
@@ -119,7 +119,7 @@ const Product = () => {
             onClick={() => filterProducts("best sellers")}
             className="btn rounded-3xl uppercase px-4 py-2 hover:bg-gray-100"
           >
-            Best sellers
+            best sellers
           </button>
           <button
             onClick={() => filterProducts("top rated")}

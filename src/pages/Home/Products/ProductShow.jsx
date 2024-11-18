@@ -6,7 +6,7 @@ import Rating from "react-rating";
 import ProductDetails from "./ProductDetails";
 
 const ProductShow = ({ cards }) => {
-  const { id,img, oldPrice, newPrice, name, rating, stock } = cards;
+  const { id,img, oldPrice, newPrice, name, rating, stock, } = cards;
   return (
     <div>
       <div className="card border bg-base-100 w-72 h-96 shadow-lg">

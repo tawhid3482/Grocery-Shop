@@ -1,16 +1,26 @@
 [
   {
     "id": "1",
-    "img": "https://i.postimg.cc/J0WR4Hnx/tomatoes-canva-removebg-preview.png",
     "name": "Tomato",
+    "img": "https://i.postimg.cc/J0WR4Hnx/tomatoes-canva-removebg-preview.png",
     "oldPrice": "2.51",
     "newPrice": "1.59",
+    "category": "vegetables",
     "rating": "4.5",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
-    "category": "vegetables",
-    "offer": "10%"
+    "featured": "best selling",
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "2",
@@ -21,9 +31,19 @@
     "rating": "4.5",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "vegetables",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "3",
@@ -34,9 +54,19 @@
     "rating": "4.7",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "fruits",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "4",
@@ -47,9 +77,19 @@
     "rating": "4.5",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "vegetables",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "5",
@@ -60,9 +100,19 @@
     "rating": "4.5",
     "stock": "to rated",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "vegetables",
-    "offer": "30%"
+    "offer": "30%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "6",
@@ -73,9 +123,19 @@
     "rating": "4.5",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "vegetables",
-    "offer": "%"
+    "offer": "%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "7",
@@ -86,9 +146,19 @@
     "rating": "4.1",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "fruits",
-    "offer": "25%"
+    "offer": "25%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "8",
@@ -101,7 +171,17 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "top rated",
     "category": "vegetables",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "9",
@@ -114,7 +194,17 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "on sale",
     "category": "vegetables",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "10",
@@ -127,7 +217,17 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "on sale",
     "category": "vegetables",
-    "offer": "20%"
+    "offer": "20%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "11",
@@ -139,8 +239,18 @@
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "on sale",
-    "category": "Seafood & Meat",
-    "offer": "15%"
+    "category": "Seafood and Meat",
+    "offer": "15%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "12",
@@ -151,9 +261,19 @@
     "rating": "4.6",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "vegetables",
-    "offer": "20%"
+    "offer": "20%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "13",
@@ -164,9 +284,19 @@
     "rating": "4.4",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "vegetables",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
 
   {
@@ -178,9 +308,19 @@
     "rating": "4.7",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "fruits",
-    "offer": "15%"
+    "offer": "15%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "15",
@@ -193,7 +333,17 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "on sale",
     "category": "Seafood and Meat",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "16",
@@ -204,9 +354,19 @@
     "rating": "4.5",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "best selling",
     "category": "Dried Food",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "17",
@@ -219,7 +379,17 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "top rated",
     "category": "Prepared and Deli",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "L",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "18",
@@ -232,7 +402,17 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "top rated",
     "category": "Bakery",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "19",
@@ -244,8 +424,18 @@
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "in stock",
-    "category": "Seafood & Meat",
-    "offer": "10%"
+    "category": "Seafood and Meat",
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "20",
@@ -257,8 +447,18 @@
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "on sale",
-    "category": "Seafood & Meat",
-    "offer": "10%"
+    "category": "Seafood and Meat",
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "21",
@@ -271,7 +471,17 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "top rated",
     "category": "Breakfast",
-    "offer": "10%"
+    "offer": "10%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   },
   {
     "id": "22",
@@ -284,6 +494,16 @@
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
     "featured": "in stock",
     "category": "Breakfast",
-    "offer": "20%"
+    "offer": "20%",
+    "stock_quantity": "50",
+    "brand": "Local Farms",
+    "unit_of_measure": "kg",
+    "supplier": {
+      "name": "Kamal Hossain",
+      "contact_info": {
+        "phone": "+1234567890",
+        "email": "contact@lkamalHossain.com"
+      }
+    }
   }
 ]
