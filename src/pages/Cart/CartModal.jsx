@@ -14,6 +14,15 @@ const CartModal = ({ isOpen, onClose }) => {
   const [timeLeft] = CountDown();
   const [cart] = UseCart();
 
+  // Calculate the subtotal by summing up the newPrice values
+  const subtotal = cart
+    ?.reduce((acc, item) => acc + parseFloat(item.newPrice || 0), 0)
+    .toFixed(2);
+
+  // Define the free shipping threshold
+  const freeShippingThreshold = 100;
+  const remainingAmount = (freeShippingThreshold - subtotal).toFixed(2);
+
   return (
     <div>
       <div
@@ -65,16 +74,19 @@ const CartModal = ({ isOpen, onClose }) => {
             {cart && cart.length > 0 ? (
               <div className="my-5 mx-4">
                 <p className="text-sm font-medium uppercase">
-                  Buy $492.01 more to enjoy FREE Shipping
+                  {subtotal >= freeShippingThreshold
+                    ? "You qualify for FREE Shipping!"
+                    : `Buy $${remainingAmount} more to enjoy FREE Shipping`}
                 </p>
                 <div className="relative pt-1">
                   <div className="overflow-hidden text-xs flex rounded bg-pink-200">
                     <div
-                      style={{ width: "35%" }} // Adjust height as needed
+                      style={{
+                        width: `${(subtotal / freeShippingThreshold) * 100}%`,
+                      }}
                       className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500 relative p-2"
                     >
-                      <TbTruckDelivery className="text-2xl absolute right-1 top-[-5px] text-black " />{" "}
-                      {/* Adjust text size as needed */}
+                      <TbTruckDelivery className="text-2xl absolute right-1 top-[-5px] text-black " />
                     </div>
                   </div>
                 </div>
@@ -85,8 +97,7 @@ const CartModal = ({ isOpen, onClose }) => {
           </div>
 
           {/* Scrollable Cart Items Section */}
-
-          <div className="flex-1 overflow-y-auto ">
+          <div className="flex-1 overflow-y-auto">
             {cart && cart?.length > 0 ? (
               <div className="">
                 <div className="grid grid-cols-1 gap-3 place-items-center p-4">
@@ -98,11 +109,11 @@ const CartModal = ({ isOpen, onClose }) => {
                 <div className="mx-4 my-5">
                   <div className="flex justify-between items-center my-2">
                     <p className="text-xl font-medium uppercase">Subtotal:</p>
-                    <span>$45</span>
+                    <span>${subtotal}</span>
                   </div>
                   <div className="flex justify-between items-center my-2">
                     <p className="text-xl font-medium uppercase">Total:</p>
-                    <span>$45</span>
+                    <span>${subtotal}</span>
                   </div>
                   <div className="flex justify-between items-center my-2">
                     <Link
@@ -113,9 +124,13 @@ const CartModal = ({ isOpen, onClose }) => {
                       View Cart
                     </Link>
 
-                    <button className="btn w-1/2 bg-[#f84503] text-white">
+                    <Link
+                      to={"/checkout"}
+                      className="btn w-1/2 bg-[#f84503] text-white"
+                      onClick={onClose}
+                    >
                       Checkout
-                    </button>
+                    </Link>
                   </div>
                   <div className="flex justify-between items-center ">
                     <button className="btn w-1/3">

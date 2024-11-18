@@ -8,6 +8,7 @@ import PageTitle from "../../Components/PageTitle/PageTitle";
 import { Link } from "react-router-dom";
 
 const SearchProductDetails = ({ product, similarProducts }) => {
+  
   const [count, setCount] = useState(1);
   const increaseCount = () => setCount(count + 1);
   const decreaseCount = () => count > 1 && setCount(count - 1);
@@ -110,14 +111,14 @@ const SearchProductDetails = ({ product, similarProducts }) => {
 
         {/* Similar Products Section */}
         {similarProducts.length > 0 && (
-          <div className="lg:w-1/3 border lg:h-[450px] p-3 md:my-5 lg:my-0 rounded-md h-96">
+          <div className="lg:w-1/3 border lg:h-[450px] p-3 md:my-5 lg:my-0 rounded-md ">
             <p className="text-xl font-medium">Similar Products</p>
             <div
               className={`${
                 similarProducts.length > 4
                   ? "border-r-2 border-gray-300 pr-5"
                   : ""
-              } flex flex-col space-y-4 max-h-[450px] overflow-y-auto`} // Added scroll functionality
+              } flex flex-col space-y-4 max-h-96 overflow-y-auto`} // Added scroll functionality
             >
               {similarProducts.map((similarPro) => (
                 <Link to={`/productsDetails/${similarPro?.id}`}>

@@ -5,13 +5,16 @@ import { Link } from "react-router-dom";
 import Rating from "react-rating";
 
 const ProCards = ({ proCards }) => {
-  const { img, oldPrice, newPrice, name, rating, stock } = proCards;
+  const { id, img, oldPrice, newPrice, name, rating, stock } = proCards;
   return (
     <div>
       <div className="card border bg-base-100 w-64  h-[400px] shadow-lg">
-        <figure>
-          <img src={img} alt="img" className="lg:h-40 " />
-        </figure>
+        <Link to={`/productsDetails/${id}`}>
+          <figure>
+            <img src={img} alt="img" className="lg:h-40 " />
+          </figure>
+        </Link>
+
         <hr className="my-2" />
         <div className="card-body mt-0 pt-0">
           <h2 className="text-lg font-medium">{name}</h2>
@@ -65,7 +68,7 @@ const ProCards = ({ proCards }) => {
               <Link to="">
                 <MdOutlineFavoriteBorder className="text-xl "></MdOutlineFavoriteBorder>
               </Link>
-              <Link to="">
+              <Link to={`/productsDetails/${id}`}>
                 <FaRegEye className="text-xl"></FaRegEye>
               </Link>
             </div>

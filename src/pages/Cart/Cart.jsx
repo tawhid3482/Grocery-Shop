@@ -4,6 +4,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import UseCart from "../../Hooks/UseCart";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import Carts from "./Carts";
+import { NavLink } from "react-router-dom";
 
 const Cart = () => {
   const [cart] = UseCart();
@@ -101,6 +102,15 @@ const Cart = () => {
     setIsOpen((prev) => !prev);
   };
 
+  // Calculate the subtotal by summing up the newPrice values
+  const subtotal = cart
+    ?.reduce((acc, item) => acc + parseFloat(item.newPrice || 0), 0)
+    .toFixed(2);
+
+  // Define the free shipping threshold
+  const freeShippingThreshold = 100;
+  const remainingAmount = (freeShippingThreshold - subtotal).toFixed(2);
+
   return (
     <div>
       <Helmet>
@@ -113,19 +123,23 @@ const Cart = () => {
         </p>
       </div>
 
-      <div className="flex gap-4 items-start justify-between md:flex-col lg:flex-row my-5  ">
-        <div className="border border-gray-300 w-8/12 rounded-lg">
+      <div className="flex gap-4 items-start justify-between  flex-col lg:flex-row my-5  p-8 lg:p-0 ">
+        <div className="border border-gray-300 w-full lg:w-8/12 rounded-lg">
           <div className="my-5 mx-4">
-            <p className="font-medium uppercase">
-              Buy $492.01 more to enjoy FREE Shipping
+            <p className="text-sm font-medium uppercase">
+              {subtotal >= freeShippingThreshold
+                ? "You qualify for FREE Shipping!"
+                : `Buy $${remainingAmount} more to enjoy FREE Shipping`}
             </p>
             <div className="relative pt-1">
               <div className="overflow-hidden text-xs flex rounded bg-pink-200">
                 <div
-                  style={{ width: "35%" }}
+                  style={{
+                    width: `${(subtotal / freeShippingThreshold) * 100}%`,
+                  }}
                   className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500 relative p-2"
                 >
-                  <TbTruckDelivery className="text-2xl absolute right-1 top-[-5px] " />
+                  <TbTruckDelivery className="text-2xl absolute right-1 top-[-5px]  " />
                 </div>
               </div>
             </div>
@@ -133,8 +147,12 @@ const Cart = () => {
 
           <div className=" grid grid-cols-1 ">
             {cart?.map((items) => {
-             return <Carts key={items?.id} items={items}></Carts>;
+              return <Carts key={items?.id} items={items}></Carts>;
             })}
+          </div>
+
+          <div className="text-right mr-5">
+            <button className="btn bg-green-700 text-white">Update</button>
           </div>
 
           <div className="flex gap-3 items-center my-5 mx-4">
@@ -149,11 +167,11 @@ const Cart = () => {
           </div>
         </div>
 
-        <div className="lg:w-4/12 border border-[#F0592A] p-5 rounded-lg">
+        <div className="w-full lg:w-4/12 border border-[#F0592A]  p-5 rounded-lg">
           <p className="text-xl font-bold">Cart totals</p>
           <div className="flex justify-between items-center text-sm font-medium uppercase my-5">
             <span>Subtotal </span>
-            <span> $144.48</span>
+            <span> ${subtotal}</span>
           </div>
           <div className="bg-[#ecc8bd] p-3">
             <p className="text-lg font-bold mb-3 text-[#F0592A]">SHIPPING</p>
@@ -232,11 +250,13 @@ const Cart = () => {
 
           <div className="flex justify-between items-center text-sm font-medium uppercase my-5">
             <span>TOTAL </span>
-            <span> $144.48</span>
+            <span> ${subtotal}</span>
           </div>
-          <button className="btn bg-[#F0592A] text-lg text-white hover:bg-[#019267] w-full">
-            Proceed to checkout
-          </button>
+          <NavLink to={"/checkout"}>
+            <button className="btn bg-[#F0592A] text-lg text-white hover:bg-[#019267] w-full">
+              Proceed to checkout
+            </button>
+          </NavLink>
         </div>
       </div>
     </div>

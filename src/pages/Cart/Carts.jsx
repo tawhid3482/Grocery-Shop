@@ -1,20 +1,28 @@
 import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const Carts = ({ items }) => {
-  const { img, name, newPrice, count } = items;
+const Carts = ({ items, onUpdateCount }) => {
+  const { img, name, newPrice, count, weight } = items;
 
-  const [counts, setCount] = useState(Number(count) || 1); // Initialize count
+  const [counts, setCount] = useState(Number(count) || 1); // Initialize count with existing value or 1
 
   // Calculate the total price based on counts and newPrice
-  const price = newPrice * counts;
+  const price = (newPrice * counts).toFixed(2);
 
   // Increment counter
-  const increaseCount = () => setCount((prevCount) => prevCount + 1);
+  const increaseCount = () => {
+    const updatedCount = counts + 1;
+    setCount(updatedCount);
+    if (onUpdateCount) onUpdateCount(items.id, updatedCount);
+  };
 
   // Decrement counter
   const decreaseCount = () => {
-    setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : prevCount)); // Prevent count from going below 1
+    if (counts > 1) {
+      const updatedCount = counts - 1;
+      setCount(updatedCount);
+      if (onUpdateCount) onUpdateCount(items.id, updatedCount);
+    }
   };
 
   return (
@@ -38,26 +46,27 @@ const Carts = ({ items }) => {
       <div className="flex items-center gap-6">
         <div className="counter flex items-center gap-3 p-2 rounded-md border border-gray-300">
           <button
-            className="text-xl text-gray-600 hover:text-gray-800"
+            className={`text-3xl text-gray-600 hover:text-gray-800 ${
+              counts === 1 ? "cursor-not-allowed opacity-50" : ""
+            }`}
             onClick={decreaseCount}
-            style={{ cursor: "pointer" }}
+            disabled={counts === 1} // Disable when count is 1
           >
             -
           </button>
           <p className="text-xl font-semibold">{counts}</p>
           <button
-            className="text-xl text-gray-600 hover:text-gray-800"
+            className="text-2xl text-gray-600 hover:text-gray-800"
             onClick={increaseCount}
-            style={{ cursor: "pointer" }}
           >
             +
           </button>
         </div>
+        <span>{weight ? `${weight} ` : ""}</span>
+      </div>
 
-        <div className="text-xl font-semibold text-green-600">
-          ${price.toFixed(2)}
-        </div>
-
+      <div className="text-xl font-semibold text-green-600">${price}</div>
+      <div>
         <button className="text-xl text-red-600 hover:text-red-800">
           <RiDeleteBin6Line />
         </button>

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Link, useAsyncError, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo/logo.png";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BsCart3 } from "react-icons/bs";
 import CartModal from "../../Cart/CartModal";
 import UseProducts from "../../../Hooks/UseProducts";
-import SearchProduct from "../../Search/SearchProduct";
 
 const Navber = () => {
   const [isModalOpen, setModalOpen] = useState(false);

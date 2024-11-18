@@ -125,7 +125,7 @@
     "rating": "3.5",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "in stock",
+    "featured": "on sale",
     "category": "vegetables",
     "offer": "20%"
   },
@@ -138,7 +138,7 @@
     "rating": "4.5",
     "stock": "In Stock",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam sunt est nostrum esse, molestiae sit neque, consectetur dicta quam officiis id quaerat nihil praesentium labore optio excepturi illum ipsam qui.",
-    "featured": "best sellers",
+    "featured": "on sale",
     "category": "Seafood & Meat",
     "offer": "15%"
   },

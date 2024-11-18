@@ -9,6 +9,7 @@ import Review from "../Review/Review";
 import Brand from "../Brand/Brand";
 import EmailSubmit from "../EmailSubmit/EmailSubmit";
 import { Helmet } from "react-helmet-async";
+import CardSwiper from "../ProductCard/CardSwiper";
 
 const Home = () => {
   return (
