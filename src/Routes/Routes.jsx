@@ -12,8 +12,9 @@ import Return from "../pages/Return/Return";
 import Shop from "../pages/Shop/Shop";
 import Cart from "../pages/Cart/Cart";
 import SearchProduct from "../pages/Search/SearchProduct";
-import ShopProducts from "../pages/Shop/ShopProducts";
 import CheckOut from "../pages/CheckOut/CheckOut";
+import Login from "../pages/Login/Login";
+import SignUp from "../pages/Login/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -59,7 +60,7 @@ export const router = createBrowserRouter([
       {
         path: "/productsDetails/:id",
         element: <ProductDetails></ProductDetails>,
-        loader: () => fetch("/products.json"),
+        loader: () => fetch("http://localhost:5000/products"),
       },
       {
         path: "/cart",
@@ -72,6 +73,14 @@ export const router = createBrowserRouter([
       {
         path:"/checkout",
         element:<CheckOut></CheckOut>
+      },
+      {
+        path:'/login',
+        element:<Login></Login>
+      },
+      {
+        path:'/signup',
+        element:<SignUp></SignUp>
       }
     ],
   },

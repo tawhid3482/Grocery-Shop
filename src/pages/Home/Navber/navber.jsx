@@ -29,6 +29,9 @@ const Navber = () => {
     });
   };
 
+
+
+
   return (
     <div>
       <div className="flex justify-between items-center bg-base-100 p-3">
@@ -79,8 +82,9 @@ const Navber = () => {
               />
             </button>
             <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
+             
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/login">Login</Link>
               </li>
 
               <li>
