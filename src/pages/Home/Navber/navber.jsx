@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo/logo.png";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BsCart3 } from "react-icons/bs";
 import CartModal from "../../Cart/CartModal";
 import UseProducts from "../../../Hooks/UseProducts";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const Navber = () => {
+  const { user, logOutUser } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOutUser();
+    toast.success("You have successfully logout");
+  };
+
   const [isModalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -28,9 +37,6 @@ const Navber = () => {
       state: { filterProduct: filterPro, query: searchTerm },
     });
   };
-
-
-
 
   return (
     <div>
@@ -75,24 +81,60 @@ const Navber = () => {
           </Link>
           <div className="dropdown dropdown-end">
             <button className="btn btn-ghost btn-circle avatar">
-              <img
-                alt="User Avatar"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                className="w-9 rounded-full"
-              />
+              {user ? (
+                <img
+                  alt="User Avatar"
+                  src={user?.photoURL}
+                  className="w-9 rounded-full"
+                />
+              ) : (
+                <img
+                  alt="User Avatar"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  className="w-9 rounded-full"
+                />
+              )}
             </button>
             <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
-             
               <li>
-                <Link to="/login">Login</Link>
+                <Link
+                  className=" hover:bg-[#F0592A] hover:text-white "
+                  to="/dashboard"
+                >
+                  {user?.displayName}
+                </Link>
               </li>
-
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/logout">Logout</Link>
-              </li>
+              {user ? (
+                <li>
+                  <Link
+                    className=" hover:bg-[#F0592A] hover:text-white"
+                    to="/dashboard"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              ) : (
+                <></>
+              )}
+              {user ? (
+                <li>
+                  <Link
+                    className=" hover:bg-[#F0592A] hover:text-white"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link
+                    className=" text-left hover:bg-[#F0592A] hover:text-white"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>
