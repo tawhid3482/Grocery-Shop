@@ -72,13 +72,22 @@ const Navber = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <button onClick={handleCartClick} className="btn btn-circle">
+          <button onClick={handleCartClick} className="btn btn-circle relative">
             <BsCart3 className="text-3xl" />
+            <div className="bg-[#F0592A] text-white rounded-2xl p-1 absolute -top-2 -right-2">
+              +1
+            </div>
           </button>
+
           <CartModal isOpen={isModalOpen} onClose={handleCloseModal} />
-          <Link to="/favorite" className="btn btn-circle">
+
+          <Link to="/favorite" className="btn btn-circle relative">
             <MdFavoriteBorder className="text-3xl" />
+            <div className="bg-[#F0592A] text-white rounded-2xl p-1 absolute -top-2 -right-2">
+              +4
+            </div>
           </Link>
+
           <div className="dropdown dropdown-end">
             <button className="btn btn-ghost btn-circle avatar">
               {user ? (
@@ -90,50 +99,50 @@ const Navber = () => {
               ) : (
                 <img
                   alt="User Avatar"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src="https://png.pngtree.com/png-clipart/20231019/original/pngtree-user-profile-avatar-png-image_13369988.png"
                   className="w-9 rounded-full"
                 />
               )}
             </button>
             <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
-              <li>
-                <Link
-                  className=" hover:bg-[#F0592A] hover:text-white "
-                  to="/dashboard"
-                >
-                  {user?.displayName}
-                </Link>
-              </li>
               {user ? (
-                <li>
-                  <Link
-                    className=" hover:bg-[#F0592A] hover:text-white"
-                    to="/dashboard"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
+                <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
+                  <li>
+                    <Link
+                      className="hover:bg-[#F0592A] hover:text-white"
+                      to="/dashboard"
+                    >
+                      {user?.displayName}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="hover:bg-[#F0592A] hover:text-white"
+                      to="/dashboard"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      className="hover:bg-[#F0592A] hover:text-white"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               ) : (
-                <></>
-              )}
-              {user ? (
-                <li>
-                  <Link
-                    className=" hover:bg-[#F0592A] hover:text-white"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </Link>
-                </li>
-              ) : (
-                <li>
-                  <Link
-                    className=" text-left hover:bg-[#F0592A] hover:text-white"
-                    to="/login"
-                  >
-                    Login
-                  </Link>
-                </li>
+                <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10  w-52 p-2 shadow">
+                  <li>
+                    <Link
+                      className="hover:bg-[#F0592A] hover:text-white"
+                      to="/login"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                </ul>
               )}
             </ul>
           </div>

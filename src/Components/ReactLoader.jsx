@@ -1,11 +1,9 @@
+import loader from "../assets/Error/loader.gif";
 
 const ReactLoader = () => {
   return (
     <div>
-      <ScatterBoxLoader
-        primaryColor={"#6366F1"}
-        background={theme.colors["background"]}
-      />
+      <img src={loader} alt="Loading..." className="w-full h-screen" />
     </div>
   );
 };
