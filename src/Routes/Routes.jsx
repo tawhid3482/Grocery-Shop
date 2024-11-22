@@ -16,6 +16,10 @@ import CheckOut from "../pages/CheckOut/CheckOut";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/Login/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
+import UserHome from "../pages/Dashboard/UserHome/UserHome";
+import Wishlist from "../pages/Dashboard/Favorite/Favorite";
+import Favorite from "../pages/Dashboard/Favorite/Favorite";
 
 export const router = createBrowserRouter([
   {
@@ -85,4 +89,19 @@ export const router = createBrowserRouter([
       }
     ],
   },
+  {
+    path:'dashboard',
+    element:<Dashboard></Dashboard>,
+    errorElement:<ErrorPage></ErrorPage>,
+    children:[
+      {
+        path:'home',
+        element:<UserHome></UserHome>
+      },
+      {
+        path:'favorite',
+        element:<Favorite></Favorite>
+      }
+    ]
+  }
 ]);

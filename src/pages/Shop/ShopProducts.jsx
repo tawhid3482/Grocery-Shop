@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import UseProducts from "../../Hooks/UseProducts";
 import ShopProductsCard from "./ShopProductsCard";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import UseProducts from "../../Hooks/UseProducts";
 
 const ShopProducts = () => {
   const [product] = UseProducts();
+  console.log(product)
 
   const [isOpen, setIsOpen] = useState(true);
   const [isStart, setIsStart] = useState(true);
@@ -13,7 +14,9 @@ const ShopProducts = () => {
   // Get category from URL query params
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const initialCategory = decodeURIComponent(queryParams.get("category") || "All Products");
+  const initialCategory = decodeURIComponent(
+    queryParams.get("category") || "All Products"
+  );
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
   // Discount filter state
@@ -71,7 +74,8 @@ const ShopProducts = () => {
     .filter((data) =>
       selectedCategory === "All Products" || !selectedCategory
         ? true
-        : data.category.trim().toLowerCase() === selectedCategory.trim().toLowerCase()
+        : data.category.trim().toLowerCase() ===
+          selectedCategory.trim().toLowerCase()
     )
     .filter((data) => {
       if (selectedDiscount.length === 0) {
@@ -85,7 +89,7 @@ const ShopProducts = () => {
 
   return (
     <div className="flex justify-between flex-col md:flex-row">
-      <div className="flex flex-col md:w-3/12">
+      <div className="flex flex-col md:w-3/12 sticky md:top-16 lg:top-36 h-full  ">
         <div className="p-4 rounded shadow">
           <h2
             onClick={toggleDropdown}

@@ -7,9 +7,14 @@ import CartModal from "../../Cart/CartModal";
 import UseProducts from "../../../Hooks/UseProducts";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import toast from "react-hot-toast";
+import UseCart from "../../../Hooks/UseCart";
+import UseFavourite from "../../../Hooks/UseFavourite";
 
 const Navber = () => {
+
   const { user, logOutUser } = useContext(AuthContext);
+  const [cart]=UseCart()
+  const [favorite]=UseFavourite()
 
   const handleLogout = () => {
     logOutUser();
@@ -75,7 +80,7 @@ const Navber = () => {
           <button onClick={handleCartClick} className="btn btn-circle relative">
             <BsCart3 className="text-3xl" />
             <div className="bg-[#F0592A] text-white rounded-2xl p-1 absolute -top-2 -right-2">
-              +1
+              +{cart?.length}
             </div>
           </button>
 
@@ -84,7 +89,7 @@ const Navber = () => {
           <Link to="/favorite" className="btn btn-circle relative">
             <MdFavoriteBorder className="text-3xl" />
             <div className="bg-[#F0592A] text-white rounded-2xl p-1 absolute -top-2 -right-2">
-              +4
+              +{favorite?.length}
             </div>
           </Link>
 
@@ -118,7 +123,7 @@ const Navber = () => {
                   <li>
                     <Link
                       className="hover:bg-[#F0592A] hover:text-white"
-                      to="/dashboard"
+                      to="/dashboard/home"
                     >
                       Dashboard
                     </Link>

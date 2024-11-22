@@ -139,7 +139,8 @@ const Login = () => {
                   type="submit"
                   className="btn btn-primary bg-[#019267] text-white hover:bg-[#F0592A]"
                   value="Login"
-                  disabled={disabled}
+                  // disable kore dio dev pore
+                  disabled={false}
                 />
               </div>
             </form>

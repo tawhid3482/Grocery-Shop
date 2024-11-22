@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import Swal from "sweetalert2";
+import UseCart from "../../Hooks/UseCart";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Carts = ({ items, onUpdateCount }) => {
-  const { img, name, newPrice, count, weight } = items;
+  const {_id, img, name, newPrice, count, weight } = items;
+  const [,refetch]=UseCart()
+  const AxiosSecure = useAxiosSecure()
 
   const [counts, setCount] = useState(Number(count) || 1); // Initialize count with existing value or 1
 
@@ -24,6 +29,33 @@ const Carts = ({ items, onUpdateCount }) => {
       if (onUpdateCount) onUpdateCount(items.id, updatedCount);
     }
   };
+
+
+  const handleDelete = (id)=>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        AxiosSecure.delete(`/carts/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  }
+
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center p-4 border-b border-gray-200">
@@ -67,7 +99,7 @@ const Carts = ({ items, onUpdateCount }) => {
 
       <div className="text-xl font-semibold text-green-600">${price}</div>
       <div>
-        <button className="text-xl text-red-600 hover:text-red-800">
+        <button onClick={()=>handleDelete(_id)} className="text-xl text-red-600 hover:text-red-800">
           <RiDeleteBin6Line />
         </button>
       </div>

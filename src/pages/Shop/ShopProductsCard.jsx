@@ -2,19 +2,91 @@ import { FaRegEye } from "react-icons/fa";
 import { FaBasketShopping } from "react-icons/fa6";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import Rating from "react-rating";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/UseAuth";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import UseCart from "../../Hooks/UseCart";
+import UseFavourite from "../../Hooks/UseFavourite";
 
 const ShopProductsCard = ({ data }) => {
-  const { id, img, oldPrice, newPrice, name, rating, stock } = data;
-  const {user}=UseAuth()
-  const navigate = useNavigate()
+  const {
+    id,
+    img,
+    oldPrice,
+    newPrice,
+    name,
+    rating,
+    stock,
+    unit_of_measure,
+    supplier,
+  } = data;
 
-  const handleAddToCart = (food) => {
-    if(user && user.email){
+  const [, refetch] = UseCart();
+  const [, reloadData] = UseFavourite();
+  const { user } = UseAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const AxiosSecure = useAxiosSecure();
 
-    }else{
+  const handleAddToFavorite = () => {
+    if (user && user.email) {
+      const favoriteItem = {
+        productId: id,
+        email: user.email,
+        name,
+        img,
+        newPrice,
+        oldPrice,
+        unit_of_measure,
+        supplier,
+        count: 1,
+      };
+      AxiosSecure.post("/favorites", favoriteItem).then((res) => {
+        if (res.data.insertedId) {
+          toast.success(`${name} add to the favorites successfully`);
+          reloadData();
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "You are not logged in",
+        text: "Please login to add to the favorite!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (user && user.email) {
+      const cartItem = {
+        productId: id,
+        email: user.email,
+        name,
+        img,
+        newPrice,
+        unit_of_measure,
+        supplier,
+        count: 1,
+      };
+
+      AxiosSecure.post("/carts", cartItem).then((res) => {
+        if (res.data.insertedId) {
+          toast.success(`${name} add to the cart successfully`);
+          // refetch cart
+          refetch();
+        }
+      });
+    } else {
       Swal.fire({
         title: "You are not logged in",
         text: "Please login to add to the cart!",
@@ -22,10 +94,10 @@ const ShopProductsCard = ({ data }) => {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, login!"
+        confirmButtonText: "Yes, login!",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate('/login')
+          navigate("/login", { state: { from: location } });
         }
       });
     }
@@ -89,16 +161,16 @@ const ShopProductsCard = ({ data }) => {
           <hr />
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-6">
-              <Link to="">
+              <button className="" onClick={handleAddToFavorite}>
                 <MdOutlineFavoriteBorder className="text-xl "></MdOutlineFavoriteBorder>
-              </Link>
+              </button>
               <Link to="">
                 <FaRegEye className="text-xl"></FaRegEye>
               </Link>
             </div>
             <div className="">
               <button
-                onClick={() => handleAddToCart(data)}
+                onClick={handleAddToCart}
                 className="btn bg-[#019267] rounded-3xl"
               >
                 <FaBasketShopping className="text-xl text-white " />

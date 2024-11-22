@@ -1,15 +1,15 @@
 import React from "react";
-import UseFavourite from "../../Hooks/UseFavourite";
 import { Link } from "react-router-dom";
 import Favorites from "./Favorites";
+import UseFavourite from "../../Hooks/UseFavourite";
 
 const Favoutire = () => {
-  const [favoutire] = UseFavourite();
+  const [favorite] = UseFavourite()
   return (
     <div className="">
-      {favoutire && favoutire?.length > 0 ? (
+      {favorite && favorite?.length > 0 ? (
         <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
-          {favoutire?.map((data) => (
+          {favorite?.map((data) => (
             <Favorites key={data.id} data={data}></Favorites>
           ))}
         </div>
@@ -24,7 +24,7 @@ const Favoutire = () => {
             There are no products on the wishlist!
           </p>
           <button className="text-lg bg-[#019267] text-white p-2 hover:bg-slate-400 rounded-lg my-4">
-            <Link to={"/"}>Start Shopping</Link>
+            <Link to={"/shop"}>Start Shopping</Link>
           </button>
         </div>
       )}

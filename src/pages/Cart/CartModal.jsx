@@ -10,6 +10,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
+
 const CartModal = ({ isOpen, onClose }) => {
   const [timeLeft] = CountDown();
   const [cart] = UseCart();
@@ -22,6 +23,11 @@ const CartModal = ({ isOpen, onClose }) => {
   // Define the free shipping threshold
   const freeShippingThreshold = 100;
   const remainingAmount = (freeShippingThreshold - subtotal).toFixed(2);
+
+
+
+
+
 
   return (
     <div>
@@ -152,12 +158,22 @@ const CartModal = ({ isOpen, onClose }) => {
                   No products in the cart.
                 </p>
                 <div className="grid md:grid-cols-2 gap-3">
-                  <button className="btn bg-[#019267] text-white">
-                    Start Shopping
-                  </button>
-                  <button className="btn bg-[#F0592A] text-white">
-                    Return Policy
-                  </button>
+                  <Link to={"/shop"}>
+                    <button
+                      onClick={onClose}
+                      className="btn bg-[#019267] text-white"
+                    >
+                      Start Shopping
+                    </button>
+                  </Link>
+                  <Link to={'/return'}>
+                    <button
+                      onClick={onClose}
+                      className="btn bg-[#F0592A] text-white"
+                    >
+                      Return Policy
+                    </button>
+                  </Link>
                 </div>
               </div>
             )}
