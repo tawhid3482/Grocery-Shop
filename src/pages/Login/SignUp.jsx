@@ -6,11 +6,14 @@ import { useForm } from "react-hook-form";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../Components/SocialLogin.jsx/SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const AxiosPublic = useAxiosPublic();
 
   const {
     register,
@@ -25,16 +28,24 @@ const SignUp = () => {
 
       updateUserProfile(data.name, data.photo)
         .then(() => {
-          console.log(data);
-
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            gender:data.gender,
+            photo:data.photo
+          };
+          console.log(data)
+          AxiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              reset();
+              toast.success("You have successfully signed up");
+              navigate("/");
+            }
+          });
         })
         .catch((error) => {
           console.log(error);
         });
-
-      reset();
-      toast.success("You have successfully signed up");
-      navigate("/");
     });
   };
 
@@ -171,6 +182,10 @@ const SignUp = () => {
                   />
                 </div>
               </form>
+              <div className="divider ">OR</div>
+              <div className="text-center mb-5">
+                <SocialLogin></SocialLogin>
+              </div>
               <div className="text-center mb-5">
                 <p>
                   If you are already a registered member, go to{" "}

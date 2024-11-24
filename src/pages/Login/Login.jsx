@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
+import SocialLogin from "../../Components/SocialLogin.jsx/SocialLogin";
 
 const Login = () => {
   const captchaRef = useRef(null);
@@ -144,6 +145,10 @@ const Login = () => {
                 />
               </div>
             </form>
+            <div className="divider ">OR</div>
+              <div className="text-center mb-5">
+                <SocialLogin></SocialLogin>
+              </div>
             <div className="text-center mb-5">
               <p>
                 If you aren't a registered member, go to{" "}

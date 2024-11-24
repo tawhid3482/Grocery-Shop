@@ -20,6 +20,8 @@ import Dashboard from "../Layout/Dashboard";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import Wishlist from "../pages/Dashboard/Favorite/Favorite";
 import Favorite from "../pages/Dashboard/Favorite/Favorite";
+import AdminHome from "../pages/Dashboard/Admin/AdminHome";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -64,7 +66,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/productsDetails/:id",
-        element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        ),
         loader: () => fetch("http://localhost:5000/products"),
       },
       {
@@ -76,32 +82,46 @@ export const router = createBrowserRouter([
         element: <SearchProduct></SearchProduct>,
       },
       {
-        path:"/checkout",
-        element:<CheckOut></CheckOut>
+        path: "/checkout",
+        element: <CheckOut></CheckOut>,
       },
       {
-        path:'/login',
-        element:<Login></Login>
+        path: "/login",
+        element: <Login></Login>,
       },
       {
-        path:'/signup',
-        element:<SignUp></SignUp>
-      }
+        path: "/signup",
+        element: <SignUp></SignUp>,
+      },
     ],
   },
   {
-    path:'dashboard',
-    element:<Dashboard></Dashboard>,
-    errorElement:<ErrorPage></ErrorPage>,
-    children:[
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
       {
-        path:'home',
-        element:<UserHome></UserHome>
+        path: "home",
+        element: <UserHome></UserHome>,
       },
       {
-        path:'favorite',
-        element:<Favorite></Favorite>
-      }
-    ]
-  }
+        path: "favorite",
+        element: <Favorite></Favorite>,
+      },
+
+      // admin routes
+      {
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
+      },
+      {
+        path: "allUsers",
+        element: <AllUsers></AllUsers>,
+      },
+    ],
+  },
 ]);

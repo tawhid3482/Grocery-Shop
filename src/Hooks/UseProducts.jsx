@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const UseProducts = () => {
   const AxiosSecure = useAxiosSecure();
-  const {isLoading, data: product = [] } = useQuery({
+  const {isLoading, refetch, data: product = [] } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await AxiosSecure.get("/products");

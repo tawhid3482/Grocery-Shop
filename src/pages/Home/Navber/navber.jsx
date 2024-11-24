@@ -9,13 +9,13 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 import toast from "react-hot-toast";
 import UseCart from "../../../Hooks/UseCart";
 import UseFavourite from "../../../Hooks/UseFavourite";
+import UseAdmin from "../../../Hooks/UseAdmin";
 
 const Navber = () => {
-
   const { user, logOutUser } = useContext(AuthContext);
-  const [cart]=UseCart()
-  const [favorite]=UseFavourite()
-
+  const [cart] = UseCart();
+  const [favorite] = UseFavourite();
+  const [isAdmin] = UseAdmin();
   const handleLogout = () => {
     logOutUser();
     toast.success("You have successfully logout");
@@ -42,6 +42,8 @@ const Navber = () => {
       state: { filterProduct: filterPro, query: searchTerm },
     });
   };
+
+  
 
   return (
     <div>
@@ -120,14 +122,25 @@ const Navber = () => {
                       {user?.displayName}
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      className="hover:bg-[#F0592A] hover:text-white"
-                      to="/dashboard/home"
-                    >
-                      Dashboard
-                    </Link>
-                  </li>
+                  {isAdmin ? (
+                    <li>
+                      <Link
+                        className="hover:bg-[#F0592A] hover:text-white"
+                        to="/dashboard/adminHome"
+                      >
+                        Dashboard
+                      </Link>
+                    </li>
+                  ) : (
+                    <li>
+                      <Link
+                        className="hover:bg-[#F0592A] hover:text-white"
+                        to="/dashboard/home"
+                      >
+                        Dashboard
+                      </Link>
+                    </li>
+                  )}
                   <li>
                     <button
                       className="hover:bg-[#F0592A] hover:text-white"
