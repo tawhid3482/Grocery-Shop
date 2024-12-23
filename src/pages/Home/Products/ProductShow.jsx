@@ -3,7 +3,6 @@ import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Rating from "react-rating";
-import ProductDetails from "./ProductDetails";
 
 const ProductShow = ({ cards }) => {
   const { id,img, oldPrice, newPrice, name, rating, stock, } = cards;

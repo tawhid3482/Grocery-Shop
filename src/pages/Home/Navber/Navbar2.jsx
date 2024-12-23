@@ -6,6 +6,7 @@ import { GrHome } from "react-icons/gr";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { SiPagerduty } from "react-icons/si";
 import ButtonColor from "../../../Components/Button/ButtonColor";
+import { useState } from "react";
 
 const Navbar2 = () => {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ const Navbar2 = () => {
     </>
   );
 
+
   return (
     <div className="hidden lg:flex items-center justify-between bg-base-100 mb-1">
       <div className="flex">
@@ -76,11 +78,11 @@ const Navbar2 = () => {
             {navOption}
           </ul>
         </div>
-        <a href="/" className="btn m-1 flex items-center">
+        <a href="/"  className={`btn m-1 flex items-center}`}>
           <GrHome className="text-xl" />
           Home Page
         </a>
-        <a href="/shop" className="btn m-1 flex items-center">
+        <a href="/shop"  className={`btn m-1 flex items-center`}>
           <MdOutlineShoppingBag className="text-xl" />
           Shop
         </a>

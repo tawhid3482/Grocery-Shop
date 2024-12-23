@@ -164,7 +164,7 @@ const ShopProductsCard = ({ data }) => {
               <button className="" onClick={handleAddToFavorite}>
                 <MdOutlineFavoriteBorder className="text-xl "></MdOutlineFavoriteBorder>
               </button>
-              <Link to="">
+              <Link to={`/productsDetails/${id}`}>
                 <FaRegEye className="text-xl"></FaRegEye>
               </Link>
             </div>

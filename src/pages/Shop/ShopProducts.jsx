@@ -6,7 +6,7 @@ import UseProducts from "../../Hooks/UseProducts";
 
 const ShopProducts = () => {
   const [product] = UseProducts();
-  console.log(product)
+  console.log(product);
 
   const [isOpen, setIsOpen] = useState(true);
   const [isStart, setIsStart] = useState(true);
@@ -87,9 +87,28 @@ const ShopProducts = () => {
       });
     });
 
+  // front-end pagination
+  // Pagination states
+  const productsPerPage = 12; // Adjust this value to set how many products per page
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  // Get the products for the current page
+  const currentProducts = filteredProducts?.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
+  // Handle page change
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="flex justify-between flex-col md:flex-row">
-      <div className="flex flex-col md:w-3/12 sticky md:top-16 lg:top-36 h-full  ">
+      <div className="flex flex-col md:w-3/12 sticky md:top-16 lg:top-36 h-full">
         <div className="p-4 rounded shadow">
           <h2
             onClick={toggleDropdown}
@@ -154,9 +173,39 @@ const ShopProducts = () => {
       </div>
       <div className="md:w-9/12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center 2xl:grid-cols-4 lg:gap-4">
-          {filteredProducts.map((data) => (
+          {currentProducts.map((data) => (
             <ShopProductsCard key={data.id} data={data} />
           ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-4 py-2 bg-gray-300 rounded-l hover:bg-[#F0592A] hover:text-white cursor-pointer"
+          >
+            Prev
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              className={`
+ px-4 py-2 ${
+   currentPage === index + 1 ? "bg-[#019267] text-white" : "bg-gray-200"
+ } mx-1 rounded`}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 bg-gray-300 rounded-r hover:bg-[#F0592A] hover:text-white"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
