@@ -4,7 +4,6 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-
 import login from "../../assets/login/login.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -13,6 +12,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import SocialLogin from "../../Components/SocialLogin.jsx/SocialLogin";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
   const captchaRef = useRef(null);
@@ -22,6 +22,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const AxiosPublic = useAxiosPublic();
 
   const {
     register,
@@ -38,13 +39,31 @@ const Login = () => {
     userLogin(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        toast.success("You have successfully signed in");
+        console.log(user);
+  
+        // Store metadata in userMetadata
+        const userMetadata = {
+          lastSignInTime: user.metadata.lastSignInTime,
+        };
+  
+        console.log("Last Sign-In Time:", userMetadata);
+        AxiosPublic.patch(`/users/${user._id}`, userMetadata)
+          .then((res) => {
+            if (res.data.message) {
+              toast.success("You have successfully signed in");
+            }
+          })
+          .catch((error) => {
+            console.error("Error updating lastSignInTime:", error);
+            toast.error("Error updating sign-in time.");
+          });
+  
         reset();
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        reset();
         toast.error("Your email or password is incorrect");
+        reset();  // Reset the form on error as well
       });
   };
 
@@ -77,14 +96,12 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
-                  {...register("email", { required: true })}
+                  {...register("email", { required: "Email is required" })}
                   placeholder="email"
                   className="input input-bordered"
                 />
                 {errors.email && (
-                  <span className="text-red-600 ml-2">
-                    Email field is required
-                  </span>
+                  <span className="text-red-600 ml-2">{errors.email.message}</span>
                 )}
               </div>
               <div className="form-control relative">
@@ -93,7 +110,7 @@ const Login = () => {
                 </label>
                 <input
                   type={showPassword ? "text" : "password"}
-                  {...register("password", { required: true })}
+                  {...register("password", { required: "Password is required" })}
                   placeholder="password"
                   className="input input-bordered"
                   required
@@ -105,9 +122,7 @@ const Login = () => {
                   {showPassword ? <FaEye /> : <FaEyeSlash />}
                 </span>
                 {errors.password && (
-                  <span className="text-red-600 ml-2">
-                    Password field is required
-                  </span>
+                  <span className="text-red-600 ml-2">{errors.password.message}</span>
                 )}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
@@ -127,28 +142,20 @@ const Login = () => {
                   placeholder="Fill the captcha"
                   className="input input-bordered"
                 />
-                {/* <button
-                  className="btn btn-xs bg-green-700 hover:bg-[#F0592A] text-white mt-2"
-                  onClick={handleValidate}
-                  type="button"
-                >
-                  Validate
-                </button> */}
               </div>
               <div className="form-control mt-5">
                 <input
                   type="submit"
                   className="btn btn-primary bg-[#019267] text-white hover:bg-[#F0592A]"
                   value="Login"
-                  // disable kore dio dev pore
-                  disabled={false}
+                  disabled={disabled}
                 />
               </div>
             </form>
             <div className="divider ">OR</div>
-              <div className="text-center mb-5">
-                <SocialLogin></SocialLogin>
-              </div>
+            <div className="text-center mb-5">
+              <SocialLogin />
+            </div>
             <div className="text-center mb-5">
               <p>
                 If you aren't a registered member, go to{" "}

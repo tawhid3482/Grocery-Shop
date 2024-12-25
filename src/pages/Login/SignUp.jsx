@@ -23,30 +23,57 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    createUser(data.email, data.password).then((result) => {
-      const loggedUser = result.user;
+    createUser(data.email, data.password)
+      .then((result) => {
+        const loggedUser = result.user;
 
-      updateUserProfile(data.name, data.photo)
-        .then(() => {
-          const userInfo = {
-            name: data.name,
-            email: data.email,
-            gender:data.gender,
-            photo:data.photo
-          };
-          console.log(data)
-          AxiosPublic.post("/users", userInfo).then((res) => {
-            if (res.data.insertedId) {
-              reset();
-              toast.success("You have successfully signed up");
-              navigate("/");
-            }
+        // Store metadata in userMetadata
+        const userMetadata = {
+          creationTime: loggedUser.metadata.creationTime,
+          lastSignInTime: loggedUser.metadata.lastSignInTime,
+        };
+
+        // Now update the user profile
+        updateUserProfile(data.name, data.photo, userMetadata)
+          .then(() => {
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              gender: data.gender,
+              photo: data.photo,
+              metadata: userMetadata, // Attach metadata here
+            };
+
+            // Save user data to your server
+            AxiosPublic.post("/users", userInfo)
+              .then((res) => {
+                if (res.data.insertedId) {
+                  reset();
+                  toast.success("You have successfully signed up");
+                  navigate("/");
+                } else {
+                  toast.error("Something went wrong! Please try again.");
+                }
+              })
+              .catch((error) => {
+                toast.error("Error while saving user data. Please try again.");
+                console.log(error);
+              });
+          })
+          .catch((error) => {
+            toast.error("Error while updating user profile. Please try again.");
+            console.log(error);
           });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+      })
+      .catch((error) => {
+        // Firebase error handling
+        if (error.code === "auth/invalid-email") {
+          toast.error("Invalid email address. Please enter a valid email.");
+        } else {
+          toast.error("Something went wrong during sign up. Please try again.");
+        }
+        console.log(error);
+      });
   };
 
   return (
