@@ -80,6 +80,8 @@ const AllUsers = () => {
               <th># No</th>
               <th>Name</th>
               <th>Email</th>
+              <th>CreationTime</th>
+              <th>LastSignInTime</th>
               <th>Role</th>
               <th>Action</th>
             </tr>
@@ -104,6 +106,8 @@ const AllUsers = () => {
                   </div>
                 </td>
                 <td>{item.email}</td>
+                <td>{item.metadata?.creationTime}</td>
+                <td>{item.metadata?.lastSignInTime}</td>
                 <td>
                   <div className="font-bold uppercase ">
                 { item?.role === 'admin' ? "Admin" :  <button

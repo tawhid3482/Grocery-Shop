@@ -25,7 +25,9 @@ const SignUp = () => {
   const onSubmit = (data) => {
     createUser(data.email, data.password)
       .then((result) => {
+
         const loggedUser = result.user;
+        const firebaseId = loggedUser.uid
 
         // Store metadata in userMetadata
         const userMetadata = {
@@ -34,9 +36,10 @@ const SignUp = () => {
         };
 
         // Now update the user profile
-        updateUserProfile(data.name, data.photo, userMetadata)
+        updateUserProfile(data.name, data.photo, userMetadata,firebaseId)
           .then(() => {
             const userInfo = {
+              id:firebaseId,
               name: data.name,
               email: data.email,
               gender: data.gender,

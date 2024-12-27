@@ -6,7 +6,6 @@ import UseProducts from "../../Hooks/UseProducts";
 
 const ShopProducts = () => {
   const [product] = UseProducts();
-  console.log(product);
 
   const [isOpen, setIsOpen] = useState(true);
   const [isStart, setIsStart] = useState(true);

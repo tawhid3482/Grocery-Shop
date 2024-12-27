@@ -36,34 +36,33 @@ const Login = () => {
   }, []);
 
   const onSubmit = (data) => {
+
     userLogin(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
-  
-        // Store metadata in userMetadata
-        const userMetadata = {
-          lastSignInTime: user.metadata.lastSignInTime,
-        };
-  
-        console.log("Last Sign-In Time:", userMetadata);
-        AxiosPublic.patch(`/users/${user._id}`, userMetadata)
+
+        // for last time user signin save in database to match the firebase provided uid 
+        const lastSignInTime = new Date().toISOString();
+
+        AxiosPublic.patch(`/users/${user.uid}`, { lastSignInTime })
           .then((res) => {
-            if (res.data.message) {
+            if (res.data.modifiedCount > 0) {
               toast.success("You have successfully signed in");
+            } else {
+              toast.error("Failed to update sign-in time.");
             }
           })
           .catch((error) => {
             console.error("Error updating lastSignInTime:", error);
             toast.error("Error updating sign-in time.");
           });
-  
+
         reset();
         navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error("Your email or password is incorrect");
-        reset();  // Reset the form on error as well
+        reset();
       });
   };
 
@@ -101,7 +100,9 @@ const Login = () => {
                   className="input input-bordered"
                 />
                 {errors.email && (
-                  <span className="text-red-600 ml-2">{errors.email.message}</span>
+                  <span className="text-red-600 ml-2">
+                    {errors.email.message}
+                  </span>
                 )}
               </div>
               <div className="form-control relative">
@@ -110,7 +111,9 @@ const Login = () => {
                 </label>
                 <input
                   type={showPassword ? "text" : "password"}
-                  {...register("password", { required: "Password is required" })}
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
                   placeholder="password"
                   className="input input-bordered"
                   required
@@ -122,7 +125,9 @@ const Login = () => {
                   {showPassword ? <FaEye /> : <FaEyeSlash />}
                 </span>
                 {errors.password && (
-                  <span className="text-red-600 ml-2">{errors.password.message}</span>
+                  <span className="text-red-600 ml-2">
+                    {errors.password.message}
+                  </span>
                 )}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">

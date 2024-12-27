@@ -12,13 +12,28 @@ const SocialLogin = () => {
 
   const handleGoogleLogin = () => {
     googleLogin().then((result) => {
-      console.log(result.user);
+      const loggedUser = result.user;
+
+      // Store metadata in userMetadata
+      const userMetadata = {
+        creationTime: loggedUser.metadata.creationTime,
+        lastSignInTime: loggedUser.metadata.lastSignInTime,
+      };
+
       const userInfo = {
+        id: result.user?.uid,
         email: result.user?.email,
         name: result.user?.displayName,
-        photo:result.user.photoURL
+        photo: result.user.photoURL,
+        metadata: userMetadata,
       };
       AxiosPublic.post("/users", userInfo).then((res) => {
+        AxiosPublic.patch(`/users/${loggedUser.uid}`, {
+          lastSignInTime: userMetadata.lastSignInTime,
+        }).then(() => {
+          navigate(from, { replace: true });
+        });
+
         navigate(from, { replace: true });
       });
     });
