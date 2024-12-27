@@ -4,11 +4,13 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import UseFavourite from "../../Hooks/UseFavourite";
+import UseCart from "../../Hooks/UseCart";
 
 const Favorites = ({ data }) => {
   const { user } = UseAuth();
   const AxiosSecure = useAxiosSecure();
-  const [,reloadData]=UseFavourite()
+  const [, reloadData] = UseFavourite();
+  const [, refetch] = UseCart();
   console.log(user);
   const {
     productId,
@@ -22,7 +24,7 @@ const Favorites = ({ data }) => {
     count,
   } = data;
 
-  const handleAddToCart = (food) => {
+  const handleAddToCart = (id) => {
     if (user && user.email) {
       const cartItem = {
         productId: productId,
@@ -38,6 +40,17 @@ const Favorites = ({ data }) => {
       AxiosSecure.post("/carts", cartItem).then((res) => {
         if (res.data.insertedId) {
           toast.success(`${name} add to the cart successfully`);
+          refetch();
+          AxiosSecure.delete(`/favorites/${id}`).then((res) => {
+            if (res.data.deletedCount > 0) {
+              reloadData();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+          });
         }
       });
     } else {
@@ -56,7 +69,6 @@ const Favorites = ({ data }) => {
       });
     }
   };
-
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -83,8 +95,6 @@ const Favorites = ({ data }) => {
     });
   };
 
-
-
   return (
     <div>
       <div className="flex justify-between  border p-3 rounded-lg w-full md:w-80 lg:w-[480px]">
@@ -100,16 +110,15 @@ const Favorites = ({ data }) => {
               <span>{newPrice}</span>
             </div>
             <button
-              onClick={() => handleAddToCart(data)}
-              className=" my-2 btn btn-ghost btn-sm border border-[#019267] hover:bg-[#F0592A] hover:text-white
-"
+              onClick={() => handleAddToCart(_id)}
+              className=" my-2 btn btn-ghost btn-sm border border-[#019267] hover:bg-[#F0592A] hover:text-white"
             >
               Add To Cart
             </button>
           </div>
         </div>
         <div className="">
-          <button onClick={()=>handleDelete(_id)}>
+          <button onClick={() => handleDelete(_id)}>
             <RiDeleteBin6Line className="text-2xl font-medium"></RiDeleteBin6Line>
           </button>
         </div>

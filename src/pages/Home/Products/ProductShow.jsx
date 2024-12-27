@@ -1,11 +1,98 @@
 import { FaBasketShopping } from "react-icons/fa6";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Rating from "react-rating";
+import UseFavourite from "../../../Hooks/UseFavourite";
+import UseCart from "../../../Hooks/UseCart";
+import UseAuth from "../../../Hooks/UseAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ProductShow = ({ cards }) => {
-  const { id,img, oldPrice, newPrice, name, rating, stock, } = cards;
+  const { id,img, oldPrice, newPrice, name, rating, stock,unit_of_measure,supplier } = cards;
+
+  const [, refetch] = UseCart();
+  const [, reloadData] = UseFavourite();
+  const { user } = UseAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const AxiosSecure = useAxiosSecure();
+
+  const handleAddToFavorite = () => {
+    if (user && user.email) {
+      const favoriteItem = {
+        productId: id,
+        email: user?.email,
+        name,
+        img,
+        newPrice,
+        oldPrice,
+        unit_of_measure,
+        supplier,
+        count: 1,
+      };
+      AxiosSecure.post("/favorites", favoriteItem).then((res) => {
+        if (res.data.insertedId) {
+          toast.success(`${name} add to the favorites successfully`);
+          reloadData();
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "You are not logged in",
+        text: "Please login to add to the favorite!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (user && user.email) {
+      const cartItem = {
+        productId: id,
+        email: user.email,
+        name,
+        img,
+        newPrice,
+        unit_of_measure,
+        supplier,
+        count: 1,
+      };
+
+      AxiosSecure.post("/carts", cartItem).then((res) => {
+        if (res.data.insertedId) {
+          toast.success(`${name} add to the cart successfully`);
+          // refetch cart
+          refetch();
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "You are not logged in",
+        text: "Please login to add to the cart!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
+
   return (
     <div>
       <div className="card border bg-base-100 w-72 h-96 shadow-lg">
@@ -64,16 +151,19 @@ const ProductShow = ({ cards }) => {
           <hr />
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-6">
-              <Link to="">
-                <MdOutlineFavoriteBorder className="text-xl "></MdOutlineFavoriteBorder>
-              </Link>
+            <button onClick={handleAddToFavorite} >
+                <MdOutlineFavoriteBorder className="text-xl" />
+              </button>
               <Link to={`/productsDetails/${id}`}>
                 <FaRegEye className="text-xl"></FaRegEye>
               </Link>
             </div>
             <div className="">
-              <button className="btn bg-[#019267] rounded-3xl">
-                <FaBasketShopping className="text-xl text-white " />
+            <button
+                onClick={handleAddToCart}
+                className="btn bg-[#019267] rounded-3xl"
+              >
+                <FaBasketShopping className="text-xl text-white" />
               </button>
             </div>
           </div>

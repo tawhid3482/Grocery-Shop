@@ -39,7 +39,7 @@ const AllUsers = () => {
             });
           }
         });
-      } 
+      }
     });
   };
 
@@ -110,12 +110,16 @@ const AllUsers = () => {
                 <td>{item.metadata?.lastSignInTime}</td>
                 <td>
                   <div className="font-bold uppercase ">
-                { item?.role === 'admin' ? "Admin" :  <button
-                      onClick={() => handleAdmin(item)}
-                      className="btn btn-sm bg-[#019267] text-white "
-                    >
-                      <FaUsers className="text-2xl"></FaUsers>
-                    </button>}
+                    {item?.role === "admin" ? (
+                      "Admin"
+                    ) : (
+                      <button
+                        onClick={() => handleAdmin(item)}
+                        className="btn btn-sm bg-[#019267] text-white "
+                      >
+                        <FaUsers className="text-2xl"></FaUsers>
+                      </button>
+                    )}
                   </div>
                 </td>
 

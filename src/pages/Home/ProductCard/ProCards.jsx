@@ -1,32 +1,148 @@
 import { FaBasketShopping } from "react-icons/fa6";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Rating from "react-rating";
+import UseCart from "../../../Hooks/UseCart";
+import UseFavourite from "../../../Hooks/UseFavourite";
+import UseAuth from "../../../Hooks/UseAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const ProCards = ({ proCards }) => {
-  const { id, img, oldPrice, newPrice, name, rating, stock } = proCards;
+  const {
+    id,
+    img,
+    oldPrice,
+    newPrice,
+    name,
+    rating,
+    stock,
+    unit_of_measure,
+    supplier,
+  } = proCards;
+
+  const [, refetch] = UseCart();
+  const [, reloadData] = UseFavourite();
+  const { user } = UseAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const AxiosSecure = useAxiosSecure();
+
+  const handleAddToFavorite = () => {
+    console.log('saikat')
+    if (user && user.email) {
+      const favoriteItem = {
+        productId: id,
+        email: user?.email,
+        name,
+        img,
+        newPrice,
+        oldPrice,
+        unit_of_measure,
+        supplier,
+        count: 1,
+      };
+
+      console.log("Adding to favorites:", favoriteItem);
+
+      AxiosSecure.post("/favorites", favoriteItem)
+        .then((res) => {
+          console.log("Favorite Response:", res);
+          if (res.data.insertedId) {
+            toast.success(`${name} added to favorites successfully`);
+            reloadData();
+          } else {
+            toast.error("Failed to add to favorites");
+          }
+        })
+       
+    } else {
+      Swal.fire({
+        title: "You are not logged in",
+        text: "Please login to add to favorites!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
+
+  const handleAddToCart = () => {
+    console.log('saikat')
+
+    if (user && user.email) {
+      const cartItem = {
+        productId: id,
+        email: user.email,
+        name,
+        img,
+        newPrice,
+        unit_of_measure,
+        supplier,
+        count: 1,
+      };
+
+      console.log("Adding to cart:", cartItem);
+
+      AxiosSecure.post("/carts", cartItem)
+        .then((res) => {
+          console.log("Cart Response:", res);
+          if (res.data.insertedId) {
+            toast.success(`${name} added to cart successfully`);
+            refetch();
+          } else {
+            toast.error("Failed to add to cart");
+          }
+        })
+        .catch((error) => {
+          console.error("Error adding to cart:", error.response || error.message);
+          toast.error("Failed to add to cart. Please try again.");
+        });
+    } else {
+      Swal.fire({
+        title: "You are not logged in",
+        text: "Please login to add to the cart!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
+
   return (
     <div>
-      <div className="card border bg-base-100 w-64  h-[400px] shadow-lg">
+      <div className="card border bg-base-100 w-64 h-[400px] shadow-lg">
         <Link to={`/productsDetails/${id}`}>
           <figure>
-            <img src={img} alt="img" className="lg:h-40 " />
+            <img src={img} alt="img" className="lg:h-40" />
           </figure>
         </Link>
-
         <hr className="my-2" />
         <div className="card-body mt-0 pt-0">
           <h2 className="text-lg font-medium">{name}</h2>
           <div className="flex items-center gap-3">
-            <span className="relative font-medium ">
+            <span className="relative font-medium">
               ${oldPrice}
               <span className="absolute left-0 top-1/2 w-full h-[2px] bg-black rotate-12 transform -translate-y-1/2"></span>
             </span>
-            <spam className="text-[#019267] font-medium">${newPrice}</spam>
+            <span className="text-[#019267] font-medium">${newPrice}</span>
           </div>
           <div className="flex items-center gap-3">
-            <spam className="text-[#019267] font-medium">{stock}</spam>
+            <span className="text-[#019267] font-medium">{stock}</span>
             <Rating
               initialRating={rating}
               emptySymbol={
@@ -49,7 +165,7 @@ const ProCards = ({ proCards }) => {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  fill="#019267" // Change fill color to green
+                  fill="#019267"
                   className="w-6 h-6"
                 >
                   <path
@@ -65,16 +181,19 @@ const ProCards = ({ proCards }) => {
           <hr />
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-6">
-              <Link to="">
-                <MdOutlineFavoriteBorder className="text-xl "></MdOutlineFavoriteBorder>
-              </Link>
+              <button onClick={handleAddToFavorite} >
+                <MdOutlineFavoriteBorder className="text-xl" />
+              </button>
               <Link to={`/productsDetails/${id}`}>
-                <FaRegEye className="text-xl"></FaRegEye>
+                <FaRegEye className="text-xl" />
               </Link>
             </div>
-            <div className="">
-              <button className="btn bg-[#019267] rounded-3xl">
-                <FaBasketShopping className="text-xl text-white " />
+            <div>
+              <button
+                onClick={handleAddToCart}
+                className="btn bg-[#019267] rounded-3xl"
+              >
+                <FaBasketShopping className="text-xl text-white" />
               </button>
             </div>
           </div>
