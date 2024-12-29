@@ -1,4 +1,4 @@
-import { FaHome, FaMailBulk, FaUser, FaUsers } from "react-icons/fa";
+import { FaHome, FaMailBulk,  FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import { MdOutlineHistory } from "react-icons/md";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
@@ -7,11 +7,12 @@ import { MdFavoriteBorder } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { LiaProductHunt } from "react-icons/lia";
-import { TbCategoryPlus } from "react-icons/tb";
 import { FaBook } from "react-icons/fa6";
+import UseAdmin from "../Hooks/UseAdmin";
+import { CiDeliveryTruck } from "react-icons/ci";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const isAdmin = UseAdmin();
 
   const adminNav = (
     <>
@@ -20,11 +21,11 @@ const Dashboard = () => {
           <FaHome className="text-xl"></FaHome>Admin Home
         </NavLink>
       </li>
-      {/* <li className="bg-[#019267] rounded-lg my-2">
-        <NavLink to={"/dashboard/addProducts"}>
-          <TbCategoryPlus className="text-xl"></TbCategoryPlus>Add Category
+      <li className="bg-[#019267] rounded-lg my-2">
+        <NavLink to={"/dashboard/order"}>
+          <CiDeliveryTruck className="text-xl"></CiDeliveryTruck>Order
         </NavLink>
-      </li> */}
+      </li>
       <li className="bg-[#019267] rounded-lg my-2">
         <NavLink to={"/dashboard/addProducts"}>
           <LiaProductHunt className="text-xl"></LiaProductHunt>Add Products
@@ -116,11 +117,9 @@ const Dashboard = () => {
     </>
   );
   return (
-    <div className="flex p-">
-      <div className="w-64 min-h-screen bg-[#F0592A] text-white">
-        <ul className="menu">
-          {isAdmin ? <> {adminNav} </> : <>{navOption}</>}
-        </ul>
+    <div className="flex flex-col md:flex-row ">
+      <div className="w-full md:w-64 bg-[#F0592A] text-white md:sticky top-0 md:h-screen">
+        <ul className="menu">{isAdmin ? adminNav : navOption}</ul>
       </div>
       <div className="flex-1 p-5">
         <Outlet></Outlet>

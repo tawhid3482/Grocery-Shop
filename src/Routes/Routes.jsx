@@ -22,6 +22,10 @@ import Wishlist from "../pages/Dashboard/Favorite/Favorite";
 import Favorite from "../pages/Dashboard/Favorite/Favorite";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AdminRoute from "./AdminRoute";
+import AddProducts from "../pages/Dashboard/AddProduct/AddProducts";
+import ManageProducts from "../pages/Dashboard/AddProduct/ManageProducts";
+import UpdateProducts from "../pages/Dashboard/AddProduct/UpdateProducts";
 
 export const router = createBrowserRouter([
   {
@@ -116,11 +120,45 @@ export const router = createBrowserRouter([
       // admin routes
       {
         path: "adminHome",
-        element: <AdminHome></AdminHome>,
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
       {
         path: "allUsers",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            {" "}
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "addProducts",
+        element: (
+          <AdminRoute>
+            <AddProducts></AddProducts>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageProducts",
+        element: (
+          <AdminRoute>
+            <ManageProducts></ManageProducts>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "updateProducts/:id",
+        element: (
+          <AdminRoute>
+            <UpdateProducts></UpdateProducts>
+          </AdminRoute>
+        ),
+        loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`),
       },
     ],
   },
