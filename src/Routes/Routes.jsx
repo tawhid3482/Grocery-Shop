@@ -26,6 +26,7 @@ import AdminRoute from "./AdminRoute";
 import AddProducts from "../pages/Dashboard/AddProduct/AddProducts";
 import ManageProducts from "../pages/Dashboard/AddProduct/ManageProducts";
 import UpdateProducts from "../pages/Dashboard/AddProduct/UpdateProducts";
+import YourReviews from "../pages/Dashboard/YourReview/YourReviews";
 
 export const router = createBrowserRouter([
   {
@@ -115,6 +116,10 @@ export const router = createBrowserRouter([
       {
         path: "favorite",
         element: <Favorite></Favorite>,
+      },
+      {
+        path: "reviews",
+        element: <YourReviews></YourReviews>,
       },
 
       // admin routes

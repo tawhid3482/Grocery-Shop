@@ -1,19 +1,26 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { TbTruckDelivery } from "react-icons/tb";
 import UseCart from "../../Hooks/UseCart";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import Carts from "./Carts";
 import { NavLink } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+import UseAuth from "../../Hooks/UseAuth";
 
 const Cart = () => {
-  const [cart] = UseCart();
+  const AxiosPublic = useAxiosPublic();
+  const [cart, setCart] = UseCart();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDivision, setSelectedDivision] = useState(""); // State to store the selected division
-  const [searchDistrict, setSearchDistrict] = useState(""); // State to store the district search query
-  const [districts, setDistricts] = useState([]); // State to store filtered districts
+  const {user}=UseAuth()
+  const [districts, setDistricts] = useState([]); // Filtered districts
+  const { register, handleSubmit, watch, reset } = useForm();
 
-  // Districts data organized by division
+  // Watch the selected division to dynamically filter districts
+  const selectedDivision = watch("division");
+
   const districtData = {
     Dhaka: [
       "Faridpur",
@@ -89,25 +96,38 @@ const Cart = () => {
     Mymensingh: ["Jamalpur", "Mymensingh", "Netrokona", "Sherpur"],
   };
 
-  // Handle division change
-  const handleDivisionChange = (event) => {
-    const division = event.target.value;
-    setSelectedDivision(division);
-    setSearchDistrict(""); // Reset search when division changes
-    setDistricts(districtData[division] || []);
-  };
+  // Update districts when division changes
+  React.useEffect(() => {
+    setDistricts(districtData[selectedDivision] || []);
+  }, [selectedDivision]);
 
-  // Toggle dropdown for shipping options
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
-  };
+  // Handle form submission
+  const onSubmit = async (data) => {
+    try {
 
-  // Calculate the subtotal by summing up the newPrice values
+      const addressInfo = {
+        name:user.displayName,
+        email:user.email,
+        data:data
+      }
+
+      const response = await AxiosPublic.post("/address", addressInfo); // Await the Axios call
+      if (response.data.insertedId) {
+        reset();
+        toast.success("Address updated successfully!");
+      }
+    } catch (error) {
+      console.error("Failed to update address:", error);
+      toast.error("Failed to update address. Please try again.");
+    }
+  };
+  
+
+  // Calculate the subtotal
   const subtotal = cart
-    ?.reduce((acc, item) => acc + parseFloat(item.newPrice || 0), 0)
+    ?.reduce((acc, item) => acc + parseFloat(item.price || 0), 0)
     .toFixed(2);
 
-  // Define the free shipping threshold
   const freeShippingThreshold = 100;
   const remainingAmount = (freeShippingThreshold - subtotal).toFixed(2);
 
@@ -123,7 +143,7 @@ const Cart = () => {
         </p>
       </div>
 
-      <div className="flex gap-4 items-start justify-between  flex-col lg:flex-row my-5  p-8 lg:p-0 ">
+      <div className="flex gap-4 items-start justify-between flex-col lg:flex-row my-5 p-8 lg:p-0">
         <div className="border border-gray-300 w-full lg:w-8/12 rounded-lg">
           <div className="my-5 mx-4">
             <p className="text-sm font-medium uppercase">
@@ -139,20 +159,16 @@ const Cart = () => {
                   }}
                   className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500 relative p-2"
                 >
-                  <TbTruckDelivery className="text-2xl absolute right-1 top-[-5px]  " />
+                  <TbTruckDelivery className="text-2xl absolute right-1 top-[-5px]" />
                 </div>
               </div>
             </div>
           </div>
 
-          <div className=" grid grid-cols-1 ">
-            {cart?.map((items) => {
-              return <Carts key={items?.id} items={items}></Carts>;
-            })}
-          </div>
-
-          <div className="text-right mr-5">
-            <button className="btn bg-green-700 text-white">Update</button>
+          <div className="grid grid-cols-1">
+            {cart?.map((items) => (
+              <Carts key={items?.id} items={items} setCart={setCart}></Carts>
+            ))}
           </div>
 
           <div className="flex gap-3 items-center my-5 mx-4">
@@ -167,11 +183,11 @@ const Cart = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-4/12 border border-[#F0592A]  p-5 rounded-lg">
+        <div className="w-full lg:w-4/12 border border-[#F0592A] p-5 rounded-lg">
           <p className="text-xl font-bold">Cart totals</p>
           <div className="flex justify-between items-center text-sm font-medium uppercase my-5">
             <span>Subtotal </span>
-            <span> ${subtotal}</span>
+            <span>${subtotal}</span>
           </div>
           <div className="bg-[#ecc8bd] p-3">
             <p className="text-lg font-bold mb-3 text-[#F0592A]">SHIPPING</p>
@@ -181,10 +197,10 @@ const Cart = () => {
             <div>
               <div className="rounded">
                 <h2
-                  onClick={toggleDropdown}
-                  className="flex items-center text-center gap-2 font-bold mb-4"
+                  onClick={() => setIsOpen((prev) => !prev)}
+                  className="flex items-center text-center gap-2 font-bold mb-4 text-green-500"
                 >
-                  Product Categories
+                  Click Here
                   {isOpen ? (
                     <FaArrowUp className="text-sm" />
                   ) : (
@@ -192,29 +208,27 @@ const Cart = () => {
                   )}
                 </h2>
                 {isOpen && (
-                  <div className="flex flex-col gap-3">
-                    {/* Division Dropdown */}
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-col gap-3"
+                  >
                     <select
+                      {...register("division")}
                       className="select select-error w-full max-w-xs"
-                      value={selectedDivision}
-                      onChange={handleDivisionChange}
                     >
                       <option disabled selected>
                         Select Your Division
                       </option>
-                      <option>Dhaka</option>
-                      <option>Chattogram</option>
-                      <option>Khulna</option>
-                      <option>Rajshahi</option>
-                      <option>Barisal</option>
-                      <option>Sylhet</option>
-                      <option>Rangpur</option>
-                      <option>Mymensingh</option>
+                      {Object.keys(districtData).map((division) => (
+                        <option key={division}>{division}</option>
+                      ))}
                     </select>
 
-                    {/* District Search and Dropdown */}
-
-                    <select className="select select-error w-full max-w-xs">
+                    <select
+                      {...register("district")}
+                      className="select select-error w-full max-w-xs"
+                      disabled={!districts.length}
+                    >
                       <option disabled selected>
                         Select Your District
                       </option>
@@ -223,26 +237,31 @@ const Cart = () => {
                       ))}
                     </select>
 
-                    {/* Additional input fields */}
                     <input
+                      {...register("town")}
                       type="text"
                       className="w-full max-w-xs p-2 rounded-lg border border-[#F0592A]"
                       placeholder="Town / City"
                     />
                     <input
+                      {...register("zipCode")}
                       type="text"
                       className="w-full max-w-xs p-2 rounded-lg"
                       placeholder="Zip Code"
                     />
                     <input
+                      {...register("phone")}
                       type="text"
                       className="w-full max-w-xs p-2 rounded-lg"
                       placeholder="Phone Number"
                     />
-                    <button className="text-white btn bg-[#F0592A]">
+                    <button
+                      type="submit"
+                      className="text-white btn bg-[#F0592A]"
+                    >
                       Update
                     </button>
-                  </div>
+                  </form>
                 )}
               </div>
             </div>
@@ -250,7 +269,7 @@ const Cart = () => {
 
           <div className="flex justify-between items-center text-sm font-medium uppercase my-5">
             <span>TOTAL </span>
-            <span> ${subtotal}</span>
+            <span>${subtotal}</span>
           </div>
           <NavLink to={"/checkout"}>
             <button className="btn bg-[#F0592A] text-lg text-white hover:bg-[#019267] w-full">

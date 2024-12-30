@@ -4,9 +4,9 @@ import Swal from "sweetalert2";
 import UseCart from "../../Hooks/UseCart";
 
 const CartModalShowCard = ({ carts }) => {
-  const { _id, img, name, newPrice } = carts;
+  const { _id, img, name, newPrice,price,count } = carts;
   const AxiosSecure = useAxiosSecure();
-  const [,refetch]=UseCart()
+  const [,refetch]= UseCart()
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -41,7 +41,9 @@ const CartModalShowCard = ({ carts }) => {
           <div className="">
             <p>{name}</p>
             <div className="flex gap-2 items-center">
-              <span>{newPrice}</span>*<span>1</span>
+              <span>{newPrice}</span>*<span>{count}</span>
+              <span>=</span>
+              <span>{price}</span>
             </div>
           </div>
         </div>

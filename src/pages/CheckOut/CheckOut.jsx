@@ -8,7 +8,7 @@ const CheckOut = () => {
   const totalPrice = cart?.reduce(
     (total, item) => total + item?.newPrice * item?.count,
     0
-  );
+  ).toFixed(2);
 
   return (
     <div>
@@ -49,7 +49,7 @@ const CheckOut = () => {
                 </div>
 
                 <p className="text-[#F0592A] font-semibold text-right">
-                  ${item.newPrice}
+                  ${item.price}
                 </p>
               </div>
             ))}

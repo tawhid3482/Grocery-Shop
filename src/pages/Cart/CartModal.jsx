@@ -17,7 +17,7 @@ const CartModal = ({ isOpen, onClose }) => {
 
   // Calculate the subtotal by summing up the newPrice values
   const subtotal = cart
-    ?.reduce((acc, item) => acc + parseFloat(item.newPrice || 0), 0)
+    ?.reduce((acc, item) => acc + parseFloat(item.price || 0), 0)
     .toFixed(2);
 
   // Define the free shipping threshold

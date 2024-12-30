@@ -74,6 +74,7 @@ const ShopProductsCard = ({ data }) => {
         name,
         img,
         newPrice,
+        price: newPrice,
         unit_of_measure,
         supplier,
         count: 1,

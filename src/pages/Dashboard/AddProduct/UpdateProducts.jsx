@@ -22,6 +22,7 @@ const UpdateProducts = () => {
         "content-type": "multipart/form-data",
       },
     });
+
     if (res.data.success) {
       const productItem = {
         id: Date.now().toString(),
@@ -58,6 +59,7 @@ const UpdateProducts = () => {
         navigate("/dashboard/manageProducts");
       }
     }
+    
   };
   return (
     <div>

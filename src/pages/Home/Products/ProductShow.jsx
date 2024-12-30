@@ -11,7 +11,17 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const ProductShow = ({ cards }) => {
-  const { id,img, oldPrice, newPrice, name, rating, stock,unit_of_measure,supplier } = cards;
+  const {
+    id,
+    img,
+    oldPrice,
+    newPrice,
+    name,
+    rating,
+    stock,
+    unit_of_measure,
+    supplier,
+  } = cards;
 
   const [, refetch] = UseCart();
   const [, reloadData] = UseFavourite();
@@ -64,6 +74,7 @@ const ProductShow = ({ cards }) => {
         name,
         img,
         newPrice,
+        price: newPrice,
         unit_of_measure,
         supplier,
         count: 1,
@@ -151,7 +162,7 @@ const ProductShow = ({ cards }) => {
           <hr />
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-6">
-            <button onClick={handleAddToFavorite} >
+              <button onClick={handleAddToFavorite}>
                 <MdOutlineFavoriteBorder className="text-xl" />
               </button>
               <Link to={`/productsDetails/${id}`}>
@@ -159,7 +170,7 @@ const ProductShow = ({ cards }) => {
               </Link>
             </div>
             <div className="">
-            <button
+              <button
                 onClick={handleAddToCart}
                 className="btn bg-[#019267] rounded-3xl"
               >
