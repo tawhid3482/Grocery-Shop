@@ -11,7 +11,6 @@ const Favorites = ({ data }) => {
   const AxiosSecure = useAxiosSecure();
   const [, reloadData] = UseFavourite();
   const [, refetch] = UseCart();
-  console.log(user);
   const {
     productId,
     _id,

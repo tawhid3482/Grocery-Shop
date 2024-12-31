@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -9,16 +9,25 @@ import { NavLink } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import UseAuth from "../../Hooks/UseAuth";
+import { useQuery } from "@tanstack/react-query";
+import UseAddress from "../../Hooks/UseAddress";
 
 const Cart = () => {
   const AxiosPublic = useAxiosPublic();
   const [cart, setCart] = UseCart();
-  const [isOpen, setIsOpen] = useState(false);
-  const {user}=UseAuth()
-  const [districts, setDistricts] = useState([]); // Filtered districts
+  const [isOpen, setIsOpen] = useState(true);
+  const { user } = UseAuth();
+  const [districts, setDistricts] = useState([]);
+  const [coupon, setCoupon] = useState("");
+  const [discount, setDiscount] = useState(0);
   const { register, handleSubmit, watch, reset } = useForm();
-
-  // Watch the selected division to dynamically filter districts
+  const { data: couponData = [], refetch } = useQuery({
+    queryKey: ["coupons"],
+    queryFn: async () => {
+      const res = await AxiosPublic.get("/coupon");
+      return res.data;
+    },
+  });
   const selectedDivision = watch("division");
 
   const districtData = {
@@ -95,23 +104,18 @@ const Cart = () => {
     ],
     Mymensingh: ["Jamalpur", "Mymensingh", "Netrokona", "Sherpur"],
   };
-
-  // Update districts when division changes
-  React.useEffect(() => {
+  useEffect(() => {
     setDistricts(districtData[selectedDivision] || []);
   }, [selectedDivision]);
 
-  // Handle form submission
   const onSubmit = async (data) => {
     try {
-
       const addressInfo = {
-        name:user.displayName,
-        email:user.email,
-        data:data
-      }
-
-      const response = await AxiosPublic.post("/address", addressInfo); // Await the Axios call
+        name: user.displayName,
+        email: user.email,
+        data,
+      };
+      const response = await AxiosPublic.post("/address", addressInfo);
       if (response.data.insertedId) {
         reset();
         toast.success("Address updated successfully!");
@@ -121,15 +125,53 @@ const Cart = () => {
       toast.error("Failed to update address. Please try again.");
     }
   };
-  
 
-  // Calculate the subtotal
   const subtotal = cart
     ?.reduce((acc, item) => acc + parseFloat(item.price || 0), 0)
     .toFixed(2);
 
   const freeShippingThreshold = 100;
   const remainingAmount = (freeShippingThreshold - subtotal).toFixed(2);
+
+  const handleApplyCoupon = () => {
+    const validCoupon = couponData.find((c) => c.code === coupon); // Validate coupon exists
+    if (validCoupon) {
+      // Extract last two digits as discount
+      const lastTwoDigits = parseInt(validCoupon.code.slice(-2), 10);
+      if (!isNaN(lastTwoDigits)) {
+        setDiscount(lastTwoDigits);
+        toast.success(`Coupon applied! ${lastTwoDigits}% discount.`);
+      } else {
+        toast.error(
+          "Invalid coupon code format. Discount could not be applied."
+        );
+      }
+    } else {
+      toast.error("Invalid coupon code. Please try again.");
+    }
+  };
+
+  const discountedTotal = (subtotal * (1 - discount / 100)).toFixed(2);
+
+  // save for to the checkout
+
+  const handleCheckOut = () => {
+    const checkoutData = {
+      name: user.displayName,
+      email: user.email,
+      photo: user.photoURL,
+      cart: cart,
+      subtotal: subtotal,
+      discount: discount,
+      discountPrice:(subtotal * (discount / 100)).toFixed(2),
+      total: discountedTotal,
+    };
+    const response = AxiosPublic.post("/checkout", checkoutData).then((res) => {
+      if (response.data) {
+        toast.success("Thank You For Coming Checkout !");
+      }
+    });
+  };
 
   return (
     <div>
@@ -176,8 +218,13 @@ const Cart = () => {
               type="text"
               className="border-2 p-2"
               placeholder="Coupon Code"
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
             />
-            <button className="btn bg-[#F0592A] text-white">
+            <button
+              className="btn bg-[#F0592A] text-white"
+              onClick={handleApplyCoupon}
+            >
               Apply coupon
             </button>
           </div>
@@ -189,90 +236,116 @@ const Cart = () => {
             <span>Subtotal </span>
             <span>${subtotal}</span>
           </div>
+
           <div className="bg-[#ecc8bd] p-3">
-            <p className="text-lg font-bold mb-3 text-[#F0592A]">SHIPPING</p>
+            {" "}
+            <p className="text-lg font-bold mb-3 text-[#F0592A]">
+              SHIPPING
+            </p>{" "}
             <p className="text-sm font-bold mb-3 text-[#F0592A]">
-              Enter your address to view shipping options
-            </p>
+              {" "}
+              Enter your address to view shipping options{" "}
+            </p>{" "}
             <div>
+              {" "}
               <div className="rounded">
+                {" "}
                 <h2
                   onClick={() => setIsOpen((prev) => !prev)}
-                  className="flex items-center text-center gap-2 font-bold mb-4 text-green-500"
+                  className="flex items-center text-center gap-2 font-bold mb-4 text-green-500 cursor-pointer"
                 >
-                  Click Here
+                  {" "}
+                  Enter Your Address{" "}
                   {isOpen ? (
                     <FaArrowUp className="text-sm" />
                   ) : (
                     <FaArrowDown className="text-sm" />
-                  )}
-                </h2>
+                  )}{" "}
+                </h2>{" "}
                 {isOpen && (
                   <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="flex flex-col gap-3"
                   >
+                    {" "}
                     <select
                       {...register("division")}
                       className="select select-error w-full max-w-xs"
                     >
+                      {" "}
                       <option disabled selected>
-                        Select Your Division
-                      </option>
+                        {" "}
+                        Select Your Division{" "}
+                      </option>{" "}
                       {Object.keys(districtData).map((division) => (
                         <option key={division}>{division}</option>
-                      ))}
-                    </select>
-
+                      ))}{" "}
+                    </select>{" "}
                     <select
                       {...register("district")}
                       className="select select-error w-full max-w-xs"
                       disabled={!districts.length}
                     >
+                      {" "}
                       <option disabled selected>
-                        Select Your District
-                      </option>
+                        {" "}
+                        Select Your District{" "}
+                      </option>{" "}
                       {districts.map((district, index) => (
                         <option key={index}>{district}</option>
-                      ))}
-                    </select>
-
+                      ))}{" "}
+                    </select>{" "}
                     <input
                       {...register("town")}
                       type="text"
                       className="w-full max-w-xs p-2 rounded-lg border border-[#F0592A]"
                       placeholder="Town / City"
-                    />
+                    />{" "}
                     <input
                       {...register("zipCode")}
                       type="text"
                       className="w-full max-w-xs p-2 rounded-lg"
                       placeholder="Zip Code"
-                    />
+                    />{" "}
                     <input
                       {...register("phone")}
                       type="text"
                       className="w-full max-w-xs p-2 rounded-lg"
                       placeholder="Phone Number"
-                    />
+                    />{" "}
                     <button
                       type="submit"
                       className="text-white btn bg-[#F0592A]"
                     >
-                      Update
-                    </button>
+                      {" "}
+                      Update{" "}
+                    </button>{" "}
                   </form>
-                )}
-              </div>
-            </div>
+                )}{" "}
+              </div>{" "}
+            </div>{" "}
           </div>
 
+          {discount > 0 && (
+            <div className="flex justify-between items-center text-sm font-medium uppercase my-5">
+              <span>Discount ({discount}%)</span>
+              <span>-${(subtotal * (discount / 100)).toFixed(2)}</span>
+            </div>
+          )}
           <div className="flex justify-between items-center text-sm font-medium uppercase my-5">
-            <span>TOTAL </span>
-            <span>${subtotal}</span>
+            <span>Total </span>
+            <span>${discountedTotal}</span>
           </div>
-          <NavLink to={"/checkout"}>
-            <button className="btn bg-[#F0592A] text-lg text-white hover:bg-[#019267] w-full">
+          <NavLink to={cart.length > 0 ? "/checkout" : "#"}>
+            <button
+              onClick={handleCheckOut}
+              className={`btn text-lg text-white w-full ${
+                cart.length > 0
+                  ? "bg-[#F0592A] hover:bg-[#019267]" // Active state
+                  : "bg-gray-300 cursor-not-allowed" // Disabled state
+              }`}
+              disabled={cart.length === 0} // Disable button if cart is empty
+            >
               Proceed to checkout
             </button>
           </NavLink>

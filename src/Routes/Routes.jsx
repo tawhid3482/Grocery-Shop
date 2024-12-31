@@ -27,6 +27,9 @@ import AddProducts from "../pages/Dashboard/AddProduct/AddProducts";
 import ManageProducts from "../pages/Dashboard/AddProduct/ManageProducts";
 import UpdateProducts from "../pages/Dashboard/AddProduct/UpdateProducts";
 import YourReviews from "../pages/Dashboard/YourReview/YourReviews";
+import Payment from "../pages/Dashboard/Payment/Payment";
+import Coupon from "../pages/Dashboard/Coupon/Coupon";
+import ManageCoupon from "../pages/Dashboard/Coupon/ManageCoupon";
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +101,10 @@ export const router = createBrowserRouter([
         path: "/signup",
         element: <SignUp></SignUp>,
       },
+      {
+        path: "payment",
+        element: <PrivateRoute><Payment></Payment></PrivateRoute>,
+      },
     ],
   },
   {
@@ -121,6 +128,15 @@ export const router = createBrowserRouter([
         path: "reviews",
         element: <YourReviews></YourReviews>,
       },
+      {
+        path:'coupon',
+        element:<Coupon></Coupon>
+      },
+      {
+        path:'manageCoupon',
+        element:<ManageCoupon></ManageCoupon>
+      },
+    
 
       // admin routes
       {

@@ -41,6 +41,16 @@ const Dashboard = () => {
           <FaUsers className="text-xl"></FaUsers>All Users
         </NavLink>
       </li>
+      <li className="bg-[#019267] rounded-lg my-2">
+        <NavLink to={"/dashboard/coupon"}>
+          <FaUsers className="text-xl"></FaUsers>Add Coupon
+        </NavLink>
+      </li>
+      <li className="bg-[#019267] rounded-lg my-2">
+        <NavLink to={"/dashboard/manageCoupon"}>
+          <FaUsers className="text-xl"></FaUsers>Manage Coupon
+        </NavLink>
+      </li>
     </>
   );
   const navOption = (
