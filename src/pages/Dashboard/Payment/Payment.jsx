@@ -1,11 +1,9 @@
-import UseCart from "../../../Hooks/UseCart";
+import useOrder from "../../../Hooks/useOrder";
 
 const Payment = () => {
-  const [cart] = UseCart();
-  // Calculate total price dynamically
-  const totalPrice = cart
-    ?.reduce((total, item) => total + item?.newPrice * item?.count, 0)
-    .toFixed(2);
+  const [orderData] = useOrder();
+  const totalPrice = orderData.flatMap((item) => item?.total);
+  console.log(totalPrice);
   return (
     <div className="my-5">
       <p className="text-4xl font-medium text-center">Complete Your Payment</p>

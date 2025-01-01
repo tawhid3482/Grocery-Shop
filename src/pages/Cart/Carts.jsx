@@ -6,7 +6,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 
 const Carts = ({ items, onUpdateCount }) => {
-  const { _id, img, name, newPrice, count, weight } = items;
+  const { _id, img, name, newPrice, count, unit_of_measure } = items;
   const [, refetch] = UseCart();
   const AxiosPublic = useAxiosPublic();
 
@@ -16,7 +16,6 @@ const Carts = ({ items, onUpdateCount }) => {
   const updateCountOnServer = async (updatedCount) => {
     try {
       const price = (newPrice * updatedCount).toFixed(2); // Recalculate total price
-      console.log(price);
 
       const response = await AxiosPublic.patch(`/carts/${_id}`, {
         count: updatedCount,
@@ -99,7 +98,7 @@ const Carts = ({ items, onUpdateCount }) => {
       <div className="flex items-center gap-6">
         <div className="counter flex items-center gap-3 p-2 rounded-md border border-gray-300">
           <button
-            className={`text-3xl text-gray-600 hover:text-gray-800 ${
+            className={`text-3xl text-gray-600 hover:text-gray-800 dark:text-white  ${
               counts === 1 ? "cursor-not-allowed opacity-50" : ""
             }`}
             onClick={decreaseCount}
@@ -110,13 +109,13 @@ const Carts = ({ items, onUpdateCount }) => {
 
           <p className="text-xl font-semibold">{counts}</p>
           <button
-            className="text-2xl text-gray-600 hover:text-gray-800"
+            className="text-2xl text-gray-600 hover:text-gray-800 dark:text-white"
             onClick={increaseCount}
           >
             +
           </button>
         </div>
-        <span>{weight ? `${weight} ` : ""}</span>
+        <span>{unit_of_measure ? `${unit_of_measure} ` : ""}</span>
       </div>
 
       <div className="text-xl font-semibold text-green-600">${price}</div>

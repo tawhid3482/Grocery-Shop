@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import UseAuth from "../../Hooks/UseAuth";
 import { useQuery } from "@tanstack/react-query";
 import UseAddress from "../../Hooks/UseAddress";
+import useCheckout from "../../Hooks/useCheckout";
 
 const Cart = () => {
   const AxiosPublic = useAxiosPublic();
@@ -21,6 +22,8 @@ const Cart = () => {
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
   const { register, handleSubmit, watch, reset } = useForm();
+  const [checkoutData, reFetch] = useCheckout();
+
   const { data: couponData = [], refetch } = useQuery({
     queryKey: ["coupons"],
     queryFn: async () => {
@@ -121,7 +124,6 @@ const Cart = () => {
         toast.success("Address updated successfully!");
       }
     } catch (error) {
-      console.error("Failed to update address:", error);
       toast.error("Failed to update address. Please try again.");
     }
   };
@@ -155,22 +157,42 @@ const Cart = () => {
 
   // save for to the checkout
 
-  const handleCheckOut = () => {
-    const checkoutData = {
-      name: user.displayName,
-      email: user.email,
-      photo: user.photoURL,
-      cart: cart,
-      subtotal: subtotal,
-      discount: discount,
-      discountPrice:(subtotal * (discount / 100)).toFixed(2),
-      total: discountedTotal,
-    };
-    const response = AxiosPublic.post("/checkout", checkoutData).then((res) => {
-      if (response.data) {
-        toast.success("Thank You For Coming Checkout !");
+  const handleCheckOut = async () => {
+    try {
+      const checkOutData = {
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+        cart: cart,
+        subtotal: subtotal,
+        discount: discount,
+        discountPrice: (subtotal * (discount / 100)).toFixed(2),
+        total: discountedTotal,
+      };
+
+      // Check if checkout data already exists for the user's email
+      const existingCheckout = await AxiosPublic.get(`/checkout/${user.email}`);
+
+      if (existingCheckout.data) {
+        const response = await AxiosPublic.patch(
+          `/checkout/${user.email}`,
+          checkOutData
+        );
+        if (response.data.modifiedCount > 0) {
+          reFetch();
+          toast.success("Checkout data updated successfully!");
+        }
+      } else {
+        // Post new data if it doesn't exist
+        const response = await AxiosPublic.post("/checkout", checkOutData);
+        if (response.data.insertedId) {
+          reFetch();
+          toast.success("Checkout data saved successfully!");
+        } else {
+          toast.error("Failed to save checkout data.");
+        }
       }
-    });
+    } catch (error) {}
   };
 
   return (
