@@ -51,6 +51,7 @@ const CheckOut = () => {
       discountPrice: discountPriceItems,
       total: totalPriceItems,
       address: addressData,
+      isOrderConfirmed: true,
     };
 
     try {

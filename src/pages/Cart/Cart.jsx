@@ -10,7 +10,6 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import UseAuth from "../../Hooks/UseAuth";
 import { useQuery } from "@tanstack/react-query";
-import UseAddress from "../../Hooks/UseAddress";
 import useCheckout from "../../Hooks/useCheckout";
 
 const Cart = () => {
