@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 const Product = () => {
   const [product] = UseProducts();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [filterFeatured, setFilterFeatured] = useState("all"); // Track selected Featured
+  const [filterFeatured, setFilterFeatured] = useState("all"); 
 
   // Filtering products based on the selected Featured
   const filterProducts = (Featured) => {
@@ -44,14 +44,14 @@ const Product = () => {
             ALL PRODUCTS
           </button>
 
-          {/* best sellers Button */}
+          {/* best scale Button */}
           <button
-            onClick={() => filterProducts("best sellers")}
+            onClick={() => filterProducts("best selling")}
             className={`btn uppercase rounded-3xl hover:bg-[#019267] hover:text-white ${
-              filterFeatured === "best sellers" ? "bg-[#019267] text-white" : ""
+              filterFeatured === "best selling" ? "bg-[#019267] text-white" : ""
             }`}
           >
-            best sellers
+            best selling
           </button>
 
           {/* Top Rated Button */}

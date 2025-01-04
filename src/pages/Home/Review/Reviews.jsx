@@ -3,7 +3,7 @@ import { BsPatchCheckFill } from "react-icons/bs";
 import Rating from "react-rating";
 
 const Reviews = ({ reviews }) => {
-  const { name, img, productImg, productName, rating, speech, timeZone } =
+  const { name, img, productImg, productName, rating, speech, date } =
     reviews;
   return (
     <div>
@@ -69,7 +69,7 @@ const Reviews = ({ reviews }) => {
         </div>
         <div className="my-2">
           <p>{speech}</p>
-          <p className="uppercase font-medium text-xs mt-5">{timeZone} Ago</p>
+          <p className="uppercase font-medium text-xs mt-5">{date}</p>
           <hr className="my-3" />
         </div>
         <div className="flex items-center gap-5 ml-8">

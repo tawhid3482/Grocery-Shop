@@ -2,8 +2,6 @@ import { Helmet } from "react-helmet-async";
 import ShopCaro from "./ShopCaro";
 import { useLoaderData, useLocation } from "react-router-dom";
 import ShopProducts from "./ShopProducts";
-import UseProducts from "../../Hooks/UseProducts";
-import { useEffect, useState } from "react";
 
 const Shop = () => {
   const brand = useLoaderData();

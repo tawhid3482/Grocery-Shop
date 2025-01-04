@@ -16,6 +16,7 @@ const Navber = () => {
   const [cart] = UseCart();
   const [favorite] = UseFavourite();
   const [isAdmin] = UseAdmin();
+  
   const handleLogout = () => {
     logOutUser();
     toast.success("You have successfully logout");

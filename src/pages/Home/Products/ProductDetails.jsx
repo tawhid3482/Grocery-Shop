@@ -5,13 +5,21 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { VscCalendar } from "react-icons/vsc";
-import { Link, useLoaderData, useParams } from "react-router-dom";
-import { rankings } from "match-sorter";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
+import UseAuth from "../../../Hooks/UseAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import UseCart from "../../../Hooks/UseCart";
+import UseFavourite from "../../../Hooks/UseFavourite";
 
 const ProductDetails = () => {
+  const { user } = UseAuth();
+  const navigate = useNavigate();
   const [proDetails, setProDetails] = useState(null);
+  const [, refetch] = UseCart();
+  const [, reloadData] = UseFavourite();
   const { id } = useParams();
-
+  const AxiosSecure = useAxiosSecure();
   const data = useLoaderData();
 
   useEffect(() => {
@@ -19,9 +27,9 @@ const ProductDetails = () => {
     setProDetails(findData);
   }, [id, data]);
 
-  const similarProductFilter = data.filter(
-    (similar) => similar.category === proDetails?.category
-  );
+  const similarProductFilter =
+    proDetails &&
+    data.filter((similar) => similar.category === proDetails?.category);
 
   const [count, setCount] = useState(1);
 
@@ -31,9 +39,94 @@ const ProductDetails = () => {
       setCount(count - 1);
     }
   };
+  
+  const handleAddToCart = () => {
+    if (user && user.email) {
+      const {
+        id: productId,
+        name,
+        img,
+        newPrice,
+        unit_of_measure,
+        supplier,
+      } = proDetails;
+      
+      const Price = (newPrice * count).toFixed(2);
+
+      const cartItem = {
+        productId,
+        email: user.email,
+        name,
+        img,
+        newPrice,
+        price:Price,
+        unit_of_measure,
+        supplier,
+        count,
+      };
+
+      AxiosSecure.post("/carts", cartItem).then((res) => {
+        if (res.data.insertedId) {
+          refetch();
+          toast.success(`${name} added to the cart successfully`);
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "You are not logged in",
+        text: "Please login to add to the cart!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
+  const handleAddToFavorite = () => {
+    if (user && user.email) {
+      const { id, name, img, newPrice, oldPrice, unit_of_measure, supplier } =
+        proDetails;
+
+      const favoriteItem = {
+        productId: id,
+        email: user.email,
+        name,
+        img,
+        newPrice,
+        oldPrice,
+        unit_of_measure,
+        supplier,
+        count: 1,
+      };
+
+      AxiosSecure.post("/favorites", favoriteItem).then((res) => {
+        if (res.data.insertedId) {
+          reloadData();
+          toast.success(`${name} added to favorites successfully`);
+        } else {
+          toast.error("Failed to add to favorites");
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "You are not logged in",
+        text: "Please login to add to favorites!",
+        icon: "warning",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
 
   return (
-    <div>
+    <div className="my-8">
       <div className=" flex justify-between items-center flex-col lg:flex-row my-8">
         <div className="lg:w-1/3  lg:h-[450px] p-3">
           <img
@@ -112,31 +205,59 @@ const ProductDetails = () => {
               >
                 +
               </span>
-              <span className="text-2xl font-medium uppercase ">{proDetails?.unit_of_measure}</span>
+              <span className="text-2xl font-medium uppercase ">
+                {proDetails?.unit_of_measure}
+              </span>
             </div>
             <div className=" ml-8">
-              <button className="btn w-28 bg-[#019267] text-white hover:bg-[#F0592A]">
+              <button
+                onClick={handleAddToCart}
+                className="btn w-28 bg-[#019267] text-white hover:bg-[#F0592A]"
+              >
                 Add To cart
               </button>
             </div>
           </div>
           <div className="flex items-center">
             <div className="">
-              <button className="w-24 ml-5">
-                <MdOutlineFavoriteBorder className="text-2xl "></MdOutlineFavoriteBorder>
-              </button>{" "}
+              <button className="w-24 ml-5"></button>
             </div>
             <div className="ml-8">
-              <button className="btn w-28 bg-[#019267] text-white hover:bg-[#F0592A]">
-                buy now
+              <button
+                onClick={handleAddToFavorite}
+                className="btn w-28 bg-[#019267] text-white hover:bg-[#F0592A]"
+              >
+                Add To{" "}
+                <MdOutlineFavoriteBorder className="text-2xl "></MdOutlineFavoriteBorder>
               </button>
             </div>
           </div>
           <div className="my-3">
-            <button className="btn w-full uppercase bg-[#019267] text-white hover:bg-[#F0592A]">
+            <button className=""></button>
+
+            {/* You can open the modal using document.getElementById('ID').showModal() method */}
+            <button
+              className="btn w-full uppercase bg-[#019267] text-white hover:bg-[#F0592A]"
+              onClick={() => document.getElementById("my_modal_3").showModal()}
+            >
               <FaWhatsapp className="text-xl"></FaWhatsapp>
+
               <span>Request information</span>
             </button>
+            <dialog id="my_modal_3" className="modal">
+              <div className="modal-box">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    ✕
+                  </button>
+                </form>
+                
+                <div className="">
+                <div className="max-w-sm mx-auto bg-gradient-to-r from-[#019267] to-[#bc4825] text-white p-6 rounded-lg shadow-lg"> <div className="flex justify-center mb-4"> <img src={user.photoURL} alt="Your Logo" className="w-16 h-16 rounded-full" /> </div> <div className="text-center"> <div className="text-2xl font-bold mb-2">{user.displayName}</div> <div className="text-lg mb-4">Our Contact Info</div> <div className="space-y-2"> <p><span className="mr-2">📱</span> WhatsApp: +880 1826853371</p> <p><span className="mr-2">📞</span> Phone: +880 1826853371</p> <p><span className="mr-2">📧</span> Email: tawhidulislam3482@gmail.com</p> </div> </div> </div>
+                </div>
+              </div>
+            </dialog>
           </div>
           <div className="">
             <div className="flex gap-2 items-center">
@@ -159,7 +280,7 @@ const ProductDetails = () => {
                 : ""
             } flex flex-col space-y-4 max-h-96 overflow-y-auto`}
           >
-            {similarProductFilter.map((similarProduct) => (
+            {similarProductFilter?.map((similarProduct) => (
               <Link to={`/productsDetails/${similarProduct?.id}`}>
                 <div className="flex gap-10 items-center border rounded-xl p-2">
                   <div className=" ">

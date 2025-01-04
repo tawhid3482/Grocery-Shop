@@ -24,7 +24,7 @@ const Carts = ({ items, onUpdateCount }) => {
 
       if (response.data.modifiedCount > 0) {
         toast.success(`${name} count updated successfully`);
-        refetch(); // Refetch cart data
+        refetch(); 
       } else {
         toast.error(`Failed to update count for ${name}`);
       }

@@ -6,7 +6,6 @@ import { GrHome } from "react-icons/gr";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { SiPagerduty } from "react-icons/si";
 import ButtonColor from "../../../Components/Button/ButtonColor";
-import { useState } from "react";
 
 const Navbar2 = () => {
   const navigate = useNavigate();

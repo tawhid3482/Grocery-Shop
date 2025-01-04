@@ -76,7 +76,6 @@ const ProCards = ({ proCards }) => {
   };
 
   const handleAddToCart = () => {
-    console.log('saikat')
 
     if (user && user.email) {
       const cartItem = {

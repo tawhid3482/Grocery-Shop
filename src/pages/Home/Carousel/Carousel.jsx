@@ -1,5 +1,3 @@
-import React, { useRef, useState } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import pic1 from "../../../assets/Carousel/pic1.jpeg";
 import pic2 from "../../../assets/Carousel/pic2.jpeg";

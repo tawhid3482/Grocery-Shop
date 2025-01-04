@@ -16,11 +16,11 @@ const Banner2 = () => {
         <div className="flex items-center justify-between mt-3 md:mt-5 lg:mt-10">
           <div className="ml-2 md:ml-5">
             <span className=" text-white font-medium text-lg md:text-xl lg:text-2xl mt-9 md:mt-16 lg:mt-28">
-              New generation products are at Agricoma with limited stocks!
+              New generation products are at Grocery-Shop with limited stocks!
             </span>
             <br />
             <span className=" text-white ">
-              New generation T-Shirts are at agricoma with limited stocks!
+              New generation T-Shirts are at Grocery-Shop with limited stocks!
             </span>
           </div>
           <div className="mr-2 md:mr-5">

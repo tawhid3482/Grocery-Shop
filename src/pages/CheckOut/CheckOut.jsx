@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import ReactLoader from "../../Components/ReactLoader";
 
 const CheckOut = () => {
-  const [checkoutData, isDataLoading, reFetch] = useCheckout();
+  const [checkoutData, , reFetch] = useCheckout();
   const [cart, refetch] = UseCart();
   const [addressData] = UseAddress();
   const { user } = UseAuth();
@@ -32,7 +32,6 @@ const CheckOut = () => {
   };
 
   const handleOrder = async () => {
-    const cartItems = checkoutData?.flatMap((item) => item.cart);
     const subTotal = checkoutData?.flatMap((item) => item.subtotal);
     const discountItems = checkoutData?.flatMap((item) => item.discount);
     const discountPriceItems = checkoutData?.flatMap(
@@ -45,7 +44,7 @@ const CheckOut = () => {
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
-      cart: cartItems,
+      cart: cart,
       subtotal: subTotal,
       discount: discountItems,
       discountPrice: discountPriceItems,
@@ -72,7 +71,6 @@ const CheckOut = () => {
   };
 
   const handleBankOrder = async () => {
-    const cartItems = checkoutData?.flatMap((item) => item.cart);
     const subTotal = checkoutData?.flatMap((item) => item.subtotal);
     const discountItems = checkoutData?.flatMap((item) => item.discount);
     const discountPriceItems = checkoutData?.flatMap(
@@ -85,7 +83,7 @@ const CheckOut = () => {
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
-      cart: cartItems,
+      cart: cart,
       subtotal: subTotal,
       discount: discountItems,
       discountPrice: discountPriceItems,
@@ -99,8 +97,8 @@ const CheckOut = () => {
         if (response.data) {
           await AxiosSecure.delete(`/checkout/${DeleteId}`);
           await AxiosSecure.delete(`/carts?email=${user.email}`);
-          reFetch(); // Refetch checkout data
-          refetch(); // Refetch cart data
+          reFetch(); 
+          refetch(); 
           toast.success("Your Order Confirmed");
         }
       }
@@ -112,7 +110,7 @@ const CheckOut = () => {
   return (
     <div>
       <Helmet>
-        <title>Grocery-Shop | CheckOut</title>
+        <title>Grocery-Shop | Checkout</title>
       </Helmet>
 
       {/* Header Section */}
@@ -136,7 +134,7 @@ const CheckOut = () => {
                   key={item._id}
                   className="border rounded-xl p-4 shadow-md bg-white"
                 >
-                  {item?.cart?.map((data) => (
+                  {cart?.map((data) => (
                     <div
                       key={data._id}
                       className="flex items-center justify-between gap-4 mb-4 border border-green-400 p-2 rounded-lg"
@@ -159,7 +157,7 @@ const CheckOut = () => {
                         </div>
                       </div>
                       <p className="text-[#F0592A] font-semibold">
-                        ${parseFloat(data.newPrice)}
+                        ${parseFloat(data.price)}
                       </p>
                     </div>
                   ))}

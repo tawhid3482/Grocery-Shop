@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import pic2 from "../../../assets/Banner/banner1.png";
+import pic2 from "../../../assets/Banner/banner2.png";
+import pic1 from "../../../assets/Banner/banner1.png";
 import pic3 from "../../../assets/Banner/banner3.png";
-import pic1 from "../../../assets/Banner/banner2.png";
+import pic4 from "../../../assets/Banner/banner4.png";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -37,6 +36,9 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img src={pic3} alt="banner" className="w-full md:h-[450px] lg:h-[500px]" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={pic4} alt="banner" className="w-full md:h-[450px] lg:h-[500px]" />
         </SwiperSlide>
       </Swiper>
     </div>

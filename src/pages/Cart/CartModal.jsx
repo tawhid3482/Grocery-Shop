@@ -10,7 +10,6 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
-
 const CartModal = ({ isOpen, onClose }) => {
   const [timeLeft] = CountDown();
   const [cart] = UseCart();
@@ -23,11 +22,6 @@ const CartModal = ({ isOpen, onClose }) => {
   // Define the free shipping threshold
   const freeShippingThreshold = 100;
   const remainingAmount = (freeShippingThreshold - subtotal).toFixed(2);
-
-
-
-
-
 
   return (
     <div>
@@ -121,22 +115,15 @@ const CartModal = ({ isOpen, onClose }) => {
                     <p className="text-xl font-medium uppercase">Total:</p>
                     <span>${subtotal}</span>
                   </div>
-                  <div className="flex justify-between items-center my-2">
+                  <div className=" my-2">
                     <Link
                       to={"/cart"}
                       onClick={onClose}
-                      className="btn bg-[#019267] text-white w-1/2"
+                      className="btn bg-[#019267] text-white w-full"
                     >
                       View Cart
                     </Link>
 
-                    <Link
-                      to={"/checkout"}
-                      className="btn w-1/2 bg-[#f84503] text-white"
-                      onClick={onClose}
-                    >
-                      Checkout
-                    </Link>
                   </div>
                   <div className="flex justify-between items-center ">
                     <button className="btn w-1/3">

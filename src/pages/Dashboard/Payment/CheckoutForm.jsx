@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useOrder from "../../../Hooks/useOrder";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({totalPrice,unconfirmedOrders }) => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -17,20 +18,15 @@ const CheckoutForm = () => {
   const { user } = UseAuth();
   const navigate = useNavigate();
   const AxiosSecure = useAxiosSecure();
-  const [orderData, refetch] = useOrder();
-
-  const totalPrice = orderData.reduce(
-    (sum, item) => sum + (parseFloat(item?.total) || 0),
-    0
-  );
-  console.log(totalPrice);
-
+  const [, refetch] = useOrder();
+  const orderData = unconfirmedOrders;
   useEffect(() => {
     if (totalPrice > 0) {
       AxiosSecure.post("/create-payment-intent", { price: totalPrice })
         .then((res) => {
-          console.log(res.data.clientSecret);
-          setClientSecret(res.data.clientSecret)})
+          // console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        })
         .catch((err) => {
           console.error("Error creating payment intent:", err);
           setError("Failed to initiate payment.");
@@ -61,7 +57,7 @@ const CheckoutForm = () => {
       setError(error.message);
       setProcessing(false);
       return;
-    }else{
+    } else {
       console.log(paymentMethod);
       setError("");
     }
@@ -88,7 +84,7 @@ const CheckoutForm = () => {
       setError("Payment failed. Please try again.");
       setProcessing(false);
       return;
-    }else{
+    } else {
       console.log(paymentIntent);
     }
 
@@ -105,11 +101,27 @@ const CheckoutForm = () => {
       };
 
       try {
-        const res = await AxiosSecure.post("/payments", payment);
+        const res = await AxiosSecure.post("/payment", payment);
         if (res.data?.insertedId) {
           toast.success("Payment Successful");
           refetch();
-          navigate("/dashboard/paymentHistory");
+
+          const existingOrder = await AxiosSecure.get(`/order/${user.email}`);
+          if (existingOrder.data) {
+            const id = orderData.flatMap((item) => item._id);
+            console.log(id);
+
+            const response = await AxiosSecure.patch(`/order/${id}`, {
+              isOrderConfirmed: true,
+            });
+            console.log(response.data);
+            if (response.data.modifiedCount > 0) {
+              toast.success("Order Confirmed");
+              navigate("/");
+            } else {
+              toast.error("Order confirmation failed.");
+            }
+          }
         } else {
           toast.error("Payment saving failed.");
         }
@@ -130,10 +142,10 @@ const CheckoutForm = () => {
         options={{
           style: {
             base: {
-              fontSize: "16px",
+              fontSize: "18px",
               color: "#039c12",
               "::placeholder": {
-                color: "#aab7c4",
+                color: "#F0592A",
               },
             },
             invalid: {
@@ -143,7 +155,7 @@ const CheckoutForm = () => {
         }}
       />
       <button
-        className="btn btn-sm bg-[#019267] my-4 text-white"
+        className="btn btn-sm bg-[#019267] my-4 text-white text-lg ml-2 "
         type="submit"
         disabled={!stripe || !clientSecret || processing}
       >

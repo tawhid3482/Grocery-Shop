@@ -154,15 +154,13 @@ const Cart = () => {
 
   const discountedTotal = (subtotal * (1 - discount / 100)).toFixed(2);
 
-  // save for to the checkout
-
   const handleCheckOut = async () => {
     try {
       const checkOutData = {
         name: user.displayName,
         email: user.email,
         photo: user.photoURL,
-        cart: cart,
+        // cart: cart,
         subtotal: subtotal,
         discount: discount,
         discountPrice: (subtotal * (discount / 100)).toFixed(2),

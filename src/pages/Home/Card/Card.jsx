@@ -10,7 +10,7 @@ const Card = () => {
   };
 
   return (
-    <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 items-center ">
+    <div className="grid place-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-center ">
       {cards?.map((card) => (
         <div key={card.id}>
           <button onClick={() => handleNavOptionClick(card?.name)}>

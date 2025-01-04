@@ -11,8 +11,12 @@ const Payment = () => {
   const [orderData, refetch] = useOrder();
   const [loading, setLoading] = useState(true);
 
-  // Calculate total price safely
-  const totalPrice = orderData.reduce(
+   // Filter unconfirmed orders and calculate total price
+   const unconfirmedOrders = orderData.filter(
+    (order) => !order.isOrderConfirmed
+  );
+
+  const totalPrice = unconfirmedOrders.reduce(
     (sum, item) => sum + (parseFloat(item?.total) || 0),
     0
   );
@@ -41,11 +45,11 @@ const Payment = () => {
       <p className="text-4xl font-medium text-center">Complete Your Payment</p>
       <div className="flex justify-between px-5 text-xl my-5">
         <span>Pay Your Payment</span>
-        <span>${totalPrice}</span>
+        <span>${totalPrice.toFixed(2)}</span>
       </div>
       <div className="my-5 p-5">
         <Elements stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm totalPrice={totalPrice} unconfirmedOrders={unconfirmedOrders} />
         </Elements>
       </div>
     </div>

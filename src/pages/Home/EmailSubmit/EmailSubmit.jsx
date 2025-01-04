@@ -1,4 +1,5 @@
 import { SiMinutemailer } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 const EmailSubmit = () => {
   return (
@@ -14,18 +15,16 @@ const EmailSubmit = () => {
               </h3>
             </div>
             <p className="text-sm lg:text-lg font-medium text-yellow-300">
-              ...and receive $20 coupon for first shopping
+              ...and receive 20% off coupon for first shopping
             </p>
           </div>
-          <div className=" flex items-center text-black bg-white p-[6px] lg:p-2 rounded-3xl ">
-            <input
-              type="text"
-              className="w-full md:w-96 p-1 lg:p-2 rounded-lg"
-              placeholder="Your E-mail"
-            />
-            <button className="ml-2 bg-yellow-400 p-2 rounded-2xl">
-              Submit
-            </button>
+          <div className=" flex items-center text-black bg-white p-[6px] lg:p-2 rounded-3xl  ">
+            <span className="text-lg font-semibold"> Go to Sign Up page</span>
+            <Link to={'/signup'}>
+              <button className="ml-2 bg-yellow-400 p-2 rounded-2xl">
+                Sign Up
+              </button>
+            </Link>
           </div>
         </div>
       </div>
