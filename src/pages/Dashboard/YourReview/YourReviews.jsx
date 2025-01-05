@@ -18,15 +18,15 @@ const YourReviews = () => {
     }
 
     const reviewsItem = {
+      id: Date.now().toString(),
       name: user.displayName || "Anonymous",
-      product: data.product,
       img: user.photoURL || "",
       rating: parseFloat(data.rating),
-      description: data.description,
-      reviewTime: new Date().toISOString()
+      productName: data.product,
+      speech: data.description,
+      date: new Date().toISOString()
     };
 
-    console.log(reviewsItem);
     try {
       const response = await axiosPublic.post("/reviews", reviewsItem);
       if (response.data.insertedId) {

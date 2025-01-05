@@ -61,7 +61,7 @@ const AddProducts = () => {
   };
 
   return (
-    <div className="dark:bg-slate-700 dark:text-black p-5">
+    <div className="dark:bg-slate-700 dark:text-white p-5">
       <Helmet>
         <title>Grocery-Shop | Add Product</title>
       </Helmet>
@@ -176,7 +176,7 @@ const AddProducts = () => {
                 type="number"
                 step="0.1"
                 placeholder="Offers percent"
-                {...register("offer", { required: true })}
+                {...register("offer")}
                 className="input input-bordered w-full"
               />
             </div>

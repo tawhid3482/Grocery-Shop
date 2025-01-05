@@ -62,12 +62,12 @@ const UpdateProducts = () => {
     
   };
   return (
-    <div>
+    <div >
       <Helmet>
         <title>Grocery-Shop | Update Products</title>
       </Helmet>
 
-      <div>
+      <div className="dark:text-white">
         <p className="text-3xl font-bold text-center">Update Your Products</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex gap-6">
@@ -185,7 +185,7 @@ const UpdateProducts = () => {
                 step="0.1"
                 defaultValue={item.offer}
                 placeholder="Offers percent"
-                {...register("offer", { required: true })}
+                {...register("offer")}
                 className="input input-bordered w-full"
               />
             </div>

@@ -50,6 +50,7 @@ const CheckOut = () => {
       discountPrice: discountPriceItems,
       total: totalPriceItems,
       address: addressData,
+      paymentMethod: "Cash on Delivery",
       isOrderConfirmed: true,
     };
 
@@ -99,7 +100,6 @@ const CheckOut = () => {
           await AxiosSecure.delete(`/carts?email=${user.email}`);
           reFetch(); 
           refetch(); 
-          toast.success("Your Order Confirmed");
         }
       }
     } catch (error) {

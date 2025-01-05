@@ -13,7 +13,6 @@ import { CiDeliveryTruck } from "react-icons/ci";
 
 const Dashboard = () => {
   const [isAdmin] = UseAdmin();
-  console.log(isAdmin)
   const adminNav = (
     <>
       <li className="bg-[#019267] rounded-lg my-2">
@@ -22,8 +21,8 @@ const Dashboard = () => {
         </NavLink>
       </li>
       <li className="bg-[#019267] rounded-lg my-2">
-        <NavLink to={"/dashboard/order"}>
-          <CiDeliveryTruck className="text-xl"></CiDeliveryTruck>Order
+        <NavLink to={"/dashboard/allOrders"}>
+          <CiDeliveryTruck className="text-xl"></CiDeliveryTruck>All Order
         </NavLink>
       </li>
       <li className="bg-[#019267] rounded-lg my-2">

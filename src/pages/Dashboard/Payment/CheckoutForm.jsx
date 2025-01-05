@@ -7,7 +7,7 @@ import useOrder from "../../../Hooks/useOrder";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
-const CheckoutForm = ({totalPrice,unconfirmedOrders }) => {
+const CheckoutForm = ({ totalPrice, unconfirmedOrders }) => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -113,6 +113,7 @@ const CheckoutForm = ({totalPrice,unconfirmedOrders }) => {
 
             const response = await AxiosSecure.patch(`/order/${id}`, {
               isOrderConfirmed: true,
+              paymentMethod: "bank"
             });
             console.log(response.data);
             if (response.data.modifiedCount > 0) {
