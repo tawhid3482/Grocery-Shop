@@ -31,6 +31,7 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import Coupon from "../pages/Dashboard/Coupon/Coupon";
 import ManageCoupon from "../pages/Dashboard/Coupon/ManageCoupon";
 import AllOrders from "../pages/Dashboard/AllOrder/AllOrders";
+import YourOrder from "../pages/Dashboard/AllOrder/YourOrder";
 
 export const router = createBrowserRouter([
   {
@@ -138,9 +139,10 @@ export const router = createBrowserRouter([
         element:<ManageCoupon></ManageCoupon>
       },
       {
-        path:'allOrders',
-        element:<AllOrders></AllOrders>
+        path:'yourOrder',
+        element:<YourOrder></YourOrder>
       },
+      
     
 
       // admin routes
@@ -185,6 +187,10 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`),
+      },
+      {
+        path:'allOrders',
+        element:<AdminRoute><AllOrders></AllOrders></AdminRoute>
       },
     ],
   },

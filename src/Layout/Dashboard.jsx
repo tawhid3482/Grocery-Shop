@@ -60,7 +60,7 @@ const Dashboard = () => {
         </NavLink>
       </li>
       <li className="bg-[#019267] rounded-lg my-2">
-        <NavLink to={"/dashboard/order"}>
+        <NavLink to={"/dashboard/yourOrder"}>
           <MdOutlineLocalGroceryStore className="text-xl"></MdOutlineLocalGroceryStore>{" "}
           Your Order
         </NavLink>
