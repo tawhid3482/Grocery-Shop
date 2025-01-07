@@ -83,8 +83,8 @@ const Dashboard = () => {
         </NavLink>
       </li>
       <li className="bg-[#019267] rounded-lg my-2">
-        <NavLink to={"/dashboard/history"}>
-          <MdOutlineHistory className="text-xl"></MdOutlineHistory> History
+        <NavLink to={"/dashboard/paymentHistory"}>
+          <MdOutlineHistory className="text-xl"></MdOutlineHistory>Payment History
         </NavLink>
       </li>
     </>

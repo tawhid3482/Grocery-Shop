@@ -32,6 +32,7 @@ import Coupon from "../pages/Dashboard/Coupon/Coupon";
 import ManageCoupon from "../pages/Dashboard/Coupon/ManageCoupon";
 import AllOrders from "../pages/Dashboard/AllOrder/AllOrders";
 import YourOrder from "../pages/Dashboard/AllOrder/YourOrder";
+import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -141,6 +142,10 @@ export const router = createBrowserRouter([
       {
         path:'yourOrder',
         element:<YourOrder></YourOrder>
+      },
+      {
+        path:'paymentHistory',
+        element:<PaymentHistory></PaymentHistory>
       },
       
     

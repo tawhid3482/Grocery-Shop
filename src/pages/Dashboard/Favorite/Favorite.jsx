@@ -1,16 +1,20 @@
-import React from "react";
 import UseFavourite from "../../../Hooks/UseFavourite";
 import { FaCartPlus } from "react-icons/fa6";
 import { BsTicketDetailed } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import UseCart from "../../../Hooks/UseCart";
+import UseAuth from "../../../Hooks/UseAuth";
 
 const Favorite = () => {
   const [favorite, reloadData] = UseFavourite();
+  const [, refetch] = UseCart();
   const navigate = useNavigate();
   const AxiosSecure = useAxiosSecure();
+  const { user } = UseAuth();
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -35,6 +39,49 @@ const Favorite = () => {
         });
       }
     });
+  };
+
+  const handleAddToCart = (item) => {
+    if (user && user.email) {
+      const cartItem = {
+        productId: item._id,
+        email: user.email,
+        name: item.name,
+        img: item.img,
+        newPrice: item.newPrice,
+        price: item.newPrice,
+        unit_of_measure: item.unit_of_measure,
+        supplier: item.supplier,
+        count: 1,
+      };
+
+      AxiosSecure.post("/carts", cartItem).then((res) => {
+        if (res.data.insertedId) {
+          toast.success(`${name} add to the cart successfully`);
+          refetch();
+          AxiosSecure.delete(`/favorites/${item._id}`).then((res) => {
+            if (res.data.deletedCount > 0) {
+              reloadData();
+
+            }
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "You are not logged in",
+        text: "Please login to add to the cart!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, login!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
   };
 
   const handleNavigate = (id) => {
@@ -83,25 +130,25 @@ const Favorite = () => {
                   <p>${item.newPrice}</p>
                 </td>
                 <td>
-                  {" "}
-                  <button className="btn bg-[#019267] text-white btn-sm">
+                  <button
+                    onClick={() => handleAddToCart(item)}
+                    className="btn bg-[#019267] text-white btn-sm"
+                  >
                     <FaCartPlus className="text-2xl"></FaCartPlus>
                   </button>
                 </td>
                 <td>
-                  {/* <Link to={`/productsDetails/${item.id}`}> */}
                   <button
-                    onClick={() => handleNavigate(item?.productId)}
+                    onClick={() => handleNavigate(item.productId)}
                     className="btn btn-sm bg-[#019267] text-white "
                   >
                     <BsTicketDetailed className="text-2xl"></BsTicketDetailed>
                     Details
                   </button>
-                  {/* </Link> */}
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(item?._id)}
+                    onClick={() => handleDelete(item._id)}
                     className="btn btn-sm bg-[#019267] text-white "
                   >
                     <MdDelete className="text-2xl"></MdDelete>

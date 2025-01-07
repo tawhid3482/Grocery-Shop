@@ -1,5 +1,7 @@
 import Swal from "sweetalert2";
 import useOrder from "../../../Hooks/useOrder";
+import { CiDeliveryTruck } from "react-icons/ci";
+import { MdDelete } from "react-icons/md";
 
 const YourOrder = () => {
   const [orderData] = useOrder();
@@ -90,7 +92,7 @@ const YourOrder = () => {
                       ) : (
                         <div className="relative h-12 w-full flex items-center overflow-hidden">
                         <div className=" flex items-center text-4xl">
-                          <CiDeliveryTruck />
+                          <CiDeliveryTruck  />
                         </div>
                         <span className="ml-4">Pending</span>
                       </div>
