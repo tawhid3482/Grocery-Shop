@@ -10,15 +10,18 @@ import {
   Pie,
   Legend,
 } from "recharts";
-import UseAuth from "../../../Hooks/UseAuth";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaBook, FaDollarSign, FaShoppingCart, FaUsers } from "react-icons/fa";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import UseAuth from "../../../Hooks/UseAuth";
+import useUsers from "../../../Hooks/useUsers";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const AdminHome = () => {
+  const [users] = useUsers()
+  console.log(users);
   const { user } = UseAuth();
 
   const AxiosSecure = useAxiosSecure();
@@ -112,7 +115,7 @@ const AdminHome = () => {
             <FaUsers className="text-4xl" />
           </div>
           <div className="stat-title">Users</div>
-          <div className="stat-value">{status?.user}</div>
+          <div className="stat-value">{users?.length}</div>
           {/* <div className="stat-desc">↗︎ 400 (22%)</div> */}
         </div>
 
