@@ -4,10 +4,19 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { MdDelete } from "react-icons/md";
 import { CiDeliveryTruck } from "react-icons/ci";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
 const AllOrders = () => {
-  const [orderData, refetch] = useOrder();
   const AxiosSecure = useAxiosSecure();
+
+  const { data: orderData, refetch } = useQuery({
+    queryKey: ["order"],
+    queryFn: async () => {
+      const res = await AxiosSecure.get("order");
+      return res.data;
+    },
+  });
+
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -62,7 +71,6 @@ const AllOrders = () => {
       <h1 className="text-2xl font-medium">
         Total All Orders: {orderData?.length}
       </h1>
-
       <div className="overflow-x-auto my-5">
         <table className="table">
           {/* Head */}
@@ -81,7 +89,7 @@ const AllOrders = () => {
             {orderData?.map((item, index) => (
               <tr key={item._id}>
                 <th>{index + 1}.</th>
-               
+
                 <td>{item.email}</td>
 
                 <td>

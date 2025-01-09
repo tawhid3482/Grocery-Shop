@@ -20,10 +20,8 @@ const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const AdminHome = () => {
-  const [users] = useUsers()
-  console.log(users);
+  
   const { user } = UseAuth();
-
   const AxiosSecure = useAxiosSecure();
 
   const { data: status } = useQuery({
@@ -115,7 +113,7 @@ const AdminHome = () => {
             <FaUsers className="text-4xl" />
           </div>
           <div className="stat-title">Users</div>
-          <div className="stat-value">{users?.length}</div>
+          <div className="stat-value">{status?.user}</div>
           {/* <div className="stat-desc">↗︎ 400 (22%)</div> */}
         </div>
 
@@ -123,8 +121,8 @@ const AdminHome = () => {
           <div className="stat-figure text-secondary">
             <FaBook className="text-3xl" />
           </div>
-          <div className="stat-title">Menu Items</div>
-          <div className="stat-value">{status?.menuItems}</div>
+          <div className="stat-title">Product Items</div>
+          <div className="stat-value">{status?.productItems}</div>
           {/* <div className="stat-desc">↘︎ 90 (14%)</div> */}
         </div>
         <div className="stat">
