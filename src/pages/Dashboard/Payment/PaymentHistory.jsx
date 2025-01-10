@@ -16,14 +16,15 @@ const PaymentHistory = () => {
     <div>
       <p className="text-3xl ">Total Payment:{payments?.length}</p>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
+      <div className="overflow-x-auto my-5">
+        <table className="table table-zebra ">
           {/* head */}
           <thead>
-            <tr>
+            <tr className="text-lg ">
               <th>#</th>
               <th>Price</th>
               <th>Transaction Id</th>
+              <th>Date</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -33,6 +34,7 @@ const PaymentHistory = () => {
                 <th>{index + 1}</th>
                 <td>$ {payment.price}</td>
                 <td>{payment.transactionId}</td>
+                <td>{payment.date}</td>
                 <td>{payment.status}</td>
               </tr>
             ))}

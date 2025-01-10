@@ -135,8 +135,17 @@ const Cart = () => {
   const remainingAmount = (freeShippingThreshold - subtotal).toFixed(2);
 
   const handleApplyCoupon = () => {
-    const validCoupon = couponData.find((c) => c.code === coupon); // Validate coupon exists
+    const validCoupon = couponData.find((c) => c.code === coupon); // Find the coupon
+
     if (validCoupon) {
+      const currentDate = new Date(); // Get the current date
+      const expireDate = new Date(validCoupon.expire); // Convert expire to a Date object
+
+      if (currentDate > expireDate) {
+        toast.error("The coupon has expired. Please try another one.");
+        return;
+      }
+
       // Extract last two digits as discount
       const lastTwoDigits = parseInt(validCoupon.code.slice(-2), 10);
       if (!isNaN(lastTwoDigits)) {
@@ -321,10 +330,10 @@ const Cart = () => {
                       placeholder="Town / City"
                     />{" "}
                     <input
-                      {...register("zipCode")}
+                      {...register("postCode")}
                       type="text"
                       className="w-full max-w-xs p-2 rounded-lg"
-                      placeholder="Zip Code"
+                      placeholder="Post Code"
                     />{" "}
                     <input
                       {...register("phone")}

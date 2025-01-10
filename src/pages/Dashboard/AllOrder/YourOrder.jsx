@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 
 const YourOrder = () => {
   const [orderData] = useOrder();
+  console.log(orderData)
 
   const handleDelete = (id) => {
     Swal.fire({

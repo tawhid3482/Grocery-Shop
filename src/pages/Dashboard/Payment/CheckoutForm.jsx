@@ -97,7 +97,7 @@ const CheckoutForm = ({ totalPrice, unconfirmedOrders }) => {
         transactionId: paymentIntent.id,
         date: new Date(),
         orderID: orderData.map((item) => item._id),
-        status: "pending",
+        status: "success",  
       };
 
       try {
@@ -118,7 +118,7 @@ const CheckoutForm = ({ totalPrice, unconfirmedOrders }) => {
             console.log(response.data);
             if (response.data.modifiedCount > 0) {
               toast.success("Order Confirmed");
-              navigate("/");
+              navigate("/dashboard/paymentHistory");
             } else {
               toast.error("Order confirmation failed.");
             }
