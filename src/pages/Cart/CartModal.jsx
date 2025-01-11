@@ -119,7 +119,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     <Link
                       to={"/cart"}
                       onClick={onClose}
-                      className="btn bg-[#019267] text-white w-full"
+                      className="btn bg-[#019267] hover:bg-[#F0592A] text-white w-full"
                     >
                       View Cart
                     </Link>

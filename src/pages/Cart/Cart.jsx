@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
@@ -22,6 +23,7 @@ const Cart = () => {
   const [discount, setDiscount] = useState(0);
   const { register, handleSubmit, watch, reset } = useForm();
   const [checkoutData, reFetch] = useCheckout();
+  const [hasAddress, setHasAddress] = useState(false);
 
   const { data: couponData = [], refetch } = useQuery({
     queryKey: ["coupons"],
@@ -110,6 +112,22 @@ const Cart = () => {
     setDistricts(districtData[selectedDivision] || []);
   }, [selectedDivision]);
 
+
+
+  useEffect(() => {
+    const checkAddress = async () => {
+      try {
+        const response = await AxiosPublic.get(`/address/${user?.email}`);
+        setHasAddress(!!response.data);
+      } catch {
+        setHasAddress(false);
+      }
+    };
+
+    if (user?.email) checkAddress();
+  }, [user?.email]);
+  
+
   const onSubmit = async (data) => {
     try {
       const addressInfo = {
@@ -121,6 +139,7 @@ const Cart = () => {
       if (response.data.insertedId) {
         reset();
         toast.success("Address updated successfully!");
+        setHasAddress(true);
       }
     } catch (error) {
       toast.error("Failed to update address. Please try again.");
@@ -201,7 +220,7 @@ const Cart = () => {
     } catch (error) {}
   };
 
-  return (
+return (
     <div>
       <Helmet>
         <title>Grocery-Shop | Cart</title>
@@ -364,15 +383,15 @@ const Cart = () => {
             <span>Total </span>
             <span>${discountedTotal}</span>
           </div>
-          <NavLink to={cart.length > 0 ? "/checkout" : "#"}>
+          <NavLink to={hasAddress && cart.length > 0 ? "/checkout" : "#"}>
             <button
               onClick={handleCheckOut}
-              className={`btn text-lg text-white w-full ${
-                cart.length > 0
+              className={`p-2 text-lg text-white w-full ${
+                hasAddress && cart.length > 0
                   ? "bg-[#F0592A] hover:bg-[#019267]" // Active state
-                  : "bg-gray-300 cursor-not-allowed" // Disabled state
+                  : "bg-gray-800 text-gray-900 cursor-not-allowed" // Disabled state
               }`}
-              disabled={cart.length === 0} // Disable button if cart is empty
+              disabled={!hasAddress && cart.length === 0} // Disable button if cart is empty
             >
               Proceed to checkout
             </button>

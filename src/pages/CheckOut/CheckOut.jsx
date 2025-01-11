@@ -8,6 +8,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import UseCart from "../../Hooks/UseCart";
 import toast from "react-hot-toast";
 import ReactLoader from "../../Components/ReactLoader";
+import { v4 as uuidv4 } from "uuid";
 
 const CheckOut = () => {
   const [checkoutData, , reFetch] = useCheckout();
@@ -41,6 +42,7 @@ const CheckOut = () => {
     const DeleteId = checkoutData?.flatMap((item) => item._id);
 
     const orderInfo = {
+      id: uuidv4(),
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
@@ -63,7 +65,7 @@ const CheckOut = () => {
           reFetch(); // Refetch checkout data
           refetch(); // Refetch cart data
           toast.success("Your Order Confirmed");
-          navigate("/dashboard/home");
+          navigate("/dashboard/paymentHistory");
         }
       }
     } catch (error) {
@@ -81,6 +83,7 @@ const CheckOut = () => {
     const DeleteId = checkoutData?.flatMap((item) => item._id);
 
     const orderInfo = {
+      id: uuidv4(),
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
@@ -117,6 +120,7 @@ const CheckOut = () => {
     const DeleteId = checkoutData?.flatMap((item) => item._id);
 
     const orderInfo = {
+      id: uuidv4(),
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
@@ -133,12 +137,12 @@ const CheckOut = () => {
       if (checkoutData.length > 0) {
         const response = await AxiosSecure.post("/order", orderInfo).then(
           (res) => {
-             AxiosSecure.delete(`/checkout/${DeleteId}`);
-             AxiosSecure.delete(`/carts?email=${user.email}`);
+            AxiosSecure.delete(`/checkout/${DeleteId}`);
+            AxiosSecure.delete(`/carts?email=${user.email}`);
             reFetch();
             refetch();
-            console.log(res.data.url)
-            window.location.replace(res.data.url)
+            console.log(res.data.url);
+            window.location.replace(res.data.url);
           }
         );
       }
