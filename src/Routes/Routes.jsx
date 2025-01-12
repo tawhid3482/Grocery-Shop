@@ -33,6 +33,7 @@ import ManageCoupon from "../pages/Dashboard/Coupon/ManageCoupon";
 import AllOrders from "../pages/Dashboard/AllOrder/AllOrders";
 import YourOrder from "../pages/Dashboard/AllOrder/YourOrder";
 import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory";
+import Notification from "../pages/Dashboard/YourNotification/Notification";
 
 export const router = createBrowserRouter([
   {
@@ -82,7 +83,7 @@ export const router = createBrowserRouter([
             <ProductDetails></ProductDetails>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/products"),
+        loader: () => fetch("https://grocery-shop-server-phi.vercel.app/products"),
       },
       {
         path: "/cart",
@@ -147,6 +148,10 @@ export const router = createBrowserRouter([
         path:'paymentHistory',
         element:<PaymentHistory></PaymentHistory>
       },
+      {
+        path:'notification',
+        element:<Notification></Notification>
+      },
       
     
 
@@ -191,7 +196,7 @@ export const router = createBrowserRouter([
             <UpdateProducts></UpdateProducts>
           </AdminRoute>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`),
+        loader: ({ params }) => fetch(`https://grocery-shop-server-phi.vercel.app/products/${params.id}`),
       },
       {
         path:'allOrders',

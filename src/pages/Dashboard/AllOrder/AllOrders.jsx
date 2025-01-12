@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const AllOrders = () => {
   const AxiosSecure = useAxiosSecure();
+  
   const { data: orderData, refetch } = useQuery({
     queryKey: ["order"],
     queryFn: async () => {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import UseAuth from "./UseAuth";
 
 const AxiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://grocery-shop-server-phi.vercel.app",
 });
 
 const useAxiosSecure = () => {

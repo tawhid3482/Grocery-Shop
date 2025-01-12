@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
@@ -12,6 +11,8 @@ import toast from "react-hot-toast";
 import UseAuth from "../../Hooks/UseAuth";
 import { useQuery } from "@tanstack/react-query";
 import useCheckout from "../../Hooks/useCheckout";
+import UseAddress from "../../Hooks/UseAddress";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Cart = () => {
   const AxiosPublic = useAxiosPublic();
@@ -24,6 +25,7 @@ const Cart = () => {
   const { register, handleSubmit, watch, reset } = useForm();
   const [checkoutData, reFetch] = useCheckout();
   const [hasAddress, setHasAddress] = useState(false);
+  const [addressData] = UseAddress();
 
   const { data: couponData = [], refetch } = useQuery({
     queryKey: ["coupons"],
@@ -112,8 +114,6 @@ const Cart = () => {
     setDistricts(districtData[selectedDivision] || []);
   }, [selectedDivision]);
 
-
-
   useEffect(() => {
     const checkAddress = async () => {
       try {
@@ -126,7 +126,6 @@ const Cart = () => {
 
     if (user?.email) checkAddress();
   }, [user?.email]);
-  
 
   const onSubmit = async (data) => {
     try {
@@ -135,6 +134,8 @@ const Cart = () => {
         email: user.email,
         data,
       };
+
+      // Post the new address
       const response = await AxiosPublic.post("/address", addressInfo);
       if (response.data.insertedId) {
         reset();
@@ -220,7 +221,7 @@ const Cart = () => {
     } catch (error) {}
   };
 
-return (
+  return (
     <div>
       <Helmet>
         <title>Grocery-Shop | Cart</title>
@@ -386,7 +387,7 @@ return (
           <NavLink to={hasAddress && cart.length > 0 ? "/checkout" : "#"}>
             <button
               onClick={handleCheckOut}
-              className={`p-2 text-lg text-white w-full ${
+              className={`p-2 rounded-md text-lg text-white w-full ${
                 hasAddress && cart.length > 0
                   ? "bg-[#F0592A] hover:bg-[#019267]" // Active state
                   : "bg-gray-800 text-gray-900 cursor-not-allowed" // Disabled state

@@ -20,7 +20,13 @@ const CheckOut = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch data on component mount
+
+    //  const hasReloaded = localStorage.getItem("hasReloaded");
+
+    // if (!hasReloaded) {
+    //   localStorage.setItem("hasReloaded", "true");
+    //   window.location.reload();
+    // }
     reFetch();
     refetch();
     <div className="">
