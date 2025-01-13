@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext(); // null katsi
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const logOutUser = () => {
     setLoading(true);
     return signOut(auth);
@@ -46,11 +47,14 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
         const userInfo = { email: currentUser.email };
+
         AxiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
@@ -65,7 +69,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       return unSubscribe();
     };
-  }, []);
+  }, [AxiosPublic]);
 
   const authInfo = {
     user,

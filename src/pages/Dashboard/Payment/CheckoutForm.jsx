@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useOrder from "../../../Hooks/useOrder";
 import toast from "react-hot-toast";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const CheckoutForm = ({ totalPrice, unconfirmedOrders }) => {
   const [error, setError] = useState("");

@@ -2,13 +2,13 @@ import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
 import UseCart from "../../Hooks/UseCart";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Carts = ({ items, onUpdateCount }) => {
   const { _id, img, name, newPrice, count, unit_of_measure } = items;
   const [, refetch] = UseCart();
-  const AxiosPublic = useAxiosPublic();
+  const AxiosSecure = useAxiosSecure()
 
   const [counts, setCount] = useState(Number(count) || 1); // Initialize count with existing value or 1
   const price = (newPrice * counts).toFixed(2); // Calculate the total price
@@ -17,7 +17,7 @@ const Carts = ({ items, onUpdateCount }) => {
     try {
       const price = (newPrice * updatedCount).toFixed(2); // Recalculate total price
 
-      const response = await AxiosPublic.patch(`/carts/${_id}`, {
+      const response = await AxiosSecure.patch(`/carts/${_id}`, {
         count: updatedCount,
         price: price, // Send the updated price
       });
@@ -65,7 +65,7 @@ const Carts = ({ items, onUpdateCount }) => {
         confirmButtonText: "Yes, delete it!",
       });
       if (result.isConfirmed) {
-        const response = await AxiosPublic.delete(`/carts/${itemId}`);
+        const response = await AxiosSecure.delete(`/carts/${itemId}`);
         if (response.data.deletedCount > 0) {
           toast.success(`${name} removed from cart`);
           refetch(); // Refetch cart data

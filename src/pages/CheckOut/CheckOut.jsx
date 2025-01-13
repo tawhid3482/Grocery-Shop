@@ -20,13 +20,12 @@ const CheckOut = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const hasReloaded = localStorage.getItem("hasReloaded");
 
-    //  const hasReloaded = localStorage.getItem("hasReloaded");
-
-    // if (!hasReloaded) {
-    //   localStorage.setItem("hasReloaded", "true");
-    //   window.location.reload();
-    // }
+    if (!hasReloaded) {
+      localStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    }
     reFetch();
     refetch();
     <div className="">
@@ -71,7 +70,7 @@ const CheckOut = () => {
           reFetch(); // Refetch checkout data
           refetch(); // Refetch cart data
           toast.success("Your Order Confirmed");
-          navigate("/dashboard/paymentHistory");
+          navigate("/dashboard/yourOrder");
         }
       }
     } catch (error) {
@@ -177,59 +176,64 @@ const CheckOut = () => {
         <div>
           <p className="text-3xl font-medium mb-8">Your Order</p>
           {/* Order Items */}
-          <div className="w-full">
-            {checkoutData.length > 0 &&
-              checkoutData?.map((item) => (
-                <div
-                  key={item._id}
-                  className="border rounded-xl p-4 shadow-md bg-white"
-                >
-                  {cart?.map((data) => (
-                    <div
-                      key={data._id}
-                      className="flex items-center justify-between gap-4 mb-4 border border-green-400 p-2 rounded-lg"
-                    >
-                      <div className="flex items-center gap-5">
-                        <img
-                          src={data.img}
-                          alt={data.name}
-                          className="w-16 h-16 md:w-24 object-cover rounded-full"
-                        />
-                        <div>
-                          <p className="font-semibold text-lg text-gray-800">
-                            {data.name}
-                          </p>
-                          <div className="flex gap-2 items-center text-gray-600 text-sm">
-                            <span className="text-gray-500">x</span>
-                            <span>{data.count}</span>
-                            <span>{data.unit_of_measure}</span>
+          {cart.length > 0 ? (
+            <div className="w-full">
+              {checkoutData.length > 0 &&
+                checkoutData?.map((item) => (
+                  <div
+                    key={item._id}
+                    className="border rounded-xl p-4 shadow-md bg-white"
+                  >
+                    {cart?.map((data) => (
+                      <div
+                        key={data._id}
+                        className="flex items-center justify-between gap-4 mb-4 border border-green-400 p-2 rounded-lg"
+                      >
+                        <div className="flex items-center gap-5">
+                          <img
+                            src={data.img}
+                            alt={data.name}
+                            className="w-16 h-16 md:w-24 object-cover rounded-full"
+                          />
+                          <div>
+                            <p className="font-semibold text-lg text-gray-800">
+                              {data.name}
+                            </p>
+                            <div className="flex gap-2 items-center text-gray-600 text-sm">
+                              <span className="text-gray-500">x</span>
+                              <span>{data.count}</span>
+                              <span>{data.unit_of_measure}</span>
+                            </div>
                           </div>
                         </div>
+                        <p className="text-[#F0592A] font-semibold">
+                          ${parseFloat(data.price)}
+                        </p>
                       </div>
-                      <p className="text-[#F0592A] font-semibold">
-                        ${parseFloat(data.price)}
-                      </p>
-                    </div>
-                  ))}
-                  <div className="mt-6">
-                    <div className="flex justify-between text-xl font-semibold">
-                      <span>Subtotal</span>
-                      <span className="text-[#019267]">${item.subtotal}</span>
-                    </div>
-                    <div className="flex justify-between text-xl font-semibold">
-                      <span>Discount</span>
-                      <span className="text-[#019267]">
-                        -${item.discountPrice}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-xl font-semibold">
-                      <span>Total Pay</span>
-                      <span className="text-[#019267]">${item.total}</span>
+                    ))}
+                    <div className="mt-6">
+                      <div className="flex justify-between text-xl font-semibold">
+                        <span>Subtotal</span>
+                        <span className="text-[#019267]">${item.subtotal}</span>
+                      </div>
+                      <div className="flex justify-between text-xl font-semibold">
+                        <span>Discount</span>
+                        <span className="text-[#019267]">
+                          -${item.discountPrice}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-xl font-semibold">
+                        <span>Total Pay</span>
+                        <span className="text-[#019267]">${item.total}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-          </div>
+                ))}
+            </div>
+          ) : (
+            <div className=""></div>
+          )}
+
           {/* Payment Options */}
           <div className="mt-12">
             <p className="text-2xl font-medium mb-6">Payment Options</p>

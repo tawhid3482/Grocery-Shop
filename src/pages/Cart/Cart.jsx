@@ -16,6 +16,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Cart = () => {
   const AxiosPublic = useAxiosPublic();
+  const AxiosSecure = useAxiosSecure()
   const [cart, setCart] = UseCart();
   const [isOpen, setIsOpen] = useState(true);
   const { user } = UseAuth();
@@ -30,7 +31,7 @@ const Cart = () => {
   const { data: couponData = [], refetch } = useQuery({
     queryKey: ["coupons"],
     queryFn: async () => {
-      const res = await AxiosPublic.get("/coupon");
+      const res = await AxiosSecure.get("/coupon");
       return res.data;
     },
   });
@@ -117,7 +118,7 @@ const Cart = () => {
   useEffect(() => {
     const checkAddress = async () => {
       try {
-        const response = await AxiosPublic.get(`/address/${user?.email}`);
+        const response = await AxiosSecure.get(`/address/${user?.email}`);
         setHasAddress(!!response.data);
       } catch {
         setHasAddress(false);
@@ -136,7 +137,7 @@ const Cart = () => {
       };
 
       // Post the new address
-      const response = await AxiosPublic.post("/address", addressInfo);
+      const response = await AxiosSecure.post("/address", addressInfo);
       if (response.data.insertedId) {
         reset();
         toast.success("Address updated successfully!");
@@ -155,7 +156,7 @@ const Cart = () => {
   const remainingAmount = (freeShippingThreshold - subtotal).toFixed(2);
 
   const handleApplyCoupon = () => {
-    const validCoupon = couponData.find((c) => c.code === coupon); // Find the coupon
+    const validCoupon = couponData?.find((c) => c.code === coupon); // Find the coupon
 
     if (validCoupon) {
       const currentDate = new Date(); // Get the current date
@@ -197,10 +198,10 @@ const Cart = () => {
       };
 
       // Check if checkout data already exists for the user's email
-      const existingCheckout = await AxiosPublic.get(`/checkout/${user.email}`);
+      const existingCheckout = await AxiosSecure.get(`/checkout/${user.email}`);
 
       if (existingCheckout.data) {
-        const response = await AxiosPublic.patch(
+        const response = await AxiosSecure.patch(
           `/checkout/${user.email}`,
           checkOutData
         );
@@ -210,7 +211,7 @@ const Cart = () => {
         }
       } else {
         // Post new data if it doesn't exist
-        const response = await AxiosPublic.post("/checkout", checkOutData);
+        const response = await AxiosSecure.post("/checkout", checkOutData);
         if (response.data.insertedId) {
           reFetch();
           toast.success("Checkout data saved successfully!");
@@ -257,7 +258,7 @@ const Cart = () => {
 
           <div className="grid grid-cols-1">
             {cart?.map((items) => (
-              <Carts key={items?.id} items={items} setCart={setCart}></Carts>
+              <Carts key={items?._id} items={items} setCart={setCart}></Carts>
             ))}
           </div>
 

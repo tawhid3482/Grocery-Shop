@@ -13,7 +13,7 @@ const useCheckout = () => {
            const res = await AxiosSecure.get(`/checkout?email=${user.email}`);
            return res.data;
        },
-       enabled: !!user?.email, // Delay query until user email exists
+       enabled: !!user?.email, 
       
    });
 

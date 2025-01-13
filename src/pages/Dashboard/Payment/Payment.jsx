@@ -12,7 +12,7 @@ const Payment = () => {
   const [loading, setLoading] = useState(true);
 
    // Filter unconfirmed orders and calculate total price
-   const unconfirmedOrders = orderData.filter(
+   const unconfirmedOrders = orderData?.filter(
     (order) => !order.isOrderConfirmed
   );
 

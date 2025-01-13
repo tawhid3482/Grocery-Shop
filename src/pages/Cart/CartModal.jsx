@@ -102,7 +102,7 @@ const CartModal = ({ isOpen, onClose }) => {
               <div className="">
                 <div className="grid grid-cols-1 gap-3 place-items-center p-4">
                   {cart?.map((carts) => (
-                    <CartModalShowCard key={carts?.id} carts={carts} />
+                    <CartModalShowCard key={carts?._id} carts={carts} />
                   ))}
                 </div>
 
