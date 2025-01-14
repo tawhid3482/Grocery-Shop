@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const YourOrder = () => {
   const [orderData, refetch] = useOrder();
   const AxiosSecure = useAxiosSecure();
-  console.log(orderData);
 
   const handleDelete = (id) => {
     Swal.fire({

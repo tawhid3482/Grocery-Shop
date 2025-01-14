@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { CiDeliveryTruck } from "react-icons/ci";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const AllOrders = () => {
   const AxiosSecure = useAxiosSecure();

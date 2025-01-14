@@ -16,7 +16,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Cart = () => {
   const AxiosPublic = useAxiosPublic();
-  const AxiosSecure = useAxiosSecure()
+  const AxiosSecure = useAxiosSecure();
   const [cart, setCart] = UseCart();
   const [isOpen, setIsOpen] = useState(true);
   const { user } = UseAuth();
@@ -27,6 +27,9 @@ const Cart = () => {
   const [checkoutData, reFetch] = useCheckout();
   const [hasAddress, setHasAddress] = useState(false);
   const [addressData] = UseAddress();
+
+  const addressFind = addressData?.find((address) => address.email);
+  const addressId = addressFind?._id;
 
   const { data: couponData = [], refetch } = useQuery({
     queryKey: ["coupons"],
@@ -115,35 +118,32 @@ const Cart = () => {
     setDistricts(districtData[selectedDivision] || []);
   }, [selectedDivision]);
 
-  useEffect(() => {
-    const checkAddress = async () => {
-      try {
-        const response = await AxiosSecure.get(`/address/${user?.email}`);
-        setHasAddress(!!response.data);
-      } catch {
-        setHasAddress(false);
-      }
-    };
-
-    if (user?.email) checkAddress();
-  }, [user?.email]);
-
   const onSubmit = async (data) => {
     try {
-      const addressInfo = {
-        name: user.displayName,
-        email: user.email,
-        data,
-      };
+      if (addressFind) {
+        // Update existing address
+        const response = await AxiosSecure.patch(`/address/${addressId}`, data);
+        if (response.data.result.modifiedCount > 0) {
+          toast.success("Address updated successfully!");
+          setHasAddress(true)
+        }
+      } else {
+        // Create a new address
+        const addressInfo = {
+          name: user.displayName,
+          email: user.email,
+          data,
+        };
 
-      // Post the new address
-      const response = await AxiosSecure.post("/address", addressInfo);
-      if (response.data.insertedId) {
-        reset();
-        toast.success("Address updated successfully!");
-        setHasAddress(true);
+        const response = await AxiosSecure.post("/address", addressInfo);
+        if (response.data.insertedId) {
+          toast.success("Address created successfully!");
+        }
       }
+      reset();
+      setHasAddress(true);
     } catch (error) {
+      console.error("Error submitting address:", error);
       toast.error("Failed to update address. Please try again.");
     }
   };
