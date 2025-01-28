@@ -18,7 +18,6 @@ import SignUp from "../pages/Login/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
-import Wishlist from "../pages/Dashboard/Favorite/Favorite";
 import Favorite from "../pages/Dashboard/Favorite/Favorite";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";

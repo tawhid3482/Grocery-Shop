@@ -15,7 +15,6 @@ import UseAddress from "../../Hooks/UseAddress";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Cart = () => {
-  const AxiosPublic = useAxiosPublic();
   const AxiosSecure = useAxiosSecure();
   const [cart, setCart] = UseCart();
   const [isOpen, setIsOpen] = useState(true);
@@ -24,7 +23,7 @@ const Cart = () => {
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
   const { register, handleSubmit, watch, reset } = useForm();
-  const [checkoutData, reFetch] = useCheckout();
+  const [, reFetch] = useCheckout();
   const [hasAddress, setHasAddress] = useState(false);
   const [addressData] = UseAddress();
 

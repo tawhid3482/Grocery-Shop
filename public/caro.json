@@ -2,41 +2,41 @@
     {
         "id":"1",
         "img":"https://partnerslate.com/wp-content/uploads/2023/10/lays-logo.png",
-        "name":"Saikat"
+        "name":"Lays"
     },
     {
         "id":"2",
         "img":"https://reallygooddesigns.com/wp-content/uploads/2022/12/Famous-Food-Brands-Pringles.jpg",
-        "name":"Saikat"
+        "name":"Pringles"
     },
     {
         "id":"3",
         "img":"https://aljazirasupermarkets.com/pub/media/elements/n/e/nestle_2.jpg",
-        "name":"Saikat"
+        "name":"Nestle"
     },
     {
         "id":"4",
         "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrf0UK0Bq3-gtEpFBAVeMaW-mbP6xWJmP2kkwl3HBv4aczDcleRe5UVN3zg6Y_bieZEgc&usqp=CAU",
-        "name":"Saikat"
+        "name":"Casino"
     },
     {
         "id":"5",
         "img":"https://aljazirasupermarkets.com/pub/media/elements/b/i/birdseye_2.jpg",
-        "name":"Saikat"
+        "name":"Birdseye"
     },
     {
         "id":"6",
         "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcGD7mLdg_nKuLr44A5Kd-Zz6aX4JJNN1FE_S9n4JJ1SRdNdh0AG816L76nGiOljhbtis&usqp=CAU",
-        "name":"Saikat"
+        "name":"Sir-Bio"
     },
     {
         "id":"7",
         "img":"https://aljazirasupermarkets.com/pub/media/elements/g/e/general_mills_1.jpg",
-        "name":"Saikat"
+        "name":"General_mills"
     },
     {
         "id":"8",
         "img":"https://aljazirasupermarkets.com/pub/media/elements/h/e/hershey_s_2.jpg",
-        "name":"Saikat"
+        "name":"Hershey"
     }
 ]

@@ -3,8 +3,14 @@ import { BsPatchCheckFill } from "react-icons/bs";
 import Rating from "react-rating";
 
 const Reviews = ({ reviews }) => {
-  const { name, img, productImg, productName, rating, speech, date } =
+  const { name, img, productName, rating,speech, suggestion, date } =
     reviews;
+
+  const truncateSpeech = (text, wordLimit) => {
+    const words = text.split(" ");
+    return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : text;
+  };
+
   return (
     <div>
       <div className="p-2 border border-gray-200 rounded-md h-80 w-60">
@@ -68,12 +74,12 @@ const Reviews = ({ reviews }) => {
           </p>
         </div>
         <div className="my-2">
-          <p>{speech}</p>
-          <p className="uppercase font-medium text-xs mt-5">{date}</p>
+          <p>{suggestion}</p>
+          <p>{truncateSpeech(speech, 10)}</p>
+          <p className="uppercase font-medium text-xs my-5">{date}</p>
           <hr className="my-3" />
         </div>
-        <div className="flex items-center gap-5 ml-8">
-          <img src={productImg} alt="" className="w-10" />
+        <div className="text-center">
           <p className="font-bold text-xs">{productName}</p>
         </div>
       </div>

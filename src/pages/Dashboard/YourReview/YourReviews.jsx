@@ -23,6 +23,7 @@ const YourReviews = () => {
       img: user.photoURL || "",
       rating: parseFloat(data.rating),
       productName: data.product,
+      suggestion: data.suggestion,
       speech: data.description,
       date: new Date().toISOString()
     };
